@@ -1,0 +1,22 @@
+C:\Users\fsola\documents\visual studio 2017\Projects\CryptoQueryWebAPI\CryptoQueryWebAPI\bin\Debug\netcoreapp2.0\CryptoQueryWebAPI.deps.json
+C:\Users\fsola\documents\visual studio 2017\Projects\CryptoQueryWebAPI\CryptoQueryWebAPI\bin\Debug\netcoreapp2.0\CryptoQueryWebAPI.runtimeconfig.json
+C:\Users\fsola\documents\visual studio 2017\Projects\CryptoQueryWebAPI\CryptoQueryWebAPI\bin\Debug\netcoreapp2.0\CryptoQueryWebAPI.runtimeconfig.dev.json
+C:\Users\fsola\documents\visual studio 2017\Projects\CryptoQueryWebAPI\CryptoQueryWebAPI\bin\Debug\netcoreapp2.0\CryptoQueryWebAPI.dll
+C:\Users\fsola\documents\visual studio 2017\Projects\CryptoQueryWebAPI\CryptoQueryWebAPI\bin\Debug\netcoreapp2.0\CryptoQueryWebAPI.pdb
+C:\Users\fsola\documents\visual studio 2017\Projects\CryptoQueryWebAPI\CryptoQueryWebAPI\obj\Debug\netcoreapp2.0\CryptoQueryWebAPI.csprojResolveAssemblyReference.cache
+C:\Users\fsola\documents\visual studio 2017\Projects\CryptoQueryWebAPI\CryptoQueryWebAPI\obj\Debug\netcoreapp2.0\CryptoQueryWebAPI.csproj.CoreCompileInputs.cache
+C:\Users\fsola\documents\visual studio 2017\Projects\CryptoQueryWebAPI\CryptoQueryWebAPI\obj\Debug\netcoreapp2.0\CryptoQueryWebAPI.AssemblyInfoInputs.cache
+C:\Users\fsola\documents\visual studio 2017\Projects\CryptoQueryWebAPI\CryptoQueryWebAPI\obj\Debug\netcoreapp2.0\CryptoQueryWebAPI.AssemblyInfo.cs
+C:\Users\fsola\documents\visual studio 2017\Projects\CryptoQueryWebAPI\CryptoQueryWebAPI\obj\Debug\netcoreapp2.0\CryptoQueryWebAPI.dll
+C:\Users\fsola\documents\visual studio 2017\Projects\CryptoQueryWebAPI\CryptoQueryWebAPI\obj\Debug\netcoreapp2.0\CryptoQueryWebAPI.pdb
+C:\Users\fsola\Documents\CS426Project\CryptoQueryWebAPI\CryptoQueryWebAPI\bin\Debug\netcoreapp2.0\CryptoQueryWebAPI.deps.json
+C:\Users\fsola\Documents\CS426Project\CryptoQueryWebAPI\CryptoQueryWebAPI\bin\Debug\netcoreapp2.0\CryptoQueryWebAPI.runtimeconfig.json
+C:\Users\fsola\Documents\CS426Project\CryptoQueryWebAPI\CryptoQueryWebAPI\bin\Debug\netcoreapp2.0\CryptoQueryWebAPI.runtimeconfig.dev.json
+C:\Users\fsola\Documents\CS426Project\CryptoQueryWebAPI\CryptoQueryWebAPI\bin\Debug\netcoreapp2.0\CryptoQueryWebAPI.dll
+C:\Users\fsola\Documents\CS426Project\CryptoQueryWebAPI\CryptoQueryWebAPI\bin\Debug\netcoreapp2.0\CryptoQueryWebAPI.pdb
+C:\Users\fsola\Documents\CS426Project\CryptoQueryWebAPI\CryptoQueryWebAPI\obj\Debug\netcoreapp2.0\CryptoQueryWebAPI.csprojResolveAssemblyReference.cache
+C:\Users\fsola\Documents\CS426Project\CryptoQueryWebAPI\CryptoQueryWebAPI\obj\Debug\netcoreapp2.0\CryptoQueryWebAPI.csproj.CoreCompileInputs.cache
+C:\Users\fsola\Documents\CS426Project\CryptoQueryWebAPI\CryptoQueryWebAPI\obj\Debug\netcoreapp2.0\CryptoQueryWebAPI.AssemblyInfoInputs.cache
+C:\Users\fsola\Documents\CS426Project\CryptoQueryWebAPI\CryptoQueryWebAPI\obj\Debug\netcoreapp2.0\CryptoQueryWebAPI.AssemblyInfo.cs
+C:\Users\fsola\Documents\CS426Project\CryptoQueryWebAPI\CryptoQueryWebAPI\obj\Debug\netcoreapp2.0\CryptoQueryWebAPI.dll
+C:\Users\fsola\Documents\CS426Project\CryptoQueryWebAPI\CryptoQueryWebAPI\obj\Debug\netcoreapp2.0\CryptoQueryWebAPI.pdb
