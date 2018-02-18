@@ -20,4 +20,9 @@
     <DotNetCliToolReference Include="Microsoft.VisualStudio.Web.CodeGeneration.Tools" Version="2.0.0" />
   </ItemGroup>
 
+  <ItemGroup>
+    <ProjectReference Include="..\CryptoQuery.Domain\CryptoQuery.Domain.csproj" />
+    <ProjectReference Include="..\CryptoQuery.SqlServer\CryptoQuery.SqlServer.csproj" />
+  </ItemGroup>
+
 </Project>

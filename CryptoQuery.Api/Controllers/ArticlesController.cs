@@ -6,6 +6,7 @@ using Microsoft.AspNetCore.Mvc;
 using CryptoQueryWebAPI.Models;
 using System.Net;
 using AutoMapper;
+using CryptoQuery.Domain.Articles;
 
 // For more information on enabling Web API for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
 

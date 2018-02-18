@@ -10,6 +10,8 @@ using Microsoft.Extensions.Logging;
 using Microsoft.Extensions.Options;
 using CryptoQueryWebAPI.Controllers;
 using AutoMapper;
+using CryptoQuery.SqlServer;
+using CryptoQuery.Domain.Articles;
 
 namespace CryptoQueryWebAPI
 {
