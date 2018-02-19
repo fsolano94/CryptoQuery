@@ -1,6 +1,6 @@
 ﻿using AutoMapper;
+using CryptoQuery.Api.Dto;
 using CryptoQuery.Domain.Articles;
-using CryptoQueryWebAPI.Models;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -12,8 +12,23 @@ namespace CryptoQuery.Api
     {
         public DomainProfile()
         {
-            CreateMap<ArticleDto, Article>();
-            CreateMap<Article, ArticleDto>();
+            CreateMap<string, DateTime>().ConvertUsing(source =>
+
+                    {
+                        DateTime dateTime;
+                        DateTime.TryParse(source, out dateTime);
+                        return dateTime;
+                    }
+                );
+
+            CreateMap<DateTime, string>().ConvertUsing(
+                    source =>
+                    source.ToLongDateString()
+                );
+
+            CreateMap<ArticleGetDto, Article>().ReverseMap();
+
+            CreateMap<ArticlePostDto, Article>().ReverseMap();
         }
     }
 }

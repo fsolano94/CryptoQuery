@@ -1,13 +1,7 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
-
-namespace CryptoQueryWebAPI.Models
+﻿namespace CryptoQuery.Api.Dto
 {
-    public class ArticleDto 
+    public class ArticlePostDto 
     {
-        public Guid Id { get; set; }
         public string UpdatedAt { get; set; }
         public string CreatedAt { get; set; }
         public string DateOfPublification { get; set; }

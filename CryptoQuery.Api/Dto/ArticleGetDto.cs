@@ -1,19 +1,18 @@
 ﻿using System;
 
-namespace CryptoQuery.Domain.Articles
+namespace CryptoQuery.Api.Dto
 {
-    public class Article
+    public class ArticleGetDto
     {
         public Guid Id { get; set; }
-        public DateTime UpdatedAt { get; set; }
-        public DateTime CreatedAt { get; set; }
-        public DateTime DateOfPublification { get; set; }
+        public string UpdatedAt { get; set; }
+        public string CreatedAt { get; set; }
+        public string DateOfPublification { get; set; }
         public string Author { get; set; }
         public string Url { get; set; }
         public string Title { get; set; }
         public string Topic { get; set; }
         public int Complexity { get; set; }
         public int Quality { get; set; }
-
     }
 }

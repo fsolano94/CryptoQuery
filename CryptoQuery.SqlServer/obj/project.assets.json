@@ -392,6 +392,25 @@
           "build/netstandard2.0/NETStandard.Library.targets": {}
         }
       },
+      "NLog/4.4.12": {
+        "type": "package",
+        "compile": {
+          "lib/net45/NLog.dll": {}
+        },
+        "runtime": {
+          "lib/net45/NLog.dll": {}
+        }
+      },
+      "NLog.Config/4.4.12": {
+        "type": "package",
+        "dependencies": {
+          "NLog": "4.4.12",
+          "NLog.Schema": "4.4.12"
+        }
+      },
+      "NLog.Schema/4.4.12": {
+        "type": "package"
+      },
       "Remotion.Linq/2.1.1": {
         "type": "package",
         "dependencies": {
@@ -1588,6 +1607,52 @@
         "lib/netstandard1.0/_._",
         "netstandard.library.2.0.0.nupkg.sha512",
         "netstandard.library.nuspec"
+      ]
+    },
+    "NLog/4.4.12": {
+      "sha512": "fODew3BFT2XhAuqhGo2ZYT9OJE0ciGEBfvKXOmAAvaDsP/3ROIf083p8QUnmwKKw4jCkVW06ObX6gn/eFi2Skg==",
+      "type": "package",
+      "path": "nlog/4.4.12",
+      "files": [
+        "lib/MonoAndroid10/NLog.dll",
+        "lib/MonoAndroid10/NLog.xml",
+        "lib/Xamarin.iOS10/NLog.dll",
+        "lib/Xamarin.iOS10/NLog.xml",
+        "lib/net35/NLog.dll",
+        "lib/net35/NLog.xml",
+        "lib/net40/NLog.dll",
+        "lib/net40/NLog.xml",
+        "lib/net45/NLog.dll",
+        "lib/net45/NLog.xml",
+        "lib/sl4/NLog.dll",
+        "lib/sl4/NLog.xml",
+        "lib/sl5/NLog.dll",
+        "lib/sl5/NLog.xml",
+        "lib/wp8/NLog.dll",
+        "lib/wp8/NLog.xml",
+        "nlog.4.4.12.nupkg.sha512",
+        "nlog.nuspec"
+      ]
+    },
+    "NLog.Config/4.4.12": {
+      "sha512": "vYSQM03xj8khIteB7ccE7tJFx7rxvpupykhDuDKsvq0W9sYr0Kewgm610GqjHyzd3O7qhiH2uN1VrP9l8hsAEQ==",
+      "type": "package",
+      "path": "nlog.config/4.4.12",
+      "files": [
+        "content/NLog.config",
+        "nlog.config.4.4.12.nupkg.sha512",
+        "nlog.config.nuspec",
+        "tools/Install.ps1"
+      ]
+    },
+    "NLog.Schema/4.4.12": {
+      "sha512": "09WGJZLsKYPOc7tULMCGOlrzsZGaMHDMRbf/TcfHfn4xS0ZT1+ADJjsss+9Xg/SzreiwEWgPaPSdkp2xpaktGQ==",
+      "type": "package",
+      "path": "nlog.schema/4.4.12",
+      "files": [
+        "content/NLog.xsd",
+        "nlog.schema.4.4.12.nupkg.sha512",
+        "nlog.schema.nuspec"
       ]
     },
     "Remotion.Linq/2.1.1": {
@@ -3344,7 +3409,9 @@
       "CryptoQuery.Domain >= 1.0.0",
       "Microsoft.EntityFrameworkCore >= 2.0.1",
       "Microsoft.EntityFrameworkCore.SqlServer >= 2.0.1",
-      "Microsoft.NETCore.App >= 2.0.0"
+      "Microsoft.NETCore.App >= 2.0.0",
+      "NLog >= 4.4.12",
+      "NLog.Config >= 4.4.12"
     ]
   },
   "packageFolders": {
@@ -3408,6 +3475,14 @@
           "Microsoft.EntityFrameworkCore.SqlServer": {
             "target": "Package",
             "version": "2.0.1"
+          },
+          "NLog.Config": {
+            "target": "Package",
+            "version": "4.4.12"
+          },
+          "NLog": {
+            "target": "Package",
+            "version": "4.4.12"
           }
         },
         "imports": [
@@ -3417,5 +3492,17 @@
         "warn": true
       }
     }
-  }
+  },
+  "logs": [
+    {
+      "code": "NU1701",
+      "level": "Warning",
+      "warningLevel": 1,
+      "message": "Package 'NLog 4.4.12' was restored using '.NETFramework,Version=v4.6.1' instead of the project target framework '.NETCoreApp,Version=v2.0'. This package may not be fully compatible with your project.",
+      "libraryId": "NLog",
+      "targetGraphs": [
+        ".NETCoreApp,Version=v2.0"
+      ]
+    }
+  ]
 }

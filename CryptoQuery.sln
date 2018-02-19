@@ -7,9 +7,9 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "CryptoQuery.Api", "CryptoQu
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "CryptoQuery.Domain", "CryptoQuery.Domain\CryptoQuery.Domain.csproj", "{41E5DD3F-A224-4138-A568-A6176EE9A8D6}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CryptoQuery.DummyData", "CryptoQuery.DummyData\CryptoQuery.DummyData.csproj", "{5B008FFE-6AED-4D28-863B-E5814207CF67}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "CryptoQuery.DummyData", "CryptoQuery.DummyData\CryptoQuery.DummyData.csproj", "{5B008FFE-6AED-4D28-863B-E5814207CF67}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CryptoQuery.SqlServer", "CryptoQuery.SqlServer\CryptoQuery.SqlServer.csproj", "{360EA40B-6AAB-468D-B4C5-DFA51D1DABBE}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "CryptoQuery.SqlServer", "CryptoQuery.SqlServer\CryptoQuery.SqlServer.csproj", "{360EA40B-6AAB-468D-B4C5-DFA51D1DABBE}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

@@ -6,6 +6,16 @@ namespace CryptoQuery.DummyData
 {
     public class DummyArticleRepository : IArticleRepository
     {
+        public Article CreateArticle(Article article)
+        {
+            throw new NotImplementedException();
+        }
+
+        public Article DeleteById(Guid article)
+        {
+            throw new NotImplementedException();
+        }
+
         public IEnumerable<Article> GetArticles()
         {
             return new List<Article>()
@@ -14,19 +24,24 @@ namespace CryptoQuery.DummyData
                 {
                     Author = "jon doe",
                     Complexity = 6,
-                    CreatedAt = string.Empty,
-                    DateOfPublification = "2/16/2018",
+                    CreatedAt = DateTime.Now,
+                    DateOfPublification = DateTime.Now,
                     Id = Guid.NewGuid(),
                 },
                 new Article()
                 {
                     Author = "jane smith",
                     Complexity = 1,
-                    CreatedAt = string.Empty,
-                    DateOfPublification = "2/15/2018",
+                    CreatedAt = DateTime.Now,
+                    DateOfPublification = DateTime.Now,
                     Id = Guid.NewGuid(),
                 }
             };
+        }
+
+        public Article GetById(Guid article)
+        {
+            throw new NotImplementedException();
         }
     }
  }

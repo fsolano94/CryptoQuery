@@ -8,12 +8,12 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging;
 using Microsoft.Extensions.Options;
-using CryptoQueryWebAPI.Controllers;
 using AutoMapper;
 using CryptoQuery.SqlServer;
 using CryptoQuery.Domain.Articles;
+using Swashbuckle.AspNetCore.Swagger;
 
-namespace CryptoQueryWebAPI
+namespace CryptoQuery
 {
     public class Startup
     {
@@ -27,6 +27,10 @@ namespace CryptoQueryWebAPI
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
+            services.AddSwaggerGen(c =>
+            {
+                c.SwaggerDoc("v1", new Info { Title = "CryptoQuery API", Version = "v1" });
+            });
             services.AddTransient<IArticleRepository, SqlServerArticleRepository>();
             services.AddAutoMapper();
             //services.AddScoped<CryptoDbContext>(_ => new CryptoDbContext(@"Server=(localdb)\DESKTOP-0EIN6C4;Database=CryptoQuery;Trusted_Connection=True;"));
@@ -42,8 +46,18 @@ namespace CryptoQueryWebAPI
                 app.UseDeveloperExceptionPage();
             }
 
+            // Enable middleware to serve generated Swagger as a JSON endpoint.  
+            app.UseSwagger();
+
+            // Enable middleware to serve swagger-ui (HTML, JS, CSS, etc.), specifying the Swagger JSON endpoint.  
+            app.UseSwaggerUI(c =>
+            {
+                c.SwaggerEndpoint("/swagger/v1/swagger.json", "My API V1");
+            });
+
             app.UseMvc();
             app.UseStatusCodePages();
+
         }
     }
 }

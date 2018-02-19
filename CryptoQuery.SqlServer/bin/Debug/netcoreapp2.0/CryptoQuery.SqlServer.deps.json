@@ -1,7 +1,7 @@
 {
   "runtimeTarget": {
     "name": ".NETCoreApp,Version=v2.0",
-    "signature": "21902c5b11e11a71d905f25fc225fbd50e01d74d"
+    "signature": "eb79fdb92090c173f0e7c4b180f2cd2f37d3da3e"
   },
   "compilationOptions": {},
   "targets": {
@@ -10,7 +10,9 @@
         "dependencies": {
           "CryptoQuery.Domain": "1.0.0",
           "Microsoft.EntityFrameworkCore": "2.0.1",
-          "Microsoft.EntityFrameworkCore.SqlServer": "2.0.1"
+          "Microsoft.EntityFrameworkCore.SqlServer": "2.0.1",
+          "NLog": "4.4.12",
+          "NLog.Config": "4.4.12"
         },
         "runtime": {
           "CryptoQuery.SqlServer.dll": {}
@@ -139,6 +141,18 @@
           }
         }
       },
+      "NLog/4.4.12": {
+        "runtime": {
+          "lib/net45/NLog.dll": {}
+        }
+      },
+      "NLog.Config/4.4.12": {
+        "dependencies": {
+          "NLog": "4.4.12",
+          "NLog.Schema": "4.4.12"
+        }
+      },
+      "NLog.Schema/4.4.12": {},
       "Remotion.Linq/2.1.1": {
         "dependencies": {
           "System.Collections": "4.0.11",
@@ -542,6 +556,27 @@
       "sha512": "sha512-dA36TlNVn/XfrZtmf0fiI/z1nd3Wfp2QVzTdj26pqgP9LFWq0i1hYEUAW50xUjGFYn1+/cP3KGuxT2Yn1OUNBQ==",
       "path": "microsoft.win32.registry/4.4.0",
       "hashPath": "microsoft.win32.registry.4.4.0.nupkg.sha512"
+    },
+    "NLog/4.4.12": {
+      "type": "package",
+      "serviceable": true,
+      "sha512": "sha512-fODew3BFT2XhAuqhGo2ZYT9OJE0ciGEBfvKXOmAAvaDsP/3ROIf083p8QUnmwKKw4jCkVW06ObX6gn/eFi2Skg==",
+      "path": "nlog/4.4.12",
+      "hashPath": "nlog.4.4.12.nupkg.sha512"
+    },
+    "NLog.Config/4.4.12": {
+      "type": "package",
+      "serviceable": true,
+      "sha512": "sha512-vYSQM03xj8khIteB7ccE7tJFx7rxvpupykhDuDKsvq0W9sYr0Kewgm610GqjHyzd3O7qhiH2uN1VrP9l8hsAEQ==",
+      "path": "nlog.config/4.4.12",
+      "hashPath": "nlog.config.4.4.12.nupkg.sha512"
+    },
+    "NLog.Schema/4.4.12": {
+      "type": "package",
+      "serviceable": true,
+      "sha512": "sha512-09WGJZLsKYPOc7tULMCGOlrzsZGaMHDMRbf/TcfHfn4xS0ZT1+ADJjsss+9Xg/SzreiwEWgPaPSdkp2xpaktGQ==",
+      "path": "nlog.schema/4.4.12",
+      "hashPath": "nlog.schema.4.4.12.nupkg.sha512"
     },
     "Remotion.Linq/2.1.1": {
       "type": "package",

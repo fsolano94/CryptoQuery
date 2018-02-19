@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 
-namespace CryptoQueryWebAPI.Models
+namespace CryptoQuery.Api.Dto
 {
     public class SettingsDto
     {
