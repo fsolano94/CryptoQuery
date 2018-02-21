@@ -12,14 +12,20 @@ using AutoMapper;
 using CryptoQuery.SqlServer;
 using CryptoQuery.Domain.Articles;
 using Swashbuckle.AspNetCore.Swagger;
+using Microsoft.AspNetCore.Mvc.Versioning;
+using Microsoft.AspNetCore.Mvc;
+using CryptoQuery.Api.Exceptions;
 
 namespace CryptoQuery
 {
     public class Startup
     {
-        public Startup(IConfiguration configuration)
+        private readonly IHostingEnvironment _hostingEnvironment;
+
+        public Startup(IConfiguration configuration, IHostingEnvironment hostingEnvironment)
         {
             Configuration = configuration;
+            _hostingEnvironment = hostingEnvironment;
         }
 
         public IConfiguration Configuration { get; }
@@ -27,14 +33,38 @@ namespace CryptoQuery
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
+
+            if (!_hostingEnvironment.IsDevelopment())
+            {
+                services.AddMvc(
+                    config =>
+                    {
+                        config.Filters.Add(typeof(GlobalExceptionFilter));
+                    }
+                );
+            }
+
+            services.AddApiVersioning(options =>
+            {
+                options.ApiVersionReader = new MediaTypeApiVersionReader();
+                options.AssumeDefaultVersionWhenUnspecified = true;
+                options.ReportApiVersions = true;
+                options.DefaultApiVersion = new ApiVersion(1, 0);
+                options.ApiVersionSelector = new CurrentImplementationApiVersionSelector(options);
+            });
+
             services.AddSwaggerGen(c =>
             {
                 c.SwaggerDoc("v1", new Info { Title = "CryptoQuery API", Version = "v1" });
             });
+
             services.AddTransient<IArticleRepository, SqlServerArticleRepository>();
+            services.AddScoped<ArticleService, ArticleService>();
             services.AddAutoMapper();
             //services.AddScoped<CryptoDbContext>(_ => new CryptoDbContext(@"Server=(localdb)\DESKTOP-0EIN6C4;Database=CryptoQuery;Trusted_Connection=True;"));
-            services.AddMvc();
+            services.AddMvc(options => {
+                options.Filters.Add(typeof(GlobalExceptionFilter));
+            });
 
         }
 

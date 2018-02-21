@@ -1,9 +1,9 @@
 C:\Users\fsola\Documents\Development\SeniorProject\CryptoQuery\CryptoQuery.Domain\bin\Debug\netcoreapp2.0\CryptoQuery.Domain.deps.json
 C:\Users\fsola\Documents\Development\SeniorProject\CryptoQuery\CryptoQuery.Domain\bin\Debug\netcoreapp2.0\CryptoQuery.Domain.dll
 C:\Users\fsola\Documents\Development\SeniorProject\CryptoQuery\CryptoQuery.Domain\bin\Debug\netcoreapp2.0\CryptoQuery.Domain.pdb
+C:\Users\fsola\Documents\Development\SeniorProject\CryptoQuery\CryptoQuery.Domain\obj\Debug\netcoreapp2.0\CryptoQuery.Domain.csprojResolveAssemblyReference.cache
 C:\Users\fsola\Documents\Development\SeniorProject\CryptoQuery\CryptoQuery.Domain\obj\Debug\netcoreapp2.0\CryptoQuery.Domain.csproj.CoreCompileInputs.cache
 C:\Users\fsola\Documents\Development\SeniorProject\CryptoQuery\CryptoQuery.Domain\obj\Debug\netcoreapp2.0\CryptoQuery.Domain.AssemblyInfoInputs.cache
 C:\Users\fsola\Documents\Development\SeniorProject\CryptoQuery\CryptoQuery.Domain\obj\Debug\netcoreapp2.0\CryptoQuery.Domain.AssemblyInfo.cs
 C:\Users\fsola\Documents\Development\SeniorProject\CryptoQuery\CryptoQuery.Domain\obj\Debug\netcoreapp2.0\CryptoQuery.Domain.dll
 C:\Users\fsola\Documents\Development\SeniorProject\CryptoQuery\CryptoQuery.Domain\obj\Debug\netcoreapp2.0\CryptoQuery.Domain.pdb
-C:\Users\fsola\Documents\Development\SeniorProject\CryptoQuery\CryptoQuery.Domain\obj\Debug\netcoreapp2.0\CryptoQuery.Domain.csprojResolveAssemblyReference.cache

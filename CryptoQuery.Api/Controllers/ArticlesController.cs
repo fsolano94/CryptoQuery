@@ -7,52 +7,60 @@ using System.Net;
 using AutoMapper;
 using CryptoQuery.Domain.Articles;
 using CryptoQuery.Api.Dto;
+using CSharpFunctionalExtensions;
 
 // For more information on enabling Web API for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
 
 namespace CryptoQuery.Api.Controllers
 {
     [Route("api/[controller]")]
+    [ApiVersion("1.0")]
     public class ArticlesController : Controller
     {
-        IArticleRepository _articleRepository;
+        ArticleService _articleService;
         IMapper _mapper;
 
-        public ArticlesController(IArticleRepository articleRepository, IMapper mapper)
+        public ArticlesController(ArticleService articleService, IMapper mapper)
         {
-            _articleRepository = articleRepository;
+            _articleService = articleService;
             _mapper = mapper;
         }
 
         // GET: api/values
-        [HttpGet]
-        public IActionResult Get()
+        [HttpGet(Name = nameof(GetAllArticles))]
+        public IActionResult GetAllArticles()
         {
-            var articles = _articleRepository.GetArticles(); // articles is a business object
+            var articlesOrError = _articleService.GetArticles(); // articles is a business object
+
+            if (articlesOrError.IsFailure)
+            {
+                return BadRequest(articlesOrError);
+            }
 
             // automapper
-            var articleDtos =_mapper.Map<IEnumerable<ArticleGetDto>>(articles);
+            var articleDtos =_mapper.Map<IEnumerable<ArticleGetDto>>(articlesOrError.Value);
 
-            return Ok(articleDtos);
+
+            return Ok(Result.Ok(articleDtos));
         }
 
         // GET api/values/5
-        [HttpGet("{id}")]
-        public IActionResult Get(Guid id)
+        [HttpGet("{id}", Name = nameof(GetAritcleWithId))]
+        public IActionResult GetAritcleWithId(Guid id)
         {
             if ( id == null )
             {
-                return BadRequest($"Invalid Guid id specified: {id}.");
+                return BadRequest(Result.Fail<ArticleGetDto>($"Invalid Guid id specified: {id}."));
             }
 
-            var article = _articleRepository.GetById(id);
+            var result = _articleService.GetById(id);
 
-            if ( article == null )
+            if (result.IsFailure)
             {
-                return NotFound();
+                return BadRequest(result);
             }
 
-            return Ok( _mapper.Map<ArticleGetDto>(article));
+            return Ok( _mapper.Map<ArticleGetDto>(result.Value));
         }
 
         // POST api/values
@@ -65,20 +73,21 @@ namespace CryptoQuery.Api.Controllers
             {
                 var article = _mapper.Map<Article>(articlePostDto);
 
-                createdArticle = _articleRepository.CreateArticle(article);
+                var result = _articleService.CreateArticle(article);
+
+                createdArticle = result.Value;
 
                 if (createdArticle == null)
                 {
-                    return new StatusCodeResult((int)HttpStatusCode.InternalServerError);
+                    return BadRequest(createdArticle);
                 }
-
             }
             catch (Exception exception)
             {
                 throw exception;
             }
 
-            return Ok(createdArticle);
+            return CreatedAtRoute("Get", new { id = createdArticle.Id}, createdArticle);
         }
 
         // PUT api/values/5
@@ -97,7 +106,9 @@ namespace CryptoQuery.Api.Controllers
                 return BadRequest($"Invalid id specified: {id}.");
             }
 
-           Article articleToDelete = _articleRepository.DeleteById(id);
+            var result = _articleService.DeleteById(id);
+
+            Article articleToDelete = result.Value;
 
             if (articleToDelete == null)
             {

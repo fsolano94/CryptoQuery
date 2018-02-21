@@ -1,7 +1,3 @@
-C:\Users\fsola\Documents\Development\SeniorProject\CryptoQuery\CryptoQuery.Api\obj\Debug\netcoreapp2.0\CryptoQuery.Api.csprojResolveAssemblyReference.cache
-C:\Users\fsola\Documents\Development\SeniorProject\CryptoQuery\CryptoQuery.Api\obj\Debug\netcoreapp2.0\CryptoQuery.Api.csproj.CoreCompileInputs.cache
-C:\Users\fsola\Documents\Development\SeniorProject\CryptoQuery\CryptoQuery.Api\obj\Debug\netcoreapp2.0\CryptoQuery.Api.AssemblyInfoInputs.cache
-C:\Users\fsola\Documents\Development\SeniorProject\CryptoQuery\CryptoQuery.Api\obj\Debug\netcoreapp2.0\CryptoQuery.Api.AssemblyInfo.cs
 C:\Users\fsola\Documents\Development\SeniorProject\CryptoQuery\CryptoQuery.Api\bin\Debug\netcoreapp2.0\CryptoQuery.Api.deps.json
 C:\Users\fsola\Documents\Development\SeniorProject\CryptoQuery\CryptoQuery.Api\bin\Debug\netcoreapp2.0\CryptoQuery.Api.runtimeconfig.json
 C:\Users\fsola\Documents\Development\SeniorProject\CryptoQuery\CryptoQuery.Api\bin\Debug\netcoreapp2.0\CryptoQuery.Api.runtimeconfig.dev.json
@@ -11,5 +7,10 @@ C:\Users\fsola\Documents\Development\SeniorProject\CryptoQuery\CryptoQuery.Api\b
 C:\Users\fsola\Documents\Development\SeniorProject\CryptoQuery\CryptoQuery.Api\bin\Debug\netcoreapp2.0\CryptoQuery.SqlServer.dll
 C:\Users\fsola\Documents\Development\SeniorProject\CryptoQuery\CryptoQuery.Api\bin\Debug\netcoreapp2.0\CryptoQuery.Domain.pdb
 C:\Users\fsola\Documents\Development\SeniorProject\CryptoQuery\CryptoQuery.Api\bin\Debug\netcoreapp2.0\CryptoQuery.SqlServer.pdb
+C:\Users\fsola\Documents\Development\SeniorProject\CryptoQuery\CryptoQuery.Api\obj\Debug\netcoreapp2.0\CryptoQuery.Api.csprojResolveAssemblyReference.cache
+C:\Users\fsola\Documents\Development\SeniorProject\CryptoQuery\CryptoQuery.Api\obj\Debug\netcoreapp2.0\CryptoQuery.Api.csproj.CoreCompileInputs.cache
+C:\Users\fsola\Documents\Development\SeniorProject\CryptoQuery\CryptoQuery.Api\obj\Debug\netcoreapp2.0\CryptoQuery.Api.AssemblyInfoInputs.cache
+C:\Users\fsola\Documents\Development\SeniorProject\CryptoQuery\CryptoQuery.Api\obj\Debug\netcoreapp2.0\CryptoQuery.Api.AssemblyInfo.cs
 C:\Users\fsola\Documents\Development\SeniorProject\CryptoQuery\CryptoQuery.Api\obj\Debug\netcoreapp2.0\CryptoQuery.Api.dll
 C:\Users\fsola\Documents\Development\SeniorProject\CryptoQuery\CryptoQuery.Api\obj\Debug\netcoreapp2.0\CryptoQuery.Api.pdb
+C:\Users\fsola\Documents\Development\SeniorProject\CryptoQuery\CryptoQuery.Api\bin\Debug\netcoreapp2.0\nlog.config

@@ -12,6 +12,14 @@ namespace CryptoQuery.Api
     {
         public DomainProfile()
         {
+            CreateMap<string, Guid>().ConvertUsing(source =>
+                {
+                    Guid newGuid;
+                    Guid.TryParse(source, out newGuid);
+                    return newGuid;
+                }
+            );
+
             CreateMap<string, DateTime>().ConvertUsing(source =>
 
                     {

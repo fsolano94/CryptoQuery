@@ -2,6 +2,15 @@
   "version": 3,
   "targets": {
     ".NETCoreApp,Version=v2.0": {
+      "CSharpFunctionalExtensions/1.9.0": {
+        "type": "package",
+        "compile": {
+          "lib/netstandard2.0/CSharpFunctionalExtensions.dll": {}
+        },
+        "runtime": {
+          "lib/netstandard2.0/CSharpFunctionalExtensions.dll": {}
+        }
+      },
       "Microsoft.CSharp/4.4.0": {
         "type": "package",
         "compile": {
@@ -895,6 +904,9 @@
       "CryptoQuery.Domain/1.0.0": {
         "type": "project",
         "framework": ".NETCoreApp,Version=v2.0",
+        "dependencies": {
+          "CSharpFunctionalExtensions": "1.9.0"
+        },
         "compile": {
           "bin/placeholder/CryptoQuery.Domain.dll": {}
         },
@@ -905,6 +917,20 @@
     }
   },
   "libraries": {
+    "CSharpFunctionalExtensions/1.9.0": {
+      "sha512": "4yuLqQIJ5tqMtv30pH6Kiy1cOHSvNvq2vVuW/erO9Ng4z8K7b3V6ITNEKJXYUNJKoxyrxI5rigBphhCYatrmYQ==",
+      "type": "package",
+      "path": "csharpfunctionalextensions/1.9.0",
+      "files": [
+        "csharpfunctionalextensions.1.9.0.nupkg.sha512",
+        "csharpfunctionalextensions.nuspec",
+        "lib/net40/CSharpFunctionalExtensions.dll",
+        "lib/net45/CSharpFunctionalExtensions.dll",
+        "lib/net461/CSharpFunctionalExtensions.dll",
+        "lib/netstandard1.3/CSharpFunctionalExtensions.dll",
+        "lib/netstandard2.0/CSharpFunctionalExtensions.dll"
+      ]
+    },
     "Microsoft.CSharp/4.4.0": {
       "sha512": "vvVR/B08YVghQ4jHEloxqw2ZWzEGE1AOA5E0DioUM3ujbXz6FD3AfB/0Jl2ohJPd0nXYGwmPe1En6HTsSriq1A==",
       "type": "package",
@@ -3406,6 +3432,7 @@
   },
   "projectFileDependencyGroups": {
     ".NETCoreApp,Version=v2.0": [
+      "CSharpFunctionalExtensions >= 1.9.0",
       "CryptoQuery.Domain >= 1.0.0",
       "Microsoft.EntityFrameworkCore >= 2.0.1",
       "Microsoft.EntityFrameworkCore.SqlServer >= 2.0.1",
@@ -3416,6 +3443,7 @@
   },
   "packageFolders": {
     "C:\\Users\\fsola\\.nuget\\packages\\": {},
+    "C:\\Program Files (x86)\\Microsoft SDKs\\NuGetPackagesFallback\\": {},
     "C:\\Program Files\\dotnet\\sdk\\NuGetFallbackFolder": {}
   },
   "project": {
@@ -3431,11 +3459,13 @@
       "outputPath": "C:\\Users\\fsola\\Documents\\Development\\SeniorProject\\CryptoQuery\\CryptoQuery.SqlServer\\obj\\",
       "projectStyle": "PackageReference",
       "fallbackFolders": [
+        "C:\\Program Files (x86)\\Microsoft SDKs\\NuGetPackagesFallback\\",
         "C:\\Program Files\\dotnet\\sdk\\NuGetFallbackFolder"
       ],
       "configFilePaths": [
         "C:\\Users\\fsola\\AppData\\Roaming\\NuGet\\NuGet.Config",
-        "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
+        "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config",
+        "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.Fallback.config"
       ],
       "originalTargetFrameworks": [
         "netcoreapp2.0"
@@ -3462,27 +3492,31 @@
     "frameworks": {
       "netcoreapp2.0": {
         "dependencies": {
+          "CSharpFunctionalExtensions": {
+            "target": "Package",
+            "version": "[1.9.0, )"
+          },
           "Microsoft.EntityFrameworkCore": {
             "target": "Package",
-            "version": "2.0.1"
+            "version": "[2.0.1, )"
+          },
+          "Microsoft.EntityFrameworkCore.SqlServer": {
+            "target": "Package",
+            "version": "[2.0.1, )"
           },
           "Microsoft.NETCore.App": {
             "suppressParent": "All",
             "target": "Package",
-            "version": "2.0.0",
+            "version": "[2.0.0, )",
             "autoReferenced": true
-          },
-          "Microsoft.EntityFrameworkCore.SqlServer": {
-            "target": "Package",
-            "version": "2.0.1"
-          },
-          "NLog.Config": {
-            "target": "Package",
-            "version": "4.4.12"
           },
           "NLog": {
             "target": "Package",
-            "version": "4.4.12"
+            "version": "[4.4.12, )"
+          },
+          "NLog.Config": {
+            "target": "Package",
+            "version": "[4.4.12, )"
           }
         },
         "imports": [

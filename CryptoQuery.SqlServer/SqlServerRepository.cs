@@ -3,6 +3,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using NLog;
+using CSharpFunctionalExtensions;
 
 namespace CryptoQuery.SqlServer
 {
@@ -16,7 +17,7 @@ namespace CryptoQuery.SqlServer
         {
         }
 
-        public Article CreateArticle(Article article)
+        public Result<Article> CreateArticle(Article article)
         {
             Article createdArticle = null;
 
@@ -29,23 +30,26 @@ namespace CryptoQuery.SqlServer
             catch (Exception exception)
             {
                 _logger.Error(exception, exception.Message);
+                return Result.Fail<Article>(exception.Message);
             }
 
-            return createdArticle;
+            return Result.Ok<Article>(createdArticle);
         }
 
-        public Article DeleteById(Guid articleId)
+        public Result<Article> DeleteById(Guid articleId)
         {
             Article articleToRemove = null;
 
             try
             {
-                articleToRemove = GetById(articleId);
+                var result = GetById(articleId);
 
-                if ( articleToRemove == null )
+                if ( result.Value == null )
                 {
-                    return articleToRemove;
+                    return Result.Fail<Article>($"Element with provided id of {articleId} could not be found.");
                 }
+
+                articleToRemove = result.Value;
 
                 _cryptoDbContext.Articles.Remove(articleToRemove);
 
@@ -54,12 +58,13 @@ namespace CryptoQuery.SqlServer
             catch (Exception exception)
             {
                 _logger.Error(exception, exception.Message);
+                return Result.Fail<Article>(exception.Message);
             }
 
-            return articleToRemove;
+            return Result.Ok(articleToRemove);
         }
 
-        public IEnumerable<Article> GetArticles()
+        public Result<IEnumerable<Article>> GetArticles()
         {
             IEnumerable<Article> articles = null;
 
@@ -70,39 +75,19 @@ namespace CryptoQuery.SqlServer
             catch (Exception exception)
             {
                 _logger.Error(exception, exception.Message);
+                return Result.Fail<IEnumerable<Article>>(exception.Message);
             }
 
-            return articles;
+            return Result.Ok(articles);
         }
 
-        public Article GetById(Guid articleId)
+        public Result<Article> GetById(Guid articleId)
         {
             Article article = null;
 
-            try
-            {
-                article = _cryptoDbContext.Articles.FirstOrDefault(existingArticle => existingArticle.Id == articleId);
-            }
-            catch (Exception exception)
-            {
-                _logger.Error(exception, exception.Message);
-            }
-            return article;
-        }
-
-       private bool ArticleExists(Article article)
-        {
-            Article articleExists = null;
-
-            try
-            {
-                articleExists = _cryptoDbContext.Articles.FirstOrDefault(existingArticle => existingArticle.Id == article.Id);
-            }
-            catch (Exception exception)
-            {
-                _logger.Error(exception, exception.Message);
-            }
-            return articleExists != null;
+            article = _cryptoDbContext.Articles.FirstOrDefault(existingArticle => existingArticle.Id == articleId);
+            
+            return (article == null) ?  Result.Fail<Article>($"Article with {articleId.ToString()} not found."): Result.Ok(article);
         }
     }
 }

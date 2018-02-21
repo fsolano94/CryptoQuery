@@ -1,13 +1,14 @@
 {
   "runtimeTarget": {
     "name": ".NETCoreApp,Version=v2.0",
-    "signature": "eb79fdb92090c173f0e7c4b180f2cd2f37d3da3e"
+    "signature": "1871bd49f7268a46ea000cc63a9f8c71d6e0d958"
   },
   "compilationOptions": {},
   "targets": {
     ".NETCoreApp,Version=v2.0": {
       "CryptoQuery.SqlServer/1.0.0": {
         "dependencies": {
+          "CSharpFunctionalExtensions": "1.9.0",
           "CryptoQuery.Domain": "1.0.0",
           "Microsoft.EntityFrameworkCore": "2.0.1",
           "Microsoft.EntityFrameworkCore.SqlServer": "2.0.1",
@@ -16,6 +17,11 @@
         },
         "runtime": {
           "CryptoQuery.SqlServer.dll": {}
+        }
+      },
+      "CSharpFunctionalExtensions/1.9.0": {
+        "runtime": {
+          "lib/netstandard2.0/CSharpFunctionalExtensions.dll": {}
         }
       },
       "Microsoft.CSharp/4.4.0": {},
@@ -440,6 +446,9 @@
         }
       },
       "CryptoQuery.Domain/1.0.0": {
+        "dependencies": {
+          "CSharpFunctionalExtensions": "1.9.0"
+        },
         "runtime": {
           "CryptoQuery.Domain.dll": {}
         }
@@ -451,6 +460,13 @@
       "type": "project",
       "serviceable": false,
       "sha512": ""
+    },
+    "CSharpFunctionalExtensions/1.9.0": {
+      "type": "package",
+      "serviceable": true,
+      "sha512": "sha512-4yuLqQIJ5tqMtv30pH6Kiy1cOHSvNvq2vVuW/erO9Ng4z8K7b3V6ITNEKJXYUNJKoxyrxI5rigBphhCYatrmYQ==",
+      "path": "csharpfunctionalextensions/1.9.0",
+      "hashPath": "csharpfunctionalextensions.1.9.0.nupkg.sha512"
     },
     "Microsoft.CSharp/4.4.0": {
       "type": "package",
