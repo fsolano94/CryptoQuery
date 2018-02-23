@@ -21,11 +21,22 @@ namespace CryptoQuery
     public class Startup
     {
         private readonly IHostingEnvironment _hostingEnvironment;
+        private readonly int? _httpsPort;
+
 
         public Startup(IConfiguration configuration, IHostingEnvironment hostingEnvironment)
         {
             Configuration = configuration;
             _hostingEnvironment = hostingEnvironment;
+
+            if (_hostingEnvironment.IsDevelopment())
+            {
+                var launchJsonConfig = new ConfigurationBuilder()
+                    .SetBasePath(_hostingEnvironment.ContentRootPath)
+                    .AddJsonFile("Properties\\launchSettings.json")
+                    .Build();
+                _httpsPort = launchJsonConfig.GetValue<int>("iisSettings:iisExpress:sslPort");
+            }
         }
 
         public IConfiguration Configuration { get; }
@@ -63,7 +74,8 @@ namespace CryptoQuery
             services.AddAutoMapper();
             //services.AddScoped<CryptoDbContext>(_ => new CryptoDbContext(@"Server=(localdb)\DESKTOP-0EIN6C4;Database=CryptoQuery;Trusted_Connection=True;"));
             services.AddMvc(options => {
-                options.Filters.Add(typeof(GlobalExceptionFilter));
+                options.SslPort = _httpsPort;
+                options.Filters.Add(typeof(RequireHttpsAttribute));
             });
 
         }
@@ -85,8 +97,15 @@ namespace CryptoQuery
                 c.SwaggerEndpoint("/swagger/v1/swagger.json", "My API V1");
             });
 
+            app.UseHsts(options =>
+            {
+                options.MaxAge(180);
+                options.IncludeSubdomains();
+                options.Preload();
+            });
             app.UseMvc();
             app.UseStatusCodePages();
+            
 
         }
     }

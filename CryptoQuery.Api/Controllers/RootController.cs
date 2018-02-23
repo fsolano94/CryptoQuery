@@ -9,7 +9,7 @@ namespace CryptoQuery.Api.Controllers
 {
     [Produces("application/json")]
     [ApiVersion("1.0")]
-    [Route("api/")]
+    [Route("/")]
     public class RootController : Controller
     {
         // GET: api/Root
@@ -18,11 +18,11 @@ namespace CryptoQuery.Api.Controllers
         {
             var response = new
             {
-                href = Url.Link(nameof(GetRoot), null),
+                location = Url.Link(nameof(GetRoot), null),
                 
                 articles = new
                 {
-                    href = Url.Link(nameof(ArticlesController.GetAllArticles), null)
+                    location = Url.Link(nameof(ArticlesController.GetAllArticles), null)
                 }
             };
 

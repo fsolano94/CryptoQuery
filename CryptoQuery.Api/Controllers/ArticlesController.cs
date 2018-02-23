@@ -13,7 +13,7 @@ using CSharpFunctionalExtensions;
 
 namespace CryptoQuery.Api.Controllers
 {
-    [Route("api/[controller]")]
+    [Route("/[controller]")]
     [ApiVersion("1.0")]
     public class ArticlesController : Controller
     {

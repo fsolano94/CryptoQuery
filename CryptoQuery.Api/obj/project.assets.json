@@ -2987,6 +2987,34 @@
           "lib/netstandard1.3/NuGet.Frameworks.dll": {}
         }
       },
+      "NWebsec.AspNetCore.Core/1.1.0": {
+        "type": "package",
+        "dependencies": {
+          "Microsoft.AspNetCore.Http.Abstractions": "1.0.2",
+          "NETStandard.Library": "1.6.1",
+          "System.Text.RegularExpressions": "4.3.0"
+        },
+        "compile": {
+          "lib/netstandard1.3/NWebsec.AspNetCore.Core.dll": {}
+        },
+        "runtime": {
+          "lib/netstandard1.3/NWebsec.AspNetCore.Core.dll": {}
+        }
+      },
+      "NWebsec.AspNetCore.Middleware/1.1.0": {
+        "type": "package",
+        "dependencies": {
+          "Microsoft.AspNetCore.Http.Abstractions": "1.0.2",
+          "NETStandard.Library": "1.6.1",
+          "NWebsec.AspNetCore.Core": "1.1.0"
+        },
+        "compile": {
+          "lib/netstandard1.3/NWebsec.AspNetCore.Middleware.dll": {}
+        },
+        "runtime": {
+          "lib/netstandard1.3/NWebsec.AspNetCore.Middleware.dll": {}
+        }
+      },
       "Remotion.Linq/2.1.1": {
         "type": "package",
         "dependencies": {
@@ -8350,6 +8378,32 @@
         "nuget.frameworks.nuspec"
       ]
     },
+    "NWebsec.AspNetCore.Core/1.1.0": {
+      "sha512": "LKyL2tmHjc0w/OUWt5TlACNCjtbKL0HP/Wn9rKDkLPXgsCxfn273jisoxEbYa+PsnPjifSwrKE0zMcGmFPE7uQ==",
+      "type": "package",
+      "path": "nwebsec.aspnetcore.core/1.1.0",
+      "files": [
+        "lib/net451/NWebsec.AspNetCore.Core.dll",
+        "lib/net451/NWebsec.AspNetCore.Core.xml",
+        "lib/netstandard1.3/NWebsec.AspNetCore.Core.dll",
+        "lib/netstandard1.3/NWebsec.AspNetCore.Core.xml",
+        "nwebsec.aspnetcore.core.1.1.0.nupkg.sha512",
+        "nwebsec.aspnetcore.core.nuspec"
+      ]
+    },
+    "NWebsec.AspNetCore.Middleware/1.1.0": {
+      "sha512": "PlZ12p+ouSJXj5/6aFL26AI18VryK3+FH+sOgt7Cj+S5uUu1HdqD2FZXWts0P4Cf5gY8a2gzahV5KKY4VP0gug==",
+      "type": "package",
+      "path": "nwebsec.aspnetcore.middleware/1.1.0",
+      "files": [
+        "lib/net451/NWebsec.AspNetCore.Middleware.dll",
+        "lib/net451/NWebsec.AspNetCore.Middleware.xml",
+        "lib/netstandard1.3/NWebsec.AspNetCore.Middleware.dll",
+        "lib/netstandard1.3/NWebsec.AspNetCore.Middleware.xml",
+        "nwebsec.aspnetcore.middleware.1.1.0.nupkg.sha512",
+        "nwebsec.aspnetcore.middleware.nuspec"
+      ]
+    },
     "Remotion.Linq/2.1.1": {
       "sha512": "k5aijpH0pRW9dABkBqnhm+wyry1T3zC0omDVisohm/7+DsNoir8tgwBm5ts8Unzvd4zt2MDkElkReuvrpkrWiQ==",
       "type": "package",
@@ -13522,6 +13576,7 @@
       "Microsoft.NETCore.App >= 2.0.0",
       "Microsoft.VisualStudio.Web.CodeGeneration.Design >= 2.0.2",
       "NLog.Web.AspNetCore >= 4.5.0-rc2",
+      "NWebsec.AspNetCore.Middleware >= 1.1.0",
       "Swashbuckle.AspNetCore >= 1.2.0"
     ]
   },
@@ -13611,6 +13666,10 @@
           "NLog.Web.AspNetCore": {
             "target": "Package",
             "version": "[4.5.0-rc2, )"
+          },
+          "NWebsec.AspNetCore.Middleware": {
+            "target": "Package",
+            "version": "[1.1.0, )"
           },
           "Swashbuckle.AspNetCore": {
             "target": "Package",
