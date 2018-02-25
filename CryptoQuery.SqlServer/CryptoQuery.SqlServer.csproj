@@ -16,4 +16,5 @@
     <ProjectReference Include="..\CryptoQuery.Domain\CryptoQuery.Domain.csproj" />
   </ItemGroup>
 
+
 </Project>

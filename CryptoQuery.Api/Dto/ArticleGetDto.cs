@@ -1,8 +1,9 @@
-﻿using System;
+﻿using CryptoQuery.Api.Models;
+using System;
 
 namespace CryptoQuery.Api.Dto
 {
-    public class ArticleGetDto
+    public class ArticleGetDto : Resource
     {
         public Guid Id { get; set; }
         public string UpdatedAt { get; set; }

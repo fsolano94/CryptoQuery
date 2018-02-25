@@ -698,11 +698,11 @@
       "hideWarningsAndErrors": true
     },
     "restore": {
-      "projectUniqueName": "C:\\Users\\fsola\\Documents\\Development\\SeniorProject\\CryptoQuery\\CryptoQuery.Domain\\CryptoQuery.Domain.csproj",
+      "projectUniqueName": "C:\\Users\\fsola\\Documents\\Development\\SeniorProject_Working\\CryptoQuery\\CryptoQuery.Domain\\CryptoQuery.Domain.csproj",
       "projectName": "CryptoQuery.Domain",
-      "projectPath": "C:\\Users\\fsola\\Documents\\Development\\SeniorProject\\CryptoQuery\\CryptoQuery.Domain\\CryptoQuery.Domain.csproj",
+      "projectPath": "C:\\Users\\fsola\\Documents\\Development\\SeniorProject_Working\\CryptoQuery\\CryptoQuery.Domain\\CryptoQuery.Domain.csproj",
       "packagesPath": "C:\\Users\\fsola\\.nuget\\packages\\",
-      "outputPath": "C:\\Users\\fsola\\Documents\\Development\\SeniorProject\\CryptoQuery\\CryptoQuery.Domain\\obj\\",
+      "outputPath": "C:\\Users\\fsola\\Documents\\Development\\SeniorProject_Working\\CryptoQuery\\CryptoQuery.Domain\\obj\\",
       "projectStyle": "PackageReference",
       "fallbackFolders": [
         "C:\\Program Files (x86)\\Microsoft SDKs\\NuGetPackagesFallback\\",

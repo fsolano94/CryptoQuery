@@ -1,4 +1,5 @@
 ﻿using CryptoQuery.Domain.Articles;
+using CryptoQuery.Domain.Users;
 using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
@@ -9,6 +10,8 @@ namespace CryptoQuery.SqlServer
     public class CryptoDbContext : DbContext
     {
         public DbSet<Article> Articles { get; set; }
+        public DbSet<User> Users { get; set; }
+       // public DbSet<ArticleQueryProfile> ArticleQueryProfiles { get; set; }
 
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {

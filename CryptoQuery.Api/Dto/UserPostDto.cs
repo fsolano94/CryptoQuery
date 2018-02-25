@@ -1,14 +1,14 @@
-﻿using CryptoQuery.Domain.Settings;
+﻿using CryptoQuery.Api.Models;
 using System;
 using System.Collections.Generic;
-using System.Text;
+using System.Linq;
+using System.Threading.Tasks;
 
-namespace CryptoQuery.Domain.Users
+namespace CryptoQuery.Api.Dto
 {
-    public class User 
+    public class UserPostDto : Resource
     {
-        public Guid Id { get; set; }
-        public ArticleQueryProfile ArticleQueryProfile { get; set; }
+        public ArticleQueryProfileDto ArticleQueryProfileDto { get; set; }
         public string CreatedAt { get; set; }
         public string UpdatedAt { get; set; }
         public string Email { get; set; }

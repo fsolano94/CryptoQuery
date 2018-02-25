@@ -3452,11 +3452,11 @@
       "hideWarningsAndErrors": true
     },
     "restore": {
-      "projectUniqueName": "C:\\Users\\fsola\\Documents\\Development\\SeniorProject\\CryptoQuery\\CryptoQuery.SqlServer\\CryptoQuery.SqlServer.csproj",
+      "projectUniqueName": "C:\\Users\\fsola\\Documents\\Development\\SeniorProject_Working\\CryptoQuery\\CryptoQuery.SqlServer\\CryptoQuery.SqlServer.csproj",
       "projectName": "CryptoQuery.SqlServer",
-      "projectPath": "C:\\Users\\fsola\\Documents\\Development\\SeniorProject\\CryptoQuery\\CryptoQuery.SqlServer\\CryptoQuery.SqlServer.csproj",
+      "projectPath": "C:\\Users\\fsola\\Documents\\Development\\SeniorProject_Working\\CryptoQuery\\CryptoQuery.SqlServer\\CryptoQuery.SqlServer.csproj",
       "packagesPath": "C:\\Users\\fsola\\.nuget\\packages\\",
-      "outputPath": "C:\\Users\\fsola\\Documents\\Development\\SeniorProject\\CryptoQuery\\CryptoQuery.SqlServer\\obj\\",
+      "outputPath": "C:\\Users\\fsola\\Documents\\Development\\SeniorProject_Working\\CryptoQuery\\CryptoQuery.SqlServer\\obj\\",
       "projectStyle": "PackageReference",
       "fallbackFolders": [
         "C:\\Program Files (x86)\\Microsoft SDKs\\NuGetPackagesFallback\\",
@@ -3477,8 +3477,8 @@
       "frameworks": {
         "netcoreapp2.0": {
           "projectReferences": {
-            "C:\\Users\\fsola\\Documents\\Development\\SeniorProject\\CryptoQuery\\CryptoQuery.Domain\\CryptoQuery.Domain.csproj": {
-              "projectPath": "C:\\Users\\fsola\\Documents\\Development\\SeniorProject\\CryptoQuery\\CryptoQuery.Domain\\CryptoQuery.Domain.csproj"
+            "C:\\Users\\fsola\\Documents\\Development\\SeniorProject_Working\\CryptoQuery\\CryptoQuery.Domain\\CryptoQuery.Domain.csproj": {
+              "projectPath": "C:\\Users\\fsola\\Documents\\Development\\SeniorProject_Working\\CryptoQuery\\CryptoQuery.Domain\\CryptoQuery.Domain.csproj"
             }
           }
         }

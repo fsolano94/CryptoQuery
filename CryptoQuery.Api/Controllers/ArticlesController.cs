@@ -27,10 +27,10 @@ namespace CryptoQuery.Api.Controllers
         }
 
         // GET: api/values
-        [HttpGet(Name = nameof(GetAllArticles))]
-        public IActionResult GetAllArticles()
+        [HttpGet]
+        public IActionResult Get()
         {
-            var articlesOrError = _articleService.GetArticles(); // articles is a business object
+            var articlesOrError = _articleService.Get(); 
 
             if (articlesOrError.IsFailure)
             {
@@ -40,82 +40,74 @@ namespace CryptoQuery.Api.Controllers
             // automapper
             var articleDtos =_mapper.Map<IEnumerable<ArticleGetDto>>(articlesOrError.Value);
 
-
             return Ok(Result.Ok(articleDtos));
         }
 
-        // GET api/values/5
-        [HttpGet("{id}", Name = nameof(GetAritcleWithId))]
-        public IActionResult GetAritcleWithId(Guid id)
-        {
-            if ( id == null )
-            {
-                return BadRequest(Result.Fail<ArticleGetDto>($"Invalid Guid id specified: {id}."));
-            }
+        //// GET api/values/5
+        //[HttpGet("{id}")]
+        //public IActionResult Get(Guid id)
+        //{
+        //    if ( id == null )
+        //    {
+        //        return BadRequest(Result.Fail<ArticleGetDto>($"Invalid Guid id specified: {id}."));
+        //    }
 
-            var result = _articleService.GetById(id);
+        //    var result = _articleService.Get(id);
 
-            if (result.IsFailure)
-            {
-                return BadRequest(result);
-            }
+        //    if (result.IsFailure)
+        //    {
+        //        return BadRequest(result);
+        //    }
 
-            return Ok( _mapper.Map<ArticleGetDto>(result.Value));
-        }
+        //    return Ok( _mapper.Map<ArticleGetDto>(result.Value));
+        //}
 
-        // POST api/values
-        [HttpPost]
-        public IActionResult Post([FromBody]ArticlePostDto articlePostDto)
-        {
-            Article createdArticle = null;
+        //// POST api/values
+        //[HttpPost]
+        //public IActionResult Post([FromBody]ArticlePostDto articlePostDto)
+        //{
+        //    Article createdArticle = null;
 
-            try
-            {
-                var article = _mapper.Map<Article>(articlePostDto);
+        //    try
+        //    {
+        //        var article = _mapper.Map<Article>(articlePostDto);
 
-                var result = _articleService.CreateArticle(article);
+        //        var result = _articleService.Create(article);
 
-                createdArticle = result.Value;
+        //        createdArticle = result.Value;
 
-                if (createdArticle == null)
-                {
-                    return BadRequest(createdArticle);
-                }
-            }
-            catch (Exception exception)
-            {
-                throw exception;
-            }
+        //        if (createdArticle == null)
+        //        {
+        //            return BadRequest(createdArticle);
+        //        }
+        //    }
+        //    catch (Exception exception)
+        //    {
+        //        throw exception;
+        //    }
 
-            return CreatedAtRoute("Get", new { id = createdArticle.Id}, createdArticle);
-        }
+        //    return CreatedAtRoute("Get", new { id = createdArticle.Id}, createdArticle);
+        //}
 
-        // PUT api/values/5
-        [HttpPut("{id}")]
-        public IActionResult Put(string id, [FromBody]ArticlePostDto article)
-        {
-            return Ok();
-        }
+        //// PUT api/values/5
+        //[HttpPut("{id}")]
+        //public IActionResult Put(string id, [FromBody]ArticlePostDto article)
+        //{
+        //    return Ok();
+        //}
 
-        // DELETE api/values/5
-        [HttpDelete("{id}")]
-        public IActionResult Delete(Guid id)
-        {
-            if ( id == null  )
-            {
-                return BadRequest($"Invalid id specified: {id}.");
-            }
+        //// DELETE api/values/5
+        //[HttpDelete("{id}")]
+        //public IActionResult Delete(Guid id)
+        //{
+        //    if ( id == null  )
+        //    {
+        //        return BadRequest($"Invalid id specified: {id}.");
+        //    }
 
-            var result = _articleService.DeleteById(id);
+        //    _articleService.Delete(id);
 
-            Article articleToDelete = result.Value;
-
-            if (articleToDelete == null)
-            {
-                return new StatusCodeResult((int)HttpStatusCode.InternalServerError);
-            }
-
-            return Ok(articleToDelete);
-        }
+        //    return Ok(Result.Ok());
+        //}
     }
 }

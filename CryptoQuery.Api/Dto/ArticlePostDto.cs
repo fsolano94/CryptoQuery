@@ -1,6 +1,8 @@
-﻿namespace CryptoQuery.Api.Dto
+﻿using CryptoQuery.Api.Models;
+
+namespace CryptoQuery.Api.Dto
 {
-    public class ArticlePostDto 
+    public class ArticlePostDto : Resource
     {
         public string UpdatedAt { get; set; }
         public string CreatedAt { get; set; }

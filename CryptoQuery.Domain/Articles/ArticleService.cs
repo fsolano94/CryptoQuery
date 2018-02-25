@@ -15,24 +15,24 @@ namespace CryptoQuery.Domain.Articles
             _articleRepository = articleRepository;
         }
 
-        public Result<Article> CreateArticle(Article article)
+        public Result<Article> Create(Article article)
         {
-            return _articleRepository.CreateArticle(article);
+            return _articleRepository.Create(article);
         }
 
-        public Result<IEnumerable<Article>> GetArticles()
+        public Result<IEnumerable<Article>> Get()
         {
-            return _articleRepository.GetArticles();
+            return _articleRepository.Get();
         }
 
-        public Result<Article> GetById(Guid id)
+        public Result<Article> Get(Guid id)
         {
-            return _articleRepository.GetById(id);
+            return _articleRepository.Get(id);
         }
 
-        public Result<Article> DeleteById(Guid id)
+        public void Delete(Guid id)
         {
-            return _articleRepository.DeleteById(id);
+            _articleRepository.Delete(id);
         }
     }
 }

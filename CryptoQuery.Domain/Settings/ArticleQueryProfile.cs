@@ -1,15 +1,12 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
+using System.Text;
 
-namespace CryptoQuery.Api.Dto
+namespace CryptoQuery.Domain.Settings
 {
-    public class SettingsPostDto
+    public class ArticleQueryProfile
     {
-        public string Id { get; set; }
-        public string UserId { get; set; }
-
+        public Guid Id { get; set; }
         public List<string> Topics;
         public int Complexity { get; set; }
         public int Quality { get; set; }
