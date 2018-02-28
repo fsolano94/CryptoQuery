@@ -7,44 +7,29 @@ namespace CryptoQuery.DummyData
 {
     public class DummyArticleRepository : IArticleRepository
     {
-        public Result<Article> CreateArticle(Article article)
+        public Result<Article> Create(Article item)
         {
             throw new NotImplementedException();
         }
 
-        public Result<Article> DeleteById(Guid article)
+        public void Delete(Guid id)
         {
             throw new NotImplementedException();
         }
 
-        public Result<IEnumerable<Article>> GetArticles()
+        public Result<IEnumerable<Article>> Get()
         {
-            var articles = new List<Article>()
-            {
-                new Article()
-                {
-                    Author = "jon doe",
-                    Complexity = 6,
-                    CreatedAt = DateTime.Now,
-                    DateOfPublification = DateTime.Now,
-                    Id = Guid.NewGuid(),
-                },
-                new Article()
-                {
-                    Author = "jane smith",
-                    Complexity = 1,
-                    CreatedAt = DateTime.Now,
-                    DateOfPublification = DateTime.Now,
-                    Id = Guid.NewGuid(),
-                }
-            };
-
-            return Result.Ok < IEnumerable < Article >> (articles);
+            throw new NotImplementedException();
         }
 
-        public Result<Article> GetById(Guid article)
+        public Result<Article> Get(Guid id)
+        {
+            throw new NotImplementedException();
+        }
+
+        public Result<Article> Update(Article item)
         {
             throw new NotImplementedException();
         }
     }
- }
+}

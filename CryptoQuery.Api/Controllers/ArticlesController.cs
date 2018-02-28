@@ -13,13 +13,21 @@ using CSharpFunctionalExtensions;
 
 namespace CryptoQuery.Api.Controllers
 {
+    /// <summary>
+    /// 
+    /// </summary>
     [Route("/[controller]")]
-    [ApiVersion("1.0")]
+   // [ApiVersion("1.0")]
     public class ArticlesController : Controller
     {
         ArticleService _articleService;
         IMapper _mapper;
 
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="articleService"></param>
+        /// <param name="mapper"></param>
         public ArticlesController(ArticleService articleService, IMapper mapper)
         {
             _articleService = articleService;
@@ -27,6 +35,10 @@ namespace CryptoQuery.Api.Controllers
         }
 
         // GET: api/values
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <returns></returns>
         [HttpGet]
         public IActionResult Get()
         {
@@ -47,7 +59,7 @@ namespace CryptoQuery.Api.Controllers
         //[HttpGet("{id}")]
         //public IActionResult Get(Guid id)
         //{
-        //    if ( id == null )
+        //    if (id == null)
         //    {
         //        return BadRequest(Result.Fail<ArticleGetDto>($"Invalid Guid id specified: {id}."));
         //    }
@@ -59,7 +71,7 @@ namespace CryptoQuery.Api.Controllers
         //        return BadRequest(result);
         //    }
 
-        //    return Ok( _mapper.Map<ArticleGetDto>(result.Value));
+        //    return Ok(_mapper.Map<ArticleGetDto>(result.Value));
         //}
 
         //// POST api/values
@@ -68,25 +80,18 @@ namespace CryptoQuery.Api.Controllers
         //{
         //    Article createdArticle = null;
 
-        //    try
+        //    var article = _mapper.Map<Article>(articlePostDto);
+
+        //    var result = _articleService.Create(article);
+
+        //    createdArticle = result.Value;
+
+        //    if (createdArticle == null)
         //    {
-        //        var article = _mapper.Map<Article>(articlePostDto);
-
-        //        var result = _articleService.Create(article);
-
-        //        createdArticle = result.Value;
-
-        //        if (createdArticle == null)
-        //        {
-        //            return BadRequest(createdArticle);
-        //        }
-        //    }
-        //    catch (Exception exception)
-        //    {
-        //        throw exception;
+        //        return BadRequest(createdArticle);
         //    }
 
-        //    return CreatedAtRoute("Get", new { id = createdArticle.Id}, createdArticle);
+        //    return CreatedAtRoute("Get", new { id = createdArticle.Id }, createdArticle);
         //}
 
         //// PUT api/values/5
@@ -97,17 +102,17 @@ namespace CryptoQuery.Api.Controllers
         //}
 
         //// DELETE api/values/5
-        //[HttpDelete("{id}")]
-        //public IActionResult Delete(Guid id)
-        //{
-        //    if ( id == null  )
-        //    {
-        //        return BadRequest($"Invalid id specified: {id}.");
-        //    }
+        [HttpDelete("{id}")]
+        public IActionResult Delete(Guid id)
+        {
+            if (id == null)
+            {
+                return BadRequest($"Invalid id specified: {id}.");
+            }
 
-        //    _articleService.Delete(id);
+            _articleService.Delete(id);
 
-        //    return Ok(Result.Ok());
-        //}
+            return Ok(Result.Ok());
+        }
     }
 }

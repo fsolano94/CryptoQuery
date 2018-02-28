@@ -1,5 +1,6 @@
 ﻿using CryptoQuery.Domain.Users;
 using CSharpFunctionalExtensions;
+using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -47,7 +48,7 @@ namespace CryptoQuery.SqlServer
         {
             IEnumerable<User> users = null;
 
-            users = _cryptoDbContext.Users.AsEnumerable();
+            users = _cryptoDbContext.Users.Include(x => x.ArticleQueryProfile).AsEnumerable();
 
             return Result.Ok(users);
         }

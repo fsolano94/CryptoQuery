@@ -15,6 +15,7 @@ using Swashbuckle.AspNetCore.Swagger;
 using Microsoft.AspNetCore.Mvc.Versioning;
 using Microsoft.AspNetCore.Mvc;
 using CryptoQuery.Api.Exceptions;
+using CryptoQuery.Domain.Users;
 
 namespace CryptoQuery
 {
@@ -55,29 +56,51 @@ namespace CryptoQuery
                 );
             }
 
-            services.AddApiVersioning(options =>
-            {
-                options.ApiVersionReader = new MediaTypeApiVersionReader();
-                options.AssumeDefaultVersionWhenUnspecified = true;
-                options.ReportApiVersions = true;
-                options.DefaultApiVersion = new ApiVersion(1, 0);
-                options.ApiVersionSelector = new CurrentImplementationApiVersionSelector(options);
-            });
+            services.AddMvc();
+
+            //services.AddMvc(options => {
+            //    options.SslPort = _httpsPort;
+            //    options.Filters.Add(typeof(RequireHttpsAttribute));
+            //});
+
+
+            //services.AddApiVersioning(options =>
+            //{
+            //    options.ApiVersionReader = new MediaTypeApiVersionReader();
+            //    options.AssumeDefaultVersionWhenUnspecified = true;
+            //    options.ReportApiVersions = true;
+            //    options.DefaultApiVersion = new ApiVersion(1, 0);
+            //    options.ApiVersionSelector = new CurrentImplementationApiVersionSelector(options);
+            //});
+
+            //services.AddSwaggerGen(c =>
+            //{
+            //    c.SwaggerDoc("v1", new Info { Title = "My API", Version = "v1" });
+            //});
 
             services.AddSwaggerGen(c =>
             {
-                c.SwaggerDoc("v1", new Info { Title = "CryptoQuery API", Version = "v1" });
+                c.SwaggerDoc("v1", new Info
+                {
+                    Version = "v1",
+                    Title = "CryptoQuery API",
+                    Description = "API for Senior Project",
+                    TermsOfService = "None",
+                    Contact = new Contact { Name = "Francisco Solano", Email = "fsolano@nevada.unr.edu", Url = "https://github.com/fsolano94" },
+                    License = new License { Name = "None", Url = "" }
+                });
             });
+
 
             services.AddTransient<IArticleRepository, SqlServerArticleRepository>();
             services.AddScoped<ArticleService, ArticleService>();
+
+            services.AddTransient<IUserRepository, SqlServerUserRepository>();
+            services.AddScoped<UserService, UserService>();
+
             services.AddAutoMapper();
             //services.AddScoped<CryptoDbContext>(_ => new CryptoDbContext(@"Server=(localdb)\DESKTOP-0EIN6C4;Database=CryptoQuery;Trusted_Connection=True;"));
-            services.AddMvc(options => {
-                options.SslPort = _httpsPort;
-                options.Filters.Add(typeof(RequireHttpsAttribute));
-            });
-
+           
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -91,20 +114,42 @@ namespace CryptoQuery
             // Enable middleware to serve generated Swagger as a JSON endpoint.  
             app.UseSwagger();
 
-            // Enable middleware to serve swagger-ui (HTML, JS, CSS, etc.), specifying the Swagger JSON endpoint.  
             app.UseSwaggerUI(c =>
             {
-                c.SwaggerEndpoint("/swagger/v1/swagger.json", "My API V1");
+                // force to add another /swagger to fix issue
+                c.SwaggerEndpoint("/swagger/swagger/v1/swagger.json", "My API V1");
             });
 
-            app.UseHsts(options =>
-            {
-                options.MaxAge(180);
-                options.IncludeSubdomains();
-                options.Preload();
-            });
+
+            // Creates Swagger JSON
+            //app.UseSwagger(c =>
+            //{
+            //    //c.RouteTemplate = "api/docs/{documentName}/swagger.json";
+            //    c.RouteTemplate = "swagger/swagger.json";
+            //});
+
+            // Enable middleware to serve swagger-ui (HTML, JS, CSS, etc.), specifying the Swagger JSON endpoint.
+            //app.UseSwaggerUI(c =>
+            //{
+            //    c.SwaggerEndpoint("/api/swagger/swagger/swagger.json", "AnnexUI API V1");
+            //    c.RoutePrefix = "";
+            //});
+
+            //Enable middleware to serve swagger - ui(HTML, JS, CSS, etc.), specifying the Swagger JSON endpoint.
+            //app.UseSwaggerUI(c =>
+            //{
+            //    c.SwaggerEndpoint("/swagger/v1/swagger.json", "My API V1");
+            //});
+
+            //app.UseHsts(options =>
+            //{
+            //    options.MaxAge(180);
+            //    options.IncludeSubdomains();
+            //    options.Preload();
+            //});
+
+
             app.UseMvc();
-            app.UseStatusCodePages();
             
 
         }

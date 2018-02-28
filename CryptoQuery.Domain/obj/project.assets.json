@@ -543,10 +543,10 @@
       "path": "microsoft.netcore.platforms/2.0.0",
       "files": [
         "LICENSE.TXT",
+        "Microsoft.NETCore.Platforms.2.0.0.nupkg.sha512",
+        "Microsoft.NETCore.Platforms.nuspec",
         "THIRD-PARTY-NOTICES.TXT",
         "lib/netstandard1.0/_._",
-        "microsoft.netcore.platforms.2.0.0.nupkg.sha512",
-        "microsoft.netcore.platforms.nuspec",
         "runtime.json",
         "useSharedDesignerContext.txt",
         "version.txt"
@@ -698,11 +698,11 @@
       "hideWarningsAndErrors": true
     },
     "restore": {
-      "projectUniqueName": "C:\\Users\\fsola\\Documents\\Development\\SeniorProject_Working\\CryptoQuery\\CryptoQuery.Domain\\CryptoQuery.Domain.csproj",
+      "projectUniqueName": "C:\\Users\\fsola\\Documents\\Development\\WebDevelopment\\ASPDOTNET\\Core\\SeniorProject_Working\\CryptoQuery\\CryptoQuery.Domain\\CryptoQuery.Domain.csproj",
       "projectName": "CryptoQuery.Domain",
-      "projectPath": "C:\\Users\\fsola\\Documents\\Development\\SeniorProject_Working\\CryptoQuery\\CryptoQuery.Domain\\CryptoQuery.Domain.csproj",
+      "projectPath": "C:\\Users\\fsola\\Documents\\Development\\WebDevelopment\\ASPDOTNET\\Core\\SeniorProject_Working\\CryptoQuery\\CryptoQuery.Domain\\CryptoQuery.Domain.csproj",
       "packagesPath": "C:\\Users\\fsola\\.nuget\\packages\\",
-      "outputPath": "C:\\Users\\fsola\\Documents\\Development\\SeniorProject_Working\\CryptoQuery\\CryptoQuery.Domain\\obj\\",
+      "outputPath": "C:\\Users\\fsola\\Documents\\Development\\WebDevelopment\\ASPDOTNET\\Core\\SeniorProject_Working\\CryptoQuery\\CryptoQuery.Domain\\obj\\",
       "projectStyle": "PackageReference",
       "fallbackFolders": [
         "C:\\Program Files (x86)\\Microsoft SDKs\\NuGetPackagesFallback\\",

@@ -1,6 +1,7 @@
 ﻿using AutoMapper;
 using CryptoQuery.Api.Dto;
 using CryptoQuery.Domain.Articles;
+using CryptoQuery.Domain.Users;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -37,6 +38,14 @@ namespace CryptoQuery.Api
             CreateMap<ArticleGetDto, Article>().ReverseMap();
 
             CreateMap<ArticlePostDto, Article>().ReverseMap();
+
+            CreateMap<UserGetDto, User>().ReverseMap();
+
+            CreateMap<UserPostDto, User>().ReverseMap();
+
+            CreateMap<ArticleQueryProfileGetDto, ArticleQueryProfile>().ReverseMap();
+
+            CreateMap<ArticleQueryProfilePostDto, ArticleQueryProfile>().ReverseMap();
         }
     }
 }

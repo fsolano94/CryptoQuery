@@ -11,7 +11,6 @@ namespace CryptoQuery.SqlServer
     {
         public DbSet<Article> Articles { get; set; }
         public DbSet<User> Users { get; set; }
-       // public DbSet<ArticleQueryProfile> ArticleQueryProfiles { get; set; }
 
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
