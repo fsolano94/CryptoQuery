@@ -20,6 +20,11 @@ namespace CryptoQuery.Domain.Articles
             return _articleRepository.Create(article);
         }
 
+        public Result<IEnumerable<Article>> Create(IEnumerable<Article> articles)
+        {
+            return _articleRepository.Create(articles);
+        }
+
         public Result<IEnumerable<Article>> Get()
         {
             return _articleRepository.Get();

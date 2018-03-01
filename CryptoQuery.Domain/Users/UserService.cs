@@ -19,6 +19,11 @@ namespace CryptoQuery.Domain.Users
             return _userRepository.Create(user);
         }
 
+        public Result<IEnumerable<User>> Create(IEnumerable<User> users)
+        {
+            return _userRepository.Create(users);
+        }
+
         public Result<IEnumerable<User>> Get()
         {
             return _userRepository.Get();

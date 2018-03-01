@@ -6,5 +6,6 @@ namespace CryptoQuery.Domain.Users
 {
     public interface IUserRepository : IRepository<User>
     {
+
     }
 }

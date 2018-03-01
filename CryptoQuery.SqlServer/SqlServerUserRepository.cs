@@ -25,6 +25,15 @@ namespace CryptoQuery.SqlServer
             return Result.Ok<User>(createdUser);
         }
 
+        public Result<IEnumerable<User>> Create(IEnumerable<User> users)
+        {
+            _cryptoDbContext.Users.AddRange(users);
+
+            _cryptoDbContext.SaveChanges();
+
+            return Result.Ok(users);
+        }
+
         public void Delete(Guid userId)
         {
             User userToRemove = null;

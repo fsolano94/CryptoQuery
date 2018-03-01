@@ -24,6 +24,15 @@ namespace CryptoQuery.SqlServer
             return Result.Ok<Article>(createdArticle);
         }
 
+        public Result<IEnumerable<Article>> Create(IEnumerable<Article> items)
+        {
+            _cryptoDbContext.Articles.AddRange(items);
+
+            _cryptoDbContext.SaveChanges();
+
+            return Result.Ok(items);
+        }
+
         public void Delete(Guid articleId)
         {
             Article articleToRemove = null;

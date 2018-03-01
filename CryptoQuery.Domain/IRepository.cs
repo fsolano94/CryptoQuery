@@ -13,6 +13,8 @@ namespace CryptoQuery.Domain
 
         Result<T> Create(T item);
 
+        Result<IEnumerable<T>> Create(IEnumerable<T> items);
+
         Result<T> Update(T item);
 
         void Delete(Guid id);

@@ -51,13 +51,11 @@ namespace CryptoQuery.Api.Controllers
 
         //// POST: api/User
         [HttpPost]
-        public IActionResult Post([FromBody]UserPostDto userPostDto)
+        public IActionResult PostRange([FromBody]IEnumerable<UserPostDto> userPostDtos)
         {
-            var user = _mapper.Map<User>(userPostDto);
+            var users = _mapper.Map<IEnumerable<User>>(userPostDtos);
 
-            user.ArticleQueryProfile.Topics = userPostDto.ArticleQueryProfile.Topics;
-
-            return Ok(_userService.Create(user));
+            return Ok(_userService.Create(users));
         }
 
         //// PUT: api/User/5

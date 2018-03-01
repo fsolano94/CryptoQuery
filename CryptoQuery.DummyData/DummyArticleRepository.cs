@@ -12,6 +12,11 @@ namespace CryptoQuery.DummyData
             throw new NotImplementedException();
         }
 
+        public Result<IEnumerable<Article>> Create(IEnumerable<Article> items)
+        {
+            throw new NotImplementedException();
+        }
+
         public void Delete(Guid id)
         {
             throw new NotImplementedException();

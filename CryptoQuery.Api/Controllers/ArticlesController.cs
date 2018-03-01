@@ -56,23 +56,23 @@ namespace CryptoQuery.Api.Controllers
         }
 
         //// GET api/values/5
-        //[HttpGet("{id}")]
-        //public IActionResult Get(Guid id)
-        //{
-        //    if (id == null)
-        //    {
-        //        return BadRequest(Result.Fail<ArticleGetDto>($"Invalid Guid id specified: {id}."));
-        //    }
+        [HttpGet("{id}")]
+        public IActionResult Get(Guid id)
+        {
+            if (id == null)
+            {
+                return BadRequest(Result.Fail<ArticleGetDto>($"Invalid Guid id specified: {id}."));
+            }
 
-        //    var result = _articleService.Get(id);
+            var result = _articleService.Get(id);
 
-        //    if (result.IsFailure)
-        //    {
-        //        return BadRequest(result);
-        //    }
+            if (result.IsFailure)
+            {
+                return BadRequest(result);
+            }
 
-        //    return Ok(_mapper.Map<ArticleGetDto>(result.Value));
-        //}
+            return Ok(_mapper.Map<ArticleGetDto>(result.Value));
+        }
 
         //// POST api/values
         //[HttpPost]
@@ -93,6 +93,15 @@ namespace CryptoQuery.Api.Controllers
 
         //    return CreatedAtRoute("Get", new { id = createdArticle.Id }, createdArticle);
         //}
+
+        [HttpPost]
+        public IActionResult PostRange([FromBody]IEnumerable<ArticlePostDto> articlePostDtoCollection)
+        {
+            var articles = _mapper.Map<IEnumerable<Article>>(articlePostDtoCollection);
+
+            return Ok(_articleService.Create(articles));
+        }
+
 
         //// PUT api/values/5
         //[HttpPut("{id}")]
