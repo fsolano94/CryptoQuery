@@ -1,6 +1,8 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
+using System.Text;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
@@ -16,6 +18,8 @@ using Microsoft.AspNetCore.Mvc.Versioning;
 using Microsoft.AspNetCore.Mvc;
 using CryptoQuery.Api.Exceptions;
 using CryptoQuery.Domain.Users;
+using Microsoft.AspNetCore.Authentication.JwtBearer;
+using Microsoft.IdentityModel.Tokens;
 
 namespace CryptoQuery
 {
@@ -30,14 +34,14 @@ namespace CryptoQuery
             Configuration = configuration;
             _hostingEnvironment = hostingEnvironment;
 
-            if (_hostingEnvironment.IsDevelopment())
-            {
-                var launchJsonConfig = new ConfigurationBuilder()
-                    .SetBasePath(_hostingEnvironment.ContentRootPath)
-                    .AddJsonFile("Properties\\launchSettings.json")
-                    .Build();
-                _httpsPort = launchJsonConfig.GetValue<int>("iisSettings:iisExpress:sslPort");
-            }
+            //if (_hostingEnvironment.IsDevelopment())
+            //{
+            //    var launchJsonConfig = new ConfigurationBuilder()
+            //        .SetBasePath(_hostingEnvironment.ContentRootPath)
+            //        .AddJsonFile("Properties\\launchSettings.json")
+            //        .Build();
+            //    _httpsPort = launchJsonConfig.GetValue<int>("iisSettings:iisExpress:sslPort");
+            //}
         }
 
         public IConfiguration Configuration { get; }
@@ -56,27 +60,22 @@ namespace CryptoQuery
                 );
             }
 
+            services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
+                .AddJwtBearer(options =>
+                {
+                    options.TokenValidationParameters = new TokenValidationParameters
+                    {
+                        ValidateIssuer = true,
+                        ValidateAudience = true,
+                        ValidateLifetime = true,
+                        ValidateIssuerSigningKey = true,
+                        ValidIssuer = KeyStore.Issuer,
+                        ValidAudience = KeyStore.Issuer,
+                        IssuerSigningKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(KeyStore.Key))
+                    };
+                });
+
             services.AddMvc();
-
-            //services.AddMvc(options => {
-            //    options.SslPort = _httpsPort;
-            //    options.Filters.Add(typeof(RequireHttpsAttribute));
-            //});
-
-
-            //services.AddApiVersioning(options =>
-            //{
-            //    options.ApiVersionReader = new MediaTypeApiVersionReader();
-            //    options.AssumeDefaultVersionWhenUnspecified = true;
-            //    options.ReportApiVersions = true;
-            //    options.DefaultApiVersion = new ApiVersion(1, 0);
-            //    options.ApiVersionSelector = new CurrentImplementationApiVersionSelector(options);
-            //});
-
-            //services.AddSwaggerGen(c =>
-            //{
-            //    c.SwaggerDoc("v1", new Info { Title = "My API", Version = "v1" });
-            //});
 
             services.AddSwaggerGen(c =>
             {
@@ -89,8 +88,19 @@ namespace CryptoQuery
                     Contact = new Contact { Name = "Francisco Solano", Email = "fsolano@nevada.unr.edu", Url = "https://github.com/fsolano94" },
                     License = new License { Name = "None", Url = "" }
                 });
-            });
 
+                var basePath = AppContext.BaseDirectory;
+                var xmlPath = Path.Combine(basePath, "CryptoQuery.Api.xml");
+                c.IncludeXmlComments(xmlPath);
+                c.AddSecurityDefinition("Bearer", new ApiKeyScheme
+                {
+                    Description = "JWT Authorization header using the Bearer scheme. Example: \"Authorization: Bearer {token}\"",
+                    Name = "Authorization",
+                    In = "header",
+                    Type = "apiKey"
+                });
+
+            });
 
             services.AddTransient<IArticleRepository, SqlServerArticleRepository>();
             services.AddScoped<ArticleService, ArticleService>();
@@ -99,7 +109,6 @@ namespace CryptoQuery
             services.AddScoped<UserService, UserService>();
 
             services.AddAutoMapper();
-            //services.AddScoped<CryptoDbContext>(_ => new CryptoDbContext(@"Server=(localdb)\DESKTOP-0EIN6C4;Database=CryptoQuery;Trusted_Connection=True;"));
            
         }
 
@@ -111,46 +120,16 @@ namespace CryptoQuery
                 app.UseDeveloperExceptionPage();
             }
 
-            // Enable middleware to serve generated Swagger as a JSON endpoint.  
             app.UseSwagger();
 
             app.UseSwaggerUI(c =>
             {
-                // force to add another /swagger to fix issue
-                c.SwaggerEndpoint("/swagger/v1/swagger.json", "My API V1");
+                c.SwaggerEndpoint("/swagger/swagger/v1/swagger.json", "My API v1"); // will be relative to route prefix, which is itself relative to the application basepath
             });
 
-
-            // Creates Swagger JSON
-            //app.UseSwagger(c =>
-            //{
-            //    //c.RouteTemplate = "api/docs/{documentName}/swagger.json";
-            //    c.RouteTemplate = "swagger/swagger.json";
-            //});
-
-            // Enable middleware to serve swagger-ui (HTML, JS, CSS, etc.), specifying the Swagger JSON endpoint.
-            //app.UseSwaggerUI(c =>
-            //{
-            //    c.SwaggerEndpoint("/api/swagger/swagger/swagger.json", "AnnexUI API V1");
-            //    c.RoutePrefix = "";
-            //});
-
-            //Enable middleware to serve swagger - ui(HTML, JS, CSS, etc.), specifying the Swagger JSON endpoint.
-            //app.UseSwaggerUI(c =>
-            //{
-            //    c.SwaggerEndpoint("/swagger/v1/swagger.json", "My API V1");
-            //});
-
-            //app.UseHsts(options =>
-            //{
-            //    options.MaxAge(180);
-            //    options.IncludeSubdomains();
-            //    options.Preload();
-            //});
-
+            app.UseAuthentication();
 
             app.UseMvc();
-            
 
         }
     }

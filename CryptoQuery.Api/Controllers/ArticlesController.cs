@@ -8,6 +8,7 @@ using AutoMapper;
 using CryptoQuery.Domain.Articles;
 using CryptoQuery.Api.Dto;
 using CSharpFunctionalExtensions;
+using Microsoft.AspNetCore.Authorization;
 
 // For more information on enabling Web API for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
 
@@ -40,6 +41,7 @@ namespace CryptoQuery.Api.Controllers
         /// </summary>
         /// <returns></returns>
         [HttpGet]
+        [Authorize(Roles = "ApiUser, StandardUser")]
         public IActionResult Get()
         {
             var articlesOrError = _articleService.Get(); 
@@ -57,13 +59,9 @@ namespace CryptoQuery.Api.Controllers
 
         //// GET api/values/5
         [HttpGet("{id}")]
+        [Authorize(Roles = "ApiUser, StandardUser")]
         public IActionResult Get(Guid id)
         {
-            if (id == null)
-            {
-                return BadRequest(Result.Fail<ArticleGetDto>($"Invalid Guid id specified: {id}."));
-            }
-
             var result = _articleService.Get(id);
 
             if (result.IsFailure)
@@ -74,27 +72,8 @@ namespace CryptoQuery.Api.Controllers
             return Ok(_mapper.Map<ArticleGetDto>(result.Value));
         }
 
-        //// POST api/values
-        //[HttpPost]
-        //public IActionResult Post([FromBody]ArticlePostDto articlePostDto)
-        //{
-        //    Article createdArticle = null;
-
-        //    var article = _mapper.Map<Article>(articlePostDto);
-
-        //    var result = _articleService.Create(article);
-
-        //    createdArticle = result.Value;
-
-        //    if (createdArticle == null)
-        //    {
-        //        return BadRequest(createdArticle);
-        //    }
-
-        //    return CreatedAtRoute("Get", new { id = createdArticle.Id }, createdArticle);
-        //}
-
         [HttpPost]
+        [Authorize(Roles = "ApiUser")]
         public IActionResult PostRange([FromBody]IEnumerable<ArticlePostDto> articlePostDtoCollection)
         {
             var articles = _mapper.Map<IEnumerable<Article>>(articlePostDtoCollection);
@@ -112,13 +91,9 @@ namespace CryptoQuery.Api.Controllers
 
         //// DELETE api/values/5
         [HttpDelete("{id}")]
+        [Authorize(Roles = "ApiUser")]
         public IActionResult Delete(Guid id)
         {
-            if (id == null)
-            {
-                return BadRequest($"Invalid id specified: {id}.");
-            }
-
             _articleService.Delete(id);
 
             return Ok(Result.Ok());

@@ -1,7 +1,7 @@
 {
   "runtimeTarget": {
     "name": ".NETCoreApp,Version=v2.0",
-    "signature": "b3425a34b802f9a06bd228e42d4e21b92e6756c9"
+    "signature": "5e7ab926c3c9e0b646f69085c249af245e76f811"
   },
   "compilationOptions": {
     "defines": [
@@ -25,7 +25,7 @@
         "dependencies": {
           "AutoMapper": "6.2.2",
           "AutoMapper.Extensions.Microsoft.DependencyInjection": "3.2.0",
-          "CSharpFunctionalExtensions": "1.9.0",
+          "CSharpFunctionalExtensions": "1.9.1",
           "CryptoQuery.Domain": "1.0.0",
           "CryptoQuery.SqlServer": "1.0.0",
           "Microsoft.AspNetCore.All": "2.0.5",
@@ -34,10 +34,7 @@
           "Microsoft.VisualStudio.Web.CodeGeneration.Design": "2.0.2",
           "NLog.Web.AspNetCore": "4.5.0-rc3",
           "NWebsec.AspNetCore.Middleware": "1.1.0",
-          "Swashbuckle.AspNetCore": "2.1.0",
-          "Swashbuckle.AspNetCore.Swagger": "2.1.0",
-          "Swashbuckle.AspNetCore.SwaggerGen": "2.1.0",
-          "Swashbuckle.AspNetCore.SwaggerUI": "2.1.0"
+          "Swashbuckle.AspNetCore": "1.2.0"
         },
         "runtime": {
           "CryptoQuery.Api.dll": {}
@@ -80,7 +77,7 @@
           "lib/netstandard2.0/AutoMapper.Extensions.Microsoft.DependencyInjection.dll": {}
         }
       },
-      "CSharpFunctionalExtensions/1.9.0": {
+      "CSharpFunctionalExtensions/1.9.1": {
         "runtime": {
           "lib/netstandard2.0/CSharpFunctionalExtensions.dll": {}
         },
@@ -2916,12 +2913,12 @@
           "lib/netstandard1.5/StackExchange.Redis.StrongName.dll": {}
         }
       },
-      "Swashbuckle.AspNetCore/2.1.0": {
+      "Swashbuckle.AspNetCore/1.2.0": {
         "dependencies": {
           "NETStandard.Library": "2.0.0",
-          "Swashbuckle.AspNetCore.Swagger": "2.1.0",
-          "Swashbuckle.AspNetCore.SwaggerGen": "2.1.0",
-          "Swashbuckle.AspNetCore.SwaggerUI": "2.1.0"
+          "Swashbuckle.AspNetCore.Swagger": "1.2.0",
+          "Swashbuckle.AspNetCore.SwaggerGen": "1.2.0",
+          "Swashbuckle.AspNetCore.SwaggerUI": "1.2.0"
         },
         "runtime": {
           "lib/netstandard1.6/Swashbuckle.AspNetCore.dll": {}
@@ -2930,7 +2927,7 @@
           "lib/netstandard1.6/Swashbuckle.AspNetCore.dll": {}
         }
       },
-      "Swashbuckle.AspNetCore.Swagger/2.1.0": {
+      "Swashbuckle.AspNetCore.Swagger/1.2.0": {
         "dependencies": {
           "Microsoft.AspNetCore.Mvc.Core": "2.0.2",
           "Microsoft.AspNetCore.Mvc.Formatters.Json": "2.0.2",
@@ -2943,13 +2940,13 @@
           "lib/netstandard1.6/Swashbuckle.AspNetCore.Swagger.dll": {}
         }
       },
-      "Swashbuckle.AspNetCore.SwaggerGen/2.1.0": {
+      "Swashbuckle.AspNetCore.SwaggerGen/1.2.0": {
         "dependencies": {
           "Microsoft.AspNetCore.Mvc.ApiExplorer": "2.0.2",
           "Microsoft.AspNetCore.Mvc.Core": "2.0.2",
           "Microsoft.AspNetCore.Mvc.DataAnnotations": "2.0.2",
           "NETStandard.Library": "2.0.0",
-          "Swashbuckle.AspNetCore.Swagger": "2.1.0",
+          "Swashbuckle.AspNetCore.Swagger": "1.2.0",
           "System.Xml.XPath": "4.3.0"
         },
         "runtime": {
@@ -2959,13 +2956,14 @@
           "lib/netstandard1.6/Swashbuckle.AspNetCore.SwaggerGen.dll": {}
         }
       },
-      "Swashbuckle.AspNetCore.SwaggerUI/2.1.0": {
+      "Swashbuckle.AspNetCore.SwaggerUI/1.2.0": {
         "dependencies": {
           "Microsoft.AspNetCore.Routing": "2.0.1",
           "Microsoft.AspNetCore.StaticFiles": "2.0.1",
           "Microsoft.Extensions.FileProviders.Embedded": "2.0.0",
           "NETStandard.Library": "2.0.0",
-          "Newtonsoft.Json": "10.0.1"
+          "Newtonsoft.Json": "10.0.1",
+          "System.Xml.XPath": "4.3.0"
         },
         "runtime": {
           "lib/netstandard1.6/Swashbuckle.AspNetCore.SwaggerUI.dll": {}
@@ -4239,7 +4237,7 @@
       },
       "CryptoQuery.Domain/1.0.0": {
         "dependencies": {
-          "CSharpFunctionalExtensions": "1.9.0"
+          "CSharpFunctionalExtensions": "1.9.1"
         },
         "runtime": {
           "CryptoQuery.Domain.dll": {}
@@ -4250,7 +4248,7 @@
       },
       "CryptoQuery.SqlServer/1.0.0": {
         "dependencies": {
-          "CSharpFunctionalExtensions": "1.9.0",
+          "CSharpFunctionalExtensions": "1.9.1",
           "CryptoQuery.Domain": "1.0.0",
           "Microsoft.EntityFrameworkCore": "2.0.1",
           "Microsoft.EntityFrameworkCore.SqlServer": "2.0.1"
@@ -4460,12 +4458,12 @@
       "path": "automapper.extensions.microsoft.dependencyinjection/3.2.0",
       "hashPath": "automapper.extensions.microsoft.dependencyinjection.3.2.0.nupkg.sha512"
     },
-    "CSharpFunctionalExtensions/1.9.0": {
+    "CSharpFunctionalExtensions/1.9.1": {
       "type": "package",
       "serviceable": true,
-      "sha512": "sha512-4yuLqQIJ5tqMtv30pH6Kiy1cOHSvNvq2vVuW/erO9Ng4z8K7b3V6ITNEKJXYUNJKoxyrxI5rigBphhCYatrmYQ==",
-      "path": "csharpfunctionalextensions/1.9.0",
-      "hashPath": "csharpfunctionalextensions.1.9.0.nupkg.sha512"
+      "sha512": "sha512-r8gAp/k5vfZkwwe7ija2HPq+SNpSmOZjdC+tM2iS1Yj4W2IcowyoeRiNVmN0LdiIcJd6K8Z9kJPVQh/U+DbfhQ==",
+      "path": "csharpfunctionalextensions/1.9.1",
+      "hashPath": "csharpfunctionalextensions.1.9.1.nupkg.sha512"
     },
     "Libuv/1.10.0": {
       "type": "package",
@@ -5937,33 +5935,33 @@
       "path": "stackexchange.redis.strongname/1.2.4",
       "hashPath": "stackexchange.redis.strongname.1.2.4.nupkg.sha512"
     },
-    "Swashbuckle.AspNetCore/2.1.0": {
+    "Swashbuckle.AspNetCore/1.2.0": {
       "type": "package",
       "serviceable": true,
-      "sha512": "sha512-4JQVWQ9md96L+eFIml68IUKsOK5iuVzrDBHgctbqkGXOfwzY3522sdwyX1RL6lDAnx/4oWb51VAqbcU4f6QYXQ==",
-      "path": "swashbuckle.aspnetcore/2.1.0",
-      "hashPath": "swashbuckle.aspnetcore.2.1.0.nupkg.sha512"
+      "sha512": "sha512-r/jU+jpeBivp5XtXW72TMpe/yp79i48rBZDA7efyaekvE7L/BBZc/Sdk661z+GAMSqchELSnMdk3yjWpj+lJUA==",
+      "path": "swashbuckle.aspnetcore/1.2.0",
+      "hashPath": "swashbuckle.aspnetcore.1.2.0.nupkg.sha512"
     },
-    "Swashbuckle.AspNetCore.Swagger/2.1.0": {
+    "Swashbuckle.AspNetCore.Swagger/1.2.0": {
       "type": "package",
       "serviceable": true,
-      "sha512": "sha512-eDMfiK7bjqxVq/IOhpQ2OY8NqpqP0qMyUWvOGo4ZjMBVmMHi8fwc/BdrlpgdWsnyuvH+wKXAOIf9vBbBjtWAJw==",
-      "path": "swashbuckle.aspnetcore.swagger/2.1.0",
-      "hashPath": "swashbuckle.aspnetcore.swagger.2.1.0.nupkg.sha512"
+      "sha512": "sha512-48yeywwlL+qwcclrDBSabMw+ZfrAwIVqrtJPpR/Ma9UeMRubb1DbiBu0ozrvpuQi/ZNM8mhweuveEo5z2IrOKw==",
+      "path": "swashbuckle.aspnetcore.swagger/1.2.0",
+      "hashPath": "swashbuckle.aspnetcore.swagger.1.2.0.nupkg.sha512"
     },
-    "Swashbuckle.AspNetCore.SwaggerGen/2.1.0": {
+    "Swashbuckle.AspNetCore.SwaggerGen/1.2.0": {
       "type": "package",
       "serviceable": true,
-      "sha512": "sha512-6uyl1ixsetE3b2mP4PzD/kAeZkXTqDjeYLOHY9Scoe7B/UDWYuNIWUoK9Iu/vp/61YsVrwZFddxoZ10Mo9eYFg==",
-      "path": "swashbuckle.aspnetcore.swaggergen/2.1.0",
-      "hashPath": "swashbuckle.aspnetcore.swaggergen.2.1.0.nupkg.sha512"
+      "sha512": "sha512-TJDiSkjljGyyntO+fcDhshbs51XDJmTs4vlvxTx/rMGzWY3EYskRQRJ28FJzuMtJQTWbe/zWW/7XvazxfHFVWA==",
+      "path": "swashbuckle.aspnetcore.swaggergen/1.2.0",
+      "hashPath": "swashbuckle.aspnetcore.swaggergen.1.2.0.nupkg.sha512"
     },
-    "Swashbuckle.AspNetCore.SwaggerUI/2.1.0": {
+    "Swashbuckle.AspNetCore.SwaggerUI/1.2.0": {
       "type": "package",
       "serviceable": true,
-      "sha512": "sha512-ZujlbO4jWAXAh95zpe8egBt0AueWM2ZtHylYRKLxmZXwaGfBQN2qim/BJahG5R1k6N2dIRgDaBT2rKDq8XdUMw==",
-      "path": "swashbuckle.aspnetcore.swaggerui/2.1.0",
-      "hashPath": "swashbuckle.aspnetcore.swaggerui.2.1.0.nupkg.sha512"
+      "sha512": "sha512-BN2k1jwqQyH0Q7+jojnOtFZ+F3+0BpZsfwy9IPQuTDj0+EA15Rdk5rZFd88udiI6zbZ+sq4CqvJTsH3j1qm0sA==",
+      "path": "swashbuckle.aspnetcore.swaggerui/1.2.0",
+      "hashPath": "swashbuckle.aspnetcore.swaggerui.1.2.0.nupkg.sha512"
     },
     "System.AppContext/4.3.0": {
       "type": "package",

@@ -7,6 +7,6 @@ namespace CryptoQuery.Api.Models
 {
     public abstract class Resource
     {
-        public string Href { get; set; }
+        private string Href { get; set; }
     }
 }

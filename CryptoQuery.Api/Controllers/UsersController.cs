@@ -5,6 +5,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using AutoMapper;
 using CryptoQuery.Api.Dto;
+using CryptoQuery.Domain;
 using CryptoQuery.Domain.Users;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
@@ -51,11 +52,13 @@ namespace CryptoQuery.Api.Controllers
 
         //// POST: api/User
         [HttpPost]
-        public IActionResult PostRange([FromBody]IEnumerable<UserPostDto> userPostDtos)
+        public IActionResult Post([FromBody]UserPostDto userPostDto)
         {
-            var users = _mapper.Map<IEnumerable<User>>(userPostDtos);
+            var user = _mapper.Map<User>(userPostDto);
 
-            return Ok(_userService.Create(users));
+            user.Type = UserType.Standard;
+
+            return Ok(_userService.Create(user));
         }
 
         //// PUT: api/User/5
