@@ -16,9 +16,9 @@ namespace CryptoQuery.Api.Controllers
     /// <summary>
     /// 
     /// </summary>
+    [Produces("application/json")]
     [Route("/[controller]")]
-
-    //[ApiVersion("1.0")]
+    [ApiVersion("1.0")]
     public class UsersController : Controller
     {
         UserService _userService;
@@ -39,7 +39,7 @@ namespace CryptoQuery.Api.Controllers
         /// </summary>
         /// <returns></returns>
         // GET: api/User
-        [HttpGet]
+        [HttpGet(Name = nameof(Get))]
         public IActionResult Get()
         {
             var usersOrError = _userService.Get();
@@ -52,6 +52,12 @@ namespace CryptoQuery.Api.Controllers
             // automapper
             var userDtos = _mapper.Map<IEnumerable<UserGetDto>>(usersOrError.Value);
 
+            foreach (var user in userDtos)
+            {
+                user.Href = Url.Link(nameof(Get), null);
+                user.Href += $"/{user.Id}";
+            }
+            
             return Ok(Result.Ok(userDtos));
         }
 

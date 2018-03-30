@@ -34,8 +34,7 @@ namespace CryptoQuery.Api.Exceptions
 
             //Notify Here by sending the string
 
-            HttpStatusCode status = HttpStatusCode.InternalServerError;
-            status = HttpStatusCode.InternalServerError;
+            var status = HttpStatusCode.InternalServerError;
             context.ExceptionHandled = true;
 
             HttpResponse response = context.HttpContext.Response;

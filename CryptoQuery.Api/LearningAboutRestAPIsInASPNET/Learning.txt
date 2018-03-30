@@ -98,6 +98,45 @@ ION JSON based specification for Hypermedia and RESTful API's. Designed to be in
 
 Links in ION are JSON objects with an href property.
 
+launchsettings.json contains info passed to IIS.
+
+Startup.cs file contains three important method:
+*Ctor = read appsettings.json which contains application specific information
+*ConfigureServices = can add services to Dependency injection system. Order of calls doesn't matter.
+*Configure = sets up application pipeline Order of calls does matter.
+
+Create a Root Controller. [Route("/")]
+
+Approaches to RESTful Versioning:
+1. Don't version (clients should be dynamic).
+2. Media type (header) versioning.
+GET /{resource}
+Accept: application/{media-type};v={version number}.
+3. URL prefix versioning:
+https://example.io/v1/{resource}.
+
+We'll do Media Type versioning.
+
+
+API Security:
+*2 Types:
+1) Transport security.
+-keep connection between client and server secure.
+-enable HTTPS, and make it required.
+-additional security headers
+
+2) Application security.
+
+ASP.NET Core sites run on Kestrel by default:
+
+Internet => Reverse Proxy => Kestrel => ASP.NET Core.
+
+
+
+
+
+
+
 
 
 

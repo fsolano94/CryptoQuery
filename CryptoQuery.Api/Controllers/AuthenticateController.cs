@@ -18,6 +18,7 @@ namespace CryptoQuery.Api.Controllers
 {
     [Produces("application/json")]
     [Route("/[controller]")]
+    [ApiVersion("1.0")]
     public class AuthenticateController : Controller
     {
         private UserService _userService;
@@ -30,7 +31,7 @@ namespace CryptoQuery.Api.Controllers
 
         [AllowAnonymous]
         [ProducesResponseType(typeof(AuthenticatePostDto), 200)]
-        [HttpPost]
+        [HttpPost(Name = nameof(CreateToken))]
         public IActionResult CreateToken([FromBody]LoginModel login)
         {
             var authResult = Authenticate(login);

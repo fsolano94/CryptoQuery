@@ -67,6 +67,7 @@ namespace CryptoQuery
                 );
             }
 
+
             services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
                 .AddJwtBearer(options =>
                 {
@@ -82,7 +83,11 @@ namespace CryptoQuery
                     };
                 });
 
-            services.AddMvc();
+            services.AddMvc(opt =>
+            {
+                opt.Filters.Add(typeof(RequireHttpsAttribute));
+                opt.SslPort = _httpsPort;
+            });
 
             services.AddSwaggerGen(c =>
             {
@@ -116,7 +121,16 @@ namespace CryptoQuery
             services.AddScoped<UserService, UserService>();
 
             services.AddAutoMapper();
-           
+
+
+            services.AddApiVersioning(opt =>
+            {
+                opt.ApiVersionReader = new MediaTypeApiVersionReader();
+                opt.AssumeDefaultVersionWhenUnspecified = true;
+                opt.ReportApiVersions = true;
+                opt.DefaultApiVersion = new ApiVersion(1, 0);
+                opt.ApiVersionSelector = new CurrentImplementationApiVersionSelector(opt);
+            });
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -135,6 +149,13 @@ namespace CryptoQuery
             });
 
             app.UseAuthentication();
+
+            app.UseHsts(opt =>
+            {
+                opt.MaxAge(days: 180);
+                opt.IncludeSubdomains();
+                opt.Preload();
+            });
 
             app.UseMvc();
 
