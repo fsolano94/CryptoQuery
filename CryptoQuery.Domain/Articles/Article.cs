@@ -14,6 +14,5 @@ namespace CryptoQuery.Domain.Articles
         public string Topic { get; set; }
         public int Complexity { get; set; }
         public int Quality { get; set; }
-
     }
 }

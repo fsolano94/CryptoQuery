@@ -52,8 +52,8 @@ namespace CryptoQuery.SqlServer.Migrations
                     CreatedAt = table.Column<string>(nullable: true),
                     Email = table.Column<string>(nullable: true),
                     HashedPassword = table.Column<string>(nullable: true),
+                    Role = table.Column<string>(nullable: true),
                     Salt = table.Column<string>(nullable: true),
-                    Type = table.Column<int>(nullable: false),
                     UpdatedAt = table.Column<string>(nullable: true),
                     UserName = table.Column<string>(nullable: true)
                 },

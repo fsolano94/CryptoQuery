@@ -53,6 +53,11 @@ namespace CryptoQuery.SqlServer
 
         }
 
+        public User GetUserByUserName(string userName)
+        {
+            return _cryptoDbContext.Users.FirstOrDefault(user => user.UserName == userName);
+        }
+
         public Result<IEnumerable<User>> Get()
         {
             IEnumerable<User> users = null;

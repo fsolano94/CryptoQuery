@@ -1,20 +1,20 @@
 {
   "runtimeTarget": {
     "name": ".NETCoreApp,Version=v2.0",
-    "signature": "d0590793eaed59c00720acc873da3a9f6b4b7b65"
+    "signature": "20a7ded5e9efa8d2f4abb7dfe032a23803be7267"
   },
   "compilationOptions": {},
   "targets": {
     ".NETCoreApp,Version=v2.0": {
       "CryptoQuery.Domain/1.0.0": {
         "dependencies": {
-          "CSharpFunctionalExtensions": "1.9.0"
+          "CSharpFunctionalExtensions": "1.9.1"
         },
         "runtime": {
           "CryptoQuery.Domain.dll": {}
         }
       },
-      "CSharpFunctionalExtensions/1.9.0": {
+      "CSharpFunctionalExtensions/1.9.1": {
         "runtime": {
           "lib/netstandard2.0/CSharpFunctionalExtensions.dll": {}
         }
@@ -27,12 +27,12 @@
       "serviceable": false,
       "sha512": ""
     },
-    "CSharpFunctionalExtensions/1.9.0": {
+    "CSharpFunctionalExtensions/1.9.1": {
       "type": "package",
       "serviceable": true,
-      "sha512": "sha512-4yuLqQIJ5tqMtv30pH6Kiy1cOHSvNvq2vVuW/erO9Ng4z8K7b3V6ITNEKJXYUNJKoxyrxI5rigBphhCYatrmYQ==",
-      "path": "csharpfunctionalextensions/1.9.0",
-      "hashPath": "csharpfunctionalextensions.1.9.0.nupkg.sha512"
+      "sha512": "sha512-r8gAp/k5vfZkwwe7ija2HPq+SNpSmOZjdC+tM2iS1Yj4W2IcowyoeRiNVmN0LdiIcJd6K8Z9kJPVQh/U+DbfhQ==",
+      "path": "csharpfunctionalextensions/1.9.1",
+      "hashPath": "csharpfunctionalextensions.1.9.1.nupkg.sha512"
     }
   }
 }

@@ -9,7 +9,7 @@ namespace CryptoQuery.Domain.Users
     {
         public Guid Id { get; set; }
         public ArticleQueryProfile ArticleQueryProfile { get; set; }
-        public UserType Type { get; set; }
+        public string Role { get; set; }
         public string CreatedAt { get; set; }
         public string UpdatedAt { get; set; }
         public string Email { get; set; }

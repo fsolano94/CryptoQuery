@@ -5,6 +5,9 @@ using System.Linq;
 using System.Security.Claims;
 using System.Text;
 using System.Threading.Tasks;
+using AutoMapper;
+using CryptoQuery.Domain;
+using CryptoQuery.Domain.Users;
 using CSharpFunctionalExtensions;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
@@ -14,9 +17,17 @@ using Microsoft.IdentityModel.Tokens;
 namespace CryptoQuery.Api.Controllers
 {
     [Produces("application/json")]
-    [Route("/Authenticate")]
+    [Route("/[controller]")]
     public class AuthenticateController : Controller
     {
+        private UserService _userService;
+        private IMapper _mapper;
+        public AuthenticateController(UserService userService, IMapper mapper)
+        {
+            _userService = userService;
+            _mapper = mapper;
+        }
+
         [AllowAnonymous]
         [ProducesResponseType(typeof(AuthenticatePostDto), 200)]
         [HttpPost]
@@ -41,7 +52,7 @@ namespace CryptoQuery.Api.Controllers
             };
             var token = new JwtSecurityToken(KeyStore.Issuer,
                 KeyStore.Issuer,
-                expires: DateTime.Now.AddMinutes(30),
+                expires: DateTime.Now.AddYears(1),
                 signingCredentials: creds,
                 claims: claims);
 
@@ -50,16 +61,18 @@ namespace CryptoQuery.Api.Controllers
 
         private Result<string> Authenticate(LoginModel login)
         {
-            if (login.Username == "test" && login.Password == "testPassword")
+            var userOrNull = _userService.GetUserByUserName(login.Username);
+
+            if ( userOrNull == null)
             {
-                return Result.Ok("StandardUser");
+                return Result.Fail<string>($"username '{login.Username}' not found.");
             }
 
-            if (login.Username == "api" && login.Password == "apiPassword")
+            if ( userOrNull.HashedPassword == login.Password )
             {
-                return Result.Ok("ApiUser");
+                return (userOrNull.Role == "Administrator") ? Result.Ok("Administrator") : Result.Ok("StandardUser");
             }
-
+        
             return Result.Fail<string>("Login failed");
         }
 

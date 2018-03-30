@@ -2,7 +2,7 @@
   "version": 3,
   "targets": {
     ".NETCoreApp,Version=v2.0": {
-      "CSharpFunctionalExtensions/1.9.0": {
+      "CSharpFunctionalExtensions/1.9.1": {
         "type": "package",
         "compile": {
           "lib/netstandard2.0/CSharpFunctionalExtensions.dll": {}
@@ -209,12 +209,12 @@
     }
   },
   "libraries": {
-    "CSharpFunctionalExtensions/1.9.0": {
-      "sha512": "4yuLqQIJ5tqMtv30pH6Kiy1cOHSvNvq2vVuW/erO9Ng4z8K7b3V6ITNEKJXYUNJKoxyrxI5rigBphhCYatrmYQ==",
+    "CSharpFunctionalExtensions/1.9.1": {
+      "sha512": "r8gAp/k5vfZkwwe7ija2HPq+SNpSmOZjdC+tM2iS1Yj4W2IcowyoeRiNVmN0LdiIcJd6K8Z9kJPVQh/U+DbfhQ==",
       "type": "package",
-      "path": "csharpfunctionalextensions/1.9.0",
+      "path": "csharpfunctionalextensions/1.9.1",
       "files": [
-        "csharpfunctionalextensions.1.9.0.nupkg.sha512",
+        "csharpfunctionalextensions.1.9.1.nupkg.sha512",
         "csharpfunctionalextensions.nuspec",
         "lib/net40/CSharpFunctionalExtensions.dll",
         "lib/net45/CSharpFunctionalExtensions.dll",
@@ -683,7 +683,7 @@
   },
   "projectFileDependencyGroups": {
     ".NETCoreApp,Version=v2.0": [
-      "CSharpFunctionalExtensions >= 1.9.0",
+      "CSharpFunctionalExtensions >= 1.9.1",
       "Microsoft.NETCore.App >= 2.0.0"
     ]
   },
@@ -736,7 +736,7 @@
         "dependencies": {
           "CSharpFunctionalExtensions": {
             "target": "Package",
-            "version": "[1.9.0, )"
+            "version": "[1.9.1, )"
           },
           "Microsoft.NETCore.App": {
             "suppressParent": "All",

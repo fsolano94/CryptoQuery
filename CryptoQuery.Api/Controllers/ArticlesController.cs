@@ -41,7 +41,7 @@ namespace CryptoQuery.Api.Controllers
         /// </summary>
         /// <returns></returns>
         [HttpGet]
-        [Authorize(Roles = "ApiUser, StandardUser")]
+        [Authorize(Roles = "Administrator, StandardUser")]
         public IActionResult Get()
         {
             var articlesOrError = _articleService.Get(); 
@@ -59,7 +59,7 @@ namespace CryptoQuery.Api.Controllers
 
         //// GET api/values/5
         [HttpGet("{id}")]
-        [Authorize(Roles = "ApiUser, StandardUser")]
+        [Authorize(Roles = "Administrator, StandardUser")]
         public IActionResult Get(Guid id)
         {
             var result = _articleService.Get(id);
@@ -73,14 +73,13 @@ namespace CryptoQuery.Api.Controllers
         }
 
         [HttpPost]
-        [Authorize(Roles = "ApiUser")]
+        [Authorize(Roles = "Administrator")]
         public IActionResult PostRange([FromBody]IEnumerable<ArticlePostDto> articlePostDtoCollection)
         {
             var articles = _mapper.Map<IEnumerable<Article>>(articlePostDtoCollection);
 
             return Ok(_articleService.Create(articles));
         }
-
 
         //// PUT api/values/5
         //[HttpPut("{id}")]
@@ -91,7 +90,7 @@ namespace CryptoQuery.Api.Controllers
 
         //// DELETE api/values/5
         [HttpDelete("{id}")]
-        [Authorize(Roles = "ApiUser")]
+        [Authorize(Roles = "Administrator")]
         public IActionResult Delete(Guid id)
         {
             _articleService.Delete(id);

@@ -33,5 +33,15 @@ namespace CryptoQuery.Domain.Users
         {
             _userRepository.Delete(id);
         }
+
+        public Result<User> Update(User item)
+        {
+            return _userRepository.Update(item);
+        }
+
+        public User GetUserByUserName(string userName)
+        {
+            return _userRepository.GetUserByUserName(userName);
+        }
     }
 }

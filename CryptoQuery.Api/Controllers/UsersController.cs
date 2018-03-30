@@ -7,6 +7,7 @@ using AutoMapper;
 using CryptoQuery.Api.Dto;
 using CryptoQuery.Domain;
 using CryptoQuery.Domain.Users;
+using CSharpFunctionalExtensions;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 
@@ -15,7 +16,8 @@ namespace CryptoQuery.Api.Controllers
     /// <summary>
     /// 
     /// </summary>
-    [Route("[controller]")]
+    [Route("/[controller]")]
+
     //[ApiVersion("1.0")]
     public class UsersController : Controller
     {
@@ -40,15 +42,32 @@ namespace CryptoQuery.Api.Controllers
         [HttpGet]
         public IActionResult Get()
         {
-            return Ok(_userService.Get());
+            var usersOrError = _userService.Get();
+
+            if (usersOrError.IsFailure)
+            {
+                return BadRequest(usersOrError);
+            }
+
+            // automapper
+            var userDtos = _mapper.Map<IEnumerable<UserGetDto>>(usersOrError.Value);
+
+            return Ok(Result.Ok(userDtos));
         }
 
-        //// GET: api/User/5
-        //[HttpGet("{id}")]
-        //public IActionResult Get(Guid userId)
-        //{
-        //    return Ok(_userService.Get(userId));
-        //}
+        //// GET api/values/5
+        [HttpGet("{id}")]
+        public IActionResult Get(Guid id)
+        {
+            var result = _userService.Get(id);
+
+            if (result.IsFailure)
+            {
+                return BadRequest(result);
+            }
+
+            return Ok(_mapper.Map<UserGetDto>(result.Value));
+        }
 
         //// POST: api/User
         [HttpPost]
@@ -56,9 +75,24 @@ namespace CryptoQuery.Api.Controllers
         {
             var user = _mapper.Map<User>(userPostDto);
 
-            user.Type = UserType.Standard;
+            user.Role = "StandardUser";
 
             return Ok(_userService.Create(user));
+        }
+
+        [HttpPost("{id}/updatePassword")]
+        public IActionResult UpdatePassword([FromRoute(Name = "id")]Guid userId, [FromBody] string newPassword)
+        {
+            var userOrError = _userService.Get(userId);
+
+            if (userOrError.IsFailure)
+            {
+                return BadRequest(userOrError);
+            }
+
+            userOrError.Value.HashedPassword = newPassword;
+
+            return Ok(_userService.Update(userOrError.Value));
         }
 
         //// PUT: api/User/5

@@ -16,5 +16,6 @@ namespace CryptoQuery.Api.Dto
         public string UserName { get; set; }
         public string HashedPassword { get; set; }
         public string Salt { get; set; }
+        public string Role { get; set; }
     }
 }

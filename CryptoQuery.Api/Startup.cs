@@ -4,6 +4,7 @@ using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Xml.XPath;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.Configuration;
@@ -19,7 +20,9 @@ using Microsoft.AspNetCore.Mvc;
 using CryptoQuery.Api.Exceptions;
 using CryptoQuery.Domain.Users;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
+using Microsoft.EntityFrameworkCore;
 using Microsoft.IdentityModel.Tokens;
+using Swashbuckle.AspNetCore.SwaggerGen;
 
 namespace CryptoQuery
 {
@@ -34,14 +37,14 @@ namespace CryptoQuery
             Configuration = configuration;
             _hostingEnvironment = hostingEnvironment;
 
-            //if (_hostingEnvironment.IsDevelopment())
-            //{
-            //    var launchJsonConfig = new ConfigurationBuilder()
-            //        .SetBasePath(_hostingEnvironment.ContentRootPath)
-            //        .AddJsonFile("Properties\\launchSettings.json")
-            //        .Build();
-            //    _httpsPort = launchJsonConfig.GetValue<int>("iisSettings:iisExpress:sslPort");
-            //}
+            if (_hostingEnvironment.IsDevelopment())
+            {
+                var launchJsonConfig = new ConfigurationBuilder()
+                    .SetBasePath(_hostingEnvironment.ContentRootPath)
+                    .AddJsonFile("Properties\\launchSettings.json")
+                    .Build();
+                _httpsPort = launchJsonConfig.GetValue<int>("iisSettings:iisExpress:sslPort");
+            }
         }
 
         public IConfiguration Configuration { get; }
@@ -49,6 +52,10 @@ namespace CryptoQuery
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
+
+            services.AddDbContext<CryptoDbContext>(options =>
+                options.UseSqlServer(Configuration.GetConnectionString("DefaultConnection")));
+
 
             if (!_hostingEnvironment.IsDevelopment())
             {
@@ -124,7 +131,7 @@ namespace CryptoQuery
 
             app.UseSwaggerUI(c =>
             {
-                c.SwaggerEndpoint("/swagger/swagger/v1/swagger.json", "My API v1"); // will be relative to route prefix, which is itself relative to the application basepath
+                c.SwaggerEndpoint("/swagger/v1/swagger.json", "My API v1"); // will be relative to route prefix, which is itself relative to the application basepath
             });
 
             app.UseAuthentication();

@@ -1,0 +1,1 @@
+java -jar swagger-codegen-cli.jar generate -i http://cryptoqueryapi2018.azurewebsites.net/swagger/v1/swagger.json -l ruby -o client/ruby

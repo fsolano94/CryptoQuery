@@ -21,6 +21,12 @@ namespace CryptoQuery.Api
                 }
             );
 
+            CreateMap<Guid, string>().ConvertUsing(source =>
+                {
+                    return source.ToString();
+                }
+            );
+
             CreateMap<string, DateTime>().ConvertUsing(source =>
 
                     {
