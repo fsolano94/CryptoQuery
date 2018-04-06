@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace CryptoQuery.Api.Dto
 {
-    public class UserPostDto : Resource
+    public class UserPostDto
     {
         public ArticleQueryProfilePostDto ArticleQueryProfile { get; set; }
         public string CreatedAt { get; set; }

@@ -9,71 +9,74 @@ namespace CryptoQuery.SqlServer
 {
     public static class CryptoDbContextInitializer
     {
+        private static Guid philGuid;
+        private static Guid franciscoGuid;
+        private static Guid maxGuid;
+        private static Guid standardUserGuid;
 
         public static void Initialize(CryptoDbContext context)
         {
             context.Database.EnsureCreated();
 
-            if (context.Users.FirstOrDefault(n => n.UserName == "phil") == null)
+            if (context.Users.FirstOrDefault(user => user.Role == "Administrator") == null)
             {
-                context.Users.Add(new User()
+                var phil = new User()
                 {
                     Role = "Administrator",
                     UserName = "phil",
-                    ArticleQueryProfile = null,
+                    ArticleQueryProfile = new ArticleQueryProfile()
+                    {
+                        PushEnabled = true,
+                        Id = Guid.NewGuid(),
+                        Complexity = 10,
+                        Quality = 10,
+                        Topics = "BitCoin, Etherium, Litecoin"
+                    },
                     CreatedAt = DateTime.Now.ToString(),
                     Email = "",
                     HashedPassword = "abc123",
-                });
+                };
 
-                context.SaveChanges();
-            }
-
-            if (context.Users.FirstOrDefault(n => n.UserName == "max") == null)
-            {
-                context.Users.Add(new User()
+                var francisco = new User()
                 {
                     Role = "Administrator",
                     UserName = "max",
-                    ArticleQueryProfile = null,
+                    ArticleQueryProfile = new ArticleQueryProfile()
+                    {
+                        PushEnabled = true,
+                        Id = Guid.NewGuid(),
+                        Complexity = 10,
+                        Quality = 10,
+                        Topics = "Bytecoin, blockchain, bitcoin"
+                    },
                     CreatedAt = DateTime.Now.ToString(),
                     Email = "",
                     HashedPassword = "abc123",
-                });
+                };
 
-                context.SaveChanges();
-            }
-
-            if (context.Users.FirstOrDefault(n => n.UserName == "francisco") == null)
-            {
-                context.Users.Add(new User()
+                var max = new User()
                 {
                     Role = "Administrator",
                     UserName = "francisco",
-                    ArticleQueryProfile = null,
+                    ArticleQueryProfile = new ArticleQueryProfile()
+                    {
+                        PushEnabled = true,
+                        Id = Guid.NewGuid(),
+                        Complexity = 10,
+                        Quality = 10,
+                        Topics = "Etherium, BitCoin"
+                    },
                     CreatedAt = DateTime.Now.ToString(),
-                    Email = "",
+                    Email = "initial email. Ensure to change.",
                     HashedPassword = "abc123",
-                });
+                };
+
+                context.Users.Add(phil);
+                context.Users.Add(max);
+                context.Users.Add(francisco);
 
                 context.SaveChanges();
             }
-
-            if (context.Users.FirstOrDefault(n => n.UserName == "standardUser") == null)
-            {
-                context.Users.Add(new User()
-                {
-                    Role = "StandardUser",
-                    UserName = "standardUser",
-                    ArticleQueryProfile = null,
-                    CreatedAt = DateTime.Now.ToString(),
-                    Email = "",
-                    HashedPassword = "abc123",
-                });
-
-                context.SaveChanges();
-            }
-
         }
     }
 }

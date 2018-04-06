@@ -131,10 +131,9 @@ ASP.NET Core sites run on Kestrel by default:
 
 Internet => Reverse Proxy => Kestrel => ASP.NET Core.
 
+Create a Resource class that only has one propery called Href.
 
-
-
-
+Every resource returned from the API will include an Href that contains the absolute URI of the resource itself and takes place of an Id property.
 
 
 

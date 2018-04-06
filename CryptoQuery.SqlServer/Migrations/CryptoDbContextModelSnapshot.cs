@@ -57,9 +57,9 @@ namespace CryptoQuery.SqlServer.Migrations
 
                     b.Property<bool>("PushEnabled");
 
-                    b.Property<int>("PushToken");
-
                     b.Property<int>("Quality");
+
+                    b.Property<string>("Topics");
 
                     b.HasKey("Id");
 

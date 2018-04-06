@@ -25,13 +25,9 @@ namespace CryptoQuery.SqlServer
             return Result.Ok<User>(createdUser);
         }
 
-        public Result<IEnumerable<User>> Create(IEnumerable<User> users)
+        public Result<IEnumerable<User>> Create(IEnumerable<User> items)
         {
-            _cryptoDbContext.Users.AddRange(users);
-
-            _cryptoDbContext.SaveChanges();
-
-            return Result.Ok(users);
+            throw new NotImplementedException();
         }
 
         public void Delete(Guid userId)
@@ -58,6 +54,113 @@ namespace CryptoQuery.SqlServer
             return _cryptoDbContext.Users.FirstOrDefault(user => user.UserName == userName);
         }
 
+        public Result UpdateUserSettings(Guid userId, ArticleQueryProfile newUserSettings)
+        {
+            var foo = _cryptoDbContext.Users.Include(x => x.ArticleQueryProfile).ToList();
+
+            var u = foo.Find(user => user.Id == userId);
+
+            //newUserSettings.Id = u.ArticleQueryProfile.Id;
+
+            u.ArticleQueryProfile.Complexity = newUserSettings.Complexity;
+            u.ArticleQueryProfile.PushEnabled = newUserSettings.PushEnabled;
+            u.ArticleQueryProfile.Topics = newUserSettings.Topics;
+            u.ArticleQueryProfile.Quality = newUserSettings.Quality;
+
+            _cryptoDbContext.Users.Update(u);
+
+           // var userToUpdate = _cryptoDbContext.Users.FirstOrDefault(user => user.Id == userId);
+           
+            //if (userToUpdate == null)
+            //{
+            //    return Result.Fail($"Could not find user with id {userId}.");
+            //}
+
+            _cryptoDbContext.SaveChanges();
+
+            return Result.Ok();
+
+        }
+
+        public Result UpdateEmail(Guid userId, string newEmail)
+        {
+            var user = _cryptoDbContext.Users.FirstOrDefault(existingUser => existingUser.Id == userId);
+
+            user.Email = newEmail;
+
+            _cryptoDbContext.Update(user);
+
+            _cryptoDbContext.SaveChanges();
+
+            return Result.Ok();
+
+        }
+
+        public Result UpdateUserName(Guid userId, string userName)
+        {
+            var user = _cryptoDbContext.Users.FirstOrDefault(existingUser => existingUser.Id == userId);
+
+            user.UserName = userName;
+
+            _cryptoDbContext.Update(user);
+
+            _cryptoDbContext.SaveChanges();
+
+            return Result.Ok();
+        }
+
+        public Result<User> Update(Guid userId, User item)
+        {
+            var usersWithArticleQueryProfiles =
+                _cryptoDbContext.Users.Include(existingUser => existingUser.ArticleQueryProfile).ToList();
+
+            var userToUpdate = usersWithArticleQueryProfiles.Find(user => user.Id == userId);
+
+            // do updates
+            userToUpdate.Email = item.Email;
+            userToUpdate.HashedPassword = item.HashedPassword;
+            userToUpdate.UserName = item.UserName;
+            userToUpdate.ArticleQueryProfile.PushEnabled = item.ArticleQueryProfile.PushEnabled;
+            userToUpdate.ArticleQueryProfile.Complexity = item.ArticleQueryProfile.Complexity;
+            userToUpdate.ArticleQueryProfile.Quality = item.ArticleQueryProfile.Quality;
+            userToUpdate.ArticleQueryProfile.Topics = item.ArticleQueryProfile.Topics;
+
+            _cryptoDbContext.Users.Update(userToUpdate);
+
+            _cryptoDbContext.Update(userToUpdate.ArticleQueryProfile);
+
+
+            _cryptoDbContext.SaveChanges();
+
+            return Result.Ok(_cryptoDbContext.Users.FirstOrDefault(user => user.Id == userId));
+        }
+
+        public Result UpdatePassword(Guid userId, string password)
+        {
+            var user = _cryptoDbContext.Users.FirstOrDefault(existingUser => existingUser.Id == userId);
+
+            user.HashedPassword = password;
+
+            _cryptoDbContext.Users.Update(user);
+
+            _cryptoDbContext.SaveChanges();
+            
+            return Result.Ok();
+        }
+
+        public Result UpdateTopics(Guid userId, List<string> topics)
+        {
+            var user = _cryptoDbContext.Users.FirstOrDefault(existingUser => existingUser.Id == userId);
+
+            if (user == null)
+            {
+                return Result.Fail($"Could not find user with id {userId}.");
+            }
+
+
+            
+        }
+
         public Result<IEnumerable<User>> Get()
         {
             IEnumerable<User> users = null;
@@ -69,27 +172,32 @@ namespace CryptoQuery.SqlServer
 
         public Result<User> Get(Guid userId)
         {
-            User user = null;
+            var usersWithArticleQueryProfiles = _cryptoDbContext.Users.Include(existingUser => existingUser.ArticleQueryProfile).ToList();
 
-            user = _cryptoDbContext.Users.FirstOrDefault(existingArticle => existingArticle.Id == userId);
+            var targetUser = usersWithArticleQueryProfiles.Find(user => user.Id == userId);
 
-            return (user == null) ? Result.Fail<User>($"User with {userId.ToString()} not found.") : Result.Ok(user);
+            return (targetUser == null) ? Result.Fail<User>($"User with {userId.ToString()} not found.") : Result.Ok(targetUser);
         }
 
-        public Result<User> Update(User user)
+        public Result<User> Update(User userWithInformationToUpdate)
         {
-            var userFound = _cryptoDbContext.Users.FirstOrDefault(existingArticle => existingArticle.Id == user.Id);
 
-            if (userFound == null)
+            var usersWithArticleQueryProfile = _cryptoDbContext.Users.Include(existingUser => existingUser.ArticleQueryProfile).ToList();
+
+            var userToUpdate =
+                _cryptoDbContext.Users.FirstOrDefault(existingUser =>
+                    existingUser.Id == userWithInformationToUpdate.Id);
+
+            if (userToUpdate == null)
             {
-                return Result.Fail<User>($"User with {user.Id.ToString()} not found.");
+                return Result.Fail<User>($"User with {userToUpdate.Id.ToString()} not found.");
             }
 
-            _cryptoDbContext.Users.Update(user);
+            _cryptoDbContext.Update(userToUpdate);
 
             _cryptoDbContext.SaveChanges();
 
-            return Result.Ok<User>(user);
+            return Result.Ok(userToUpdate);
         }
     }
 }

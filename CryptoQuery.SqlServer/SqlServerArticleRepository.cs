@@ -2,7 +2,10 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using CryptoQuery.Domain.Users;
 using CSharpFunctionalExtensions;
+using Microsoft.Extensions.Configuration;
+using Microsoft.Extensions.Options;
 
 namespace CryptoQuery.SqlServer
 {
@@ -57,6 +60,16 @@ namespace CryptoQuery.SqlServer
             IEnumerable<Article> articles = null;
 
             articles = _cryptoDbContext.Articles.AsEnumerable();
+
+            return Result.Ok(articles);
+        }
+
+        public Result<IEnumerable<Article>> GetArticlesBySettings(ArticleQueryProfile articleQueryProfile)
+        {
+            IEnumerable<Article> articles = null;
+
+            //articles = _cryptoDbContext.Articles.AsEnumerable();
+
 
             return Result.Ok(articles);
         }

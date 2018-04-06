@@ -15,8 +15,8 @@ namespace CryptoQuery.SqlServer.Migrations
                     Id = table.Column<Guid>(nullable: false),
                     Complexity = table.Column<int>(nullable: false),
                     PushEnabled = table.Column<bool>(nullable: false),
-                    PushToken = table.Column<int>(nullable: false),
-                    Quality = table.Column<int>(nullable: false)
+                    Quality = table.Column<int>(nullable: false),
+                    Topics = table.Column<string>(nullable: true)
                 },
                 constraints: table =>
                 {

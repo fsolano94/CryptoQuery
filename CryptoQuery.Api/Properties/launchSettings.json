@@ -15,6 +15,14 @@
       "environmentVariables": {
         "ASPNETCORE_ENVIRONMENT": "Development"
       }
+    },
+    "WebApiProduction": {
+      "commandName": "Project",
+      "launchBrowser": true,
+      "launchUrl": "http://localhost:53138/",
+      "environmentVariables": {
+        "WebApi_Env_Variable": "Production"
+      }
     }
   }
 }

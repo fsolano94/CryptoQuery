@@ -2,10 +2,13 @@ C:\Users\fsola\Documents\Development\WebDevelopment\ASPDOTNET\Core\SeniorProject
 C:\Users\fsola\Documents\Development\WebDevelopment\ASPDOTNET\Core\SeniorProject_Working\CryptoQuery\CryptoQuery.SqlServer\bin\Debug\netcoreapp2.0\CryptoQuery.SqlServer.dll
 C:\Users\fsola\Documents\Development\WebDevelopment\ASPDOTNET\Core\SeniorProject_Working\CryptoQuery\CryptoQuery.SqlServer\bin\Debug\netcoreapp2.0\CryptoQuery.SqlServer.pdb
 C:\Users\fsola\Documents\Development\WebDevelopment\ASPDOTNET\Core\SeniorProject_Working\CryptoQuery\CryptoQuery.SqlServer\bin\Debug\netcoreapp2.0\CryptoQuery.Domain.dll
+C:\Users\fsola\Documents\Development\WebDevelopment\ASPDOTNET\Core\SeniorProject_Working\CryptoQuery\CryptoQuery.SqlServer\bin\Debug\netcoreapp2.0\Microsoft.Extensions.Configuration.dll
 C:\Users\fsola\Documents\Development\WebDevelopment\ASPDOTNET\Core\SeniorProject_Working\CryptoQuery\CryptoQuery.SqlServer\bin\Debug\netcoreapp2.0\CryptoQuery.Domain.pdb
+C:\Users\fsola\Documents\Development\WebDevelopment\ASPDOTNET\Core\SeniorProject_Working\CryptoQuery\CryptoQuery.SqlServer\bin\Debug\netcoreapp2.0\Microsoft.Extensions.Configuration.xml
 C:\Users\fsola\Documents\Development\WebDevelopment\ASPDOTNET\Core\SeniorProject_Working\CryptoQuery\CryptoQuery.SqlServer\obj\Debug\netcoreapp2.0\CryptoQuery.SqlServer.csprojResolveAssemblyReference.cache
 C:\Users\fsola\Documents\Development\WebDevelopment\ASPDOTNET\Core\SeniorProject_Working\CryptoQuery\CryptoQuery.SqlServer\obj\Debug\netcoreapp2.0\CryptoQuery.SqlServer.csproj.CoreCompileInputs.cache
 C:\Users\fsola\Documents\Development\WebDevelopment\ASPDOTNET\Core\SeniorProject_Working\CryptoQuery\CryptoQuery.SqlServer\obj\Debug\netcoreapp2.0\CryptoQuery.SqlServer.AssemblyInfoInputs.cache
 C:\Users\fsola\Documents\Development\WebDevelopment\ASPDOTNET\Core\SeniorProject_Working\CryptoQuery\CryptoQuery.SqlServer\obj\Debug\netcoreapp2.0\CryptoQuery.SqlServer.AssemblyInfo.cs
 C:\Users\fsola\Documents\Development\WebDevelopment\ASPDOTNET\Core\SeniorProject_Working\CryptoQuery\CryptoQuery.SqlServer\obj\Debug\netcoreapp2.0\CryptoQuery.SqlServer.dll
 C:\Users\fsola\Documents\Development\WebDevelopment\ASPDOTNET\Core\SeniorProject_Working\CryptoQuery\CryptoQuery.SqlServer\obj\Debug\netcoreapp2.0\CryptoQuery.SqlServer.pdb
+C:\Users\fsola\Documents\Development\WebDevelopment\ASPDOTNET\Core\SeniorProject_Working\CryptoQuery\CryptoQuery.SqlServer\bin\Debug\netcoreapp2.0\CryptoQuery.SqlServer.dll.config

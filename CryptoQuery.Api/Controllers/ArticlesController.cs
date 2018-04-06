@@ -40,9 +40,31 @@ namespace CryptoQuery.Api.Controllers
         /// 
         /// </summary>
         /// <returns></returns>
-        [HttpGet]
+        [HttpGet(nameof(GetArticlesBySettings))]
         [Authorize(Roles = "Administrator, StandardUser")]
-        public IActionResult Get()
+        public IActionResult GetArticlesBySettings([FromBody] ArticleQueryProfilePostDto settings)
+        {
+            var articlesOrError = _articleService.Get();
+
+            if (articlesOrError.IsFailure)
+            {
+                return BadRequest(articlesOrError);
+            }
+
+            // automapper
+            var articleDtos = _mapper.Map<IEnumerable<ArticleGetDto>>(articlesOrError.Value);
+
+            return Ok(Result.Ok(articleDtos));
+        }
+
+        // GET: api/values
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <returns></returns>
+        [HttpGet(Name = nameof(GetAllArticles))]
+        [Authorize(Roles = "Administrator, StandardUser")]
+        public IActionResult GetAllArticles()
         {
             var articlesOrError = _articleService.Get(); 
 
@@ -50,7 +72,7 @@ namespace CryptoQuery.Api.Controllers
             {
                 return BadRequest(articlesOrError);
             }
-
+            
             // automapper
             var articleDtos =_mapper.Map<IEnumerable<ArticleGetDto>>(articlesOrError.Value);
 

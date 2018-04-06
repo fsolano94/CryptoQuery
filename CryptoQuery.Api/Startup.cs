@@ -23,6 +23,8 @@ using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.IdentityModel.Tokens;
 using Swashbuckle.AspNetCore.SwaggerGen;
+using System.Configuration;
+using System.Xml.Linq;
 
 namespace CryptoQuery
 {
@@ -31,12 +33,11 @@ namespace CryptoQuery
         private readonly IHostingEnvironment _hostingEnvironment;
         private readonly int? _httpsPort;
 
-
         public Startup(IConfiguration configuration, IHostingEnvironment hostingEnvironment)
         {
             Configuration = configuration;
-            _hostingEnvironment = hostingEnvironment;
 
+            _hostingEnvironment = hostingEnvironment;
             if (_hostingEnvironment.IsDevelopment())
             {
                 var launchJsonConfig = new ConfigurationBuilder()
@@ -53,9 +54,10 @@ namespace CryptoQuery
         public void ConfigureServices(IServiceCollection services)
         {
 
-            services.AddDbContext<CryptoDbContext>(options =>
-                options.UseSqlServer(Configuration.GetConnectionString("DefaultConnection")));
+            var connectionString = GetConnectionStringFromAppConfigFile("LocalHost");
 
+            services.AddDbContext<CryptoDbContext>(options =>
+                options.UseSqlServer(connectionString));
 
             if (!_hostingEnvironment.IsDevelopment())
             {
@@ -133,6 +135,21 @@ namespace CryptoQuery
             });
         }
 
+        private string GetConnectionStringFromAppConfigFile(string connectionStringName)
+        {
+
+            XDocument xmlDocument = XDocument.Load("app.config");
+
+            var addXmlElement = xmlDocument.Descendants().Where(element => element.Name == "add" && element.Attribute("name").Value == connectionStringName).FirstOrDefault();
+
+            if (addXmlElement == null)
+            {
+                return string.Empty;
+            }
+
+            return addXmlElement.Attribute("connectionString").Value;
+        }
+
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
         public void Configure(IApplicationBuilder app, IHostingEnvironment env)
         {
@@ -145,7 +162,8 @@ namespace CryptoQuery
 
             app.UseSwaggerUI(c =>
             {
-                c.SwaggerEndpoint("/swagger/v1/swagger.json", "My API v1"); // will be relative to route prefix, which is itself relative to the application basepath
+                // make sure it's /swagger/v1/swagger.json in release and /swagger/swagger/v1/swagger.json
+                c.SwaggerEndpoint("/swagger/swagger/v1/swagger.json", "My API v1"); // will be relative to route prefix, which is itself relative to the application basepath
             });
 
             app.UseAuthentication();

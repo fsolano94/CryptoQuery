@@ -23,10 +23,9 @@ namespace CryptoQuery.Api.Controllers
                 {
                     href = Url.Link(nameof(AuthenticateController.CreateToken), null)
                 },
-
-                users = new
+                articles = new
                 {
-                    href = Url.Link(nameof(UsersController.Get), null)
+                    href = Url.Link(nameof(ArticlesController.GetAllArticles), null)
                 }
             };
             return Ok(response);

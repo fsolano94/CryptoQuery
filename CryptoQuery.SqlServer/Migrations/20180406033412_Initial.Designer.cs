@@ -11,7 +11,7 @@ using System;
 namespace CryptoQuery.SqlServer.Migrations
 {
     [DbContext(typeof(CryptoDbContext))]
-    [Migration("20180323000000_Initial")]
+    [Migration("20180406033412_Initial")]
     partial class Initial
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -58,9 +58,9 @@ namespace CryptoQuery.SqlServer.Migrations
 
                     b.Property<bool>("PushEnabled");
 
-                    b.Property<int>("PushToken");
-
                     b.Property<int>("Quality");
+
+                    b.Property<string>("Topics");
 
                     b.HasKey("Id");
 

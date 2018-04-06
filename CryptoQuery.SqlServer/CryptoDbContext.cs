@@ -4,6 +4,10 @@ using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
 using System.Text;
+using Microsoft.Extensions.Options;
+using System.Configuration;
+using System.Linq;
+using System.Xml.Linq;
 
 namespace CryptoQuery.SqlServer
 {
@@ -23,11 +27,28 @@ namespace CryptoQuery.SqlServer
 
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
-            optionsBuilder.UseSqlServer(
-                "Server=tcp:cryptoqueryapi2018dbserver.database.windows.net,1433;Initial Catalog=CryptoQuery;Persist Security Info=False;User ID=csqdaL25!;Password=!!eL9624Jrm;MultipleActiveResultSets=False;Encrypt=True;TrustServerCertificate=False;Connection Timeout=30;");
-            //optionsBuilder.UseSqlServer(@"Server=tcp:cryptoquery.database.windows.net,1433;Initial Catalog=CryptoQuery;Persist Security Info=False;User ID=cqsda;Password=Rfv84720^7Tgb;MultipleActiveResultSets=False;Encrypt=True;TrustServerCertificate=False;Connection Timeout=30;");
-            //optionsBuilder.UseSqlServer(
-            //   @"Server = localhost\MSSQLSERVER2017;Database = CryptoQuery; Trusted_Connection = True;");
+            // if environment is development, use local host
+            var connectionString = GetConnectionStringFromAppConfigFile("LocalHost");
+
+            // otherwise use Azure
+            
+            optionsBuilder.UseSqlServer(connectionString);
+
+            optionsBuilder.EnableSensitiveDataLogging();
+        }
+
+        private string GetConnectionStringFromAppConfigFile(string connectionStringName)
+        {
+            XDocument xmlDocument = XDocument.Load("app.config");
+
+            var addXmlElement = xmlDocument.Descendants().Where(element => element.Name == "add" && element.Attribute("name").Value == connectionStringName).FirstOrDefault();
+
+            if (addXmlElement == null)
+            {
+                return string.Empty;
+            }
+
+            return addXmlElement.Attribute("connectionString").Value;
         }
     }
 }

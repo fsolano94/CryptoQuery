@@ -10,6 +10,7 @@ using CryptoQuery.Domain.Users;
 using CSharpFunctionalExtensions;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore.Internal;
 
 namespace CryptoQuery.Api.Controllers
 {
@@ -34,50 +35,28 @@ namespace CryptoQuery.Api.Controllers
             _userService = userService;
             _mapper = mapper;
         }
-        /// <summary>
-        /// 
-        /// </summary>
-        /// <returns></returns>
-        // GET: api/User
-        [HttpGet(Name = nameof(Get))]
-        public IActionResult Get()
-        {
-            var usersOrError = _userService.Get();
-
-            if (usersOrError.IsFailure)
-            {
-                return BadRequest(usersOrError);
-            }
-
-            // automapper
-            var userDtos = _mapper.Map<IEnumerable<UserGetDto>>(usersOrError.Value);
-
-            foreach (var user in userDtos)
-            {
-                user.Href = Url.Link(nameof(Get), null);
-                user.Href += $"/{user.Id}";
-            }
-            
-            return Ok(Result.Ok(userDtos));
-        }
 
         //// GET api/values/5
-        [HttpGet("{id}")]
-        public IActionResult Get(Guid id)
+        [HttpGet("{userId}", Name = nameof(GetUserById))]
+        public IActionResult GetUserById([FromRoute(Name = "userId")]Guid id)
         {
-            var result = _userService.Get(id);
+            var userOrError = _userService.Get(id);
 
-            if (result.IsFailure)
+            if (userOrError.IsFailure)
             {
-                return BadRequest(result);
+                return BadRequest(userOrError);
             }
 
-            return Ok(_mapper.Map<UserGetDto>(result.Value));
+            var user = _mapper.Map<UserGetDto>(userOrError.Value);
+
+            user.Href = Url.Link(nameof(GetUserById), id);
+
+            return Ok(user);
         }
 
         //// POST: api/User
-        [HttpPost]
-        public IActionResult Post([FromBody]UserPostDto userPostDto)
+        [HttpPost(nameof(CreateUser))]
+        public IActionResult CreateUser([FromBody]UserPostDto userPostDto)
         {
             var user = _mapper.Map<User>(userPostDto);
 
@@ -86,20 +65,109 @@ namespace CryptoQuery.Api.Controllers
             return Ok(_userService.Create(user));
         }
 
-        [HttpPost("{id}/updatePassword")]
-        public IActionResult UpdatePassword([FromRoute(Name = "id")]Guid userId, [FromBody] string newPassword)
+        //[HttpPatch("{userId}/UpdateUserName", Name = nameof(UpdateUserName))]
+        //public IActionResult UpdateUserName([FromRoute(Name = "{userId}")]Guid userId, [FromBody]UserNameDto userNameDto)
+        //{
+        //    var userOrError = _userService.Get(userId);
+
+        //    if (userOrError.IsFailure)
+        //    {
+        //        return NotFound($"User with id {userId} not found.");
+        //    }
+
+        //    return Ok(_userService.UpdateUserName(userId, userNameDto.UserName));
+
+        //}
+
+        //[HttpPatch("{userId}/UpdateEmail", Name = nameof(UpdateEmail))]
+        //public IActionResult UpdateEmail([FromRoute]Guid userId, [FromBody] EmailPostDto emailPostDto)
+        //{
+        //    var userOrError = _userService.Get(userId);
+
+        //    if (userOrError.IsFailure)
+        //    {
+        //        return NotFound($"User with id {userId} not found.");
+        //    }
+
+        //    return Ok(_userService.UpdateEmail(userId, emailPostDto.Email));
+        //}
+
+        // POST: api/User
+        [HttpPut("{userId}/UpdateUser", Name = nameof(UpdateUser))]
+        public IActionResult UpdateUser([FromRoute(Name = "userId")]Guid userId, [FromBody]UpdateUserDto userWithInformationToBeUpdated)
         {
             var userOrError = _userService.Get(userId);
 
             if (userOrError.IsFailure)
             {
-                return BadRequest(userOrError);
+                return NotFound($"User with id {userId} not found.");
             }
 
-            userOrError.Value.HashedPassword = newPassword;
+            var user = new User()
+            {
+                Email = userWithInformationToBeUpdated.Email,
+                UserName = userWithInformationToBeUpdated.UserName,
+                ArticleQueryProfile = new ArticleQueryProfile()
+                {
+                    Complexity = userWithInformationToBeUpdated.Complexity,
+                    PushEnabled = userWithInformationToBeUpdated.PushEnabled,
+                    Quality = userWithInformationToBeUpdated.Quality,
+                    Topics = string.Join(',', userWithInformationToBeUpdated.Topics)
+                }
+            };
 
-            return Ok(_userService.Update(userOrError.Value));
+            return Ok(_userService.Update(userId, user));
         }
+
+        [HttpPatch("{userId}/" + nameof(AddNewTopics))]
+        public IActionResult AddNewTopics([FromRoute(Name = "userId")]Guid userId,[FromBody] TopicsDto topicsDto)
+        {
+            var userOrError = _userService.Get(userId);
+
+            if (userOrError.IsFailure)
+            {
+                return NotFound($"User with id {userId} not found.");
+            }
+
+            return Ok(_userService.UpdateTopics(userId, topicsDto.Topics));
+        }
+
+        //// POST: api/User
+        [HttpPatch("{userId}/"+ nameof(UpdateUserSettings))]
+        public IActionResult UpdateUserSettings([FromRoute(Name = "userId")]Guid userId, [FromBody]ArticleQueryProfileUpdateDto articleQueryProfileUpdateDto)
+        {
+            //var newUserSettings = _mapper.Map<ArticleQueryProfile>(articleQueryProfileUpdateDto);
+
+            var userOrError = _userService.Get(userId);
+
+            if (userOrError.IsFailure)
+            {
+                return NotFound($"User with id {userId} not found.");
+            }
+
+            var newUserSettings = new ArticleQueryProfile()
+            {
+                PushEnabled = articleQueryProfileUpdateDto.PushEnabled,
+                Complexity = articleQueryProfileUpdateDto.Complexity,
+                Quality = articleQueryProfileUpdateDto.Quality,
+                Topics = articleQueryProfileUpdateDto.Topics.Join(",")
+            };
+
+            return Ok(_userService.UpdateUserSettings( userId, newUserSettings));
+        }
+
+        //[HttpPatch("{id}/updatePassword")]
+        //public IActionResult UpdatePassword([FromRoute]Guid userId, [FromBody] PasswordDto passwordDto)
+        //{
+        //    var userOrError = _userService.Get(userId);
+
+        //    if (userOrError.IsFailure)
+        //    {
+        //        return BadRequest(userOrError);
+        //    }
+
+        //    return Ok(_userService.Update(userId, passwordDto.Password));
+        //}
 
         //// PUT: api/User/5
         //[HttpPut("{id}")]

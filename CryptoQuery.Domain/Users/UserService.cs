@@ -34,14 +34,44 @@ namespace CryptoQuery.Domain.Users
             _userRepository.Delete(id);
         }
 
-        public Result<User> Update(User item)
+        public Result<User> Update(Guid userId, User item)
         {
-            return _userRepository.Update(item);
+            return _userRepository.Update(userId, item);
+        }
+
+        public Result UpdateUserSettings(Guid userId, ArticleQueryProfile newUserSettings)
+        {
+            return _userRepository.UpdateUserSettings(userId, newUserSettings);
         }
 
         public User GetUserByUserName(string userName)
         {
             return _userRepository.GetUserByUserName(userName);
+        }
+
+        public Result UpdateEmail(Guid userId, string newEmail)
+        {
+            return _userRepository.UpdateEmail(userId,newEmail);
+        }
+
+        public Result UpdateUserName(Guid userId, string userName)
+        {
+            return _userRepository.UpdateUserName(userId, userName);
+        }
+
+        public Result Update(User value)
+        {
+            return _userRepository.Update(value);
+        }
+
+        public Result Update(Guid userId, string password)
+        {
+            return _userRepository.UpdatePassword(userId, password);
+        }
+
+        public Result UpdateTopics(Guid userId, List<string> topics)
+        {
+            return _userRepository.UpdateTopics(userId, topics);
         }
     }
 }

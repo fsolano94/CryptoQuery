@@ -2,7 +2,7 @@
 
 namespace CryptoQuery.Api.Dto
 {
-    public class ArticlePostDto : Resource
+    public class ArticlePostDto
     {
         public string UpdatedAt { get; set; }
         public string CreatedAt { get; set; }
@@ -13,6 +13,6 @@ namespace CryptoQuery.Api.Dto
         public string Topic { get; set; }
         public int Complexity { get; set; }
         public int Quality { get; set; }
-
+        public string Source { get; set; }
     }
 }

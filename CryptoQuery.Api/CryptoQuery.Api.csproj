@@ -37,6 +37,7 @@
     <PackageReference Include="NLog.Web.AspNetCore" Version="4.5.0-rc3" />
     <PackageReference Include="NWebsec.AspNetCore.Middleware" Version="1.1.0" />
     <PackageReference Include="Swashbuckle.AspNetCore" Version="2.3.0" />
+    <PackageReference Include="System.Configuration.ConfigurationManager" Version="4.4.1" />
   </ItemGroup>
 
   <ItemGroup>
@@ -46,6 +47,12 @@
   <ItemGroup>
     <ProjectReference Include="..\CryptoQuery.Domain\CryptoQuery.Domain.csproj" />
     <ProjectReference Include="..\CryptoQuery.SqlServer\CryptoQuery.SqlServer.csproj" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Reference Include="System.Configuration.ConfigurationManager">
+      <HintPath>..\..\..\..\..\..\..\..\.nuget\packages\system.configuration.configurationmanager\4.4.0\lib\netstandard2.0\System.Configuration.ConfigurationManager.dll</HintPath>
+    </Reference>
   </ItemGroup>
 
   <ItemGroup>

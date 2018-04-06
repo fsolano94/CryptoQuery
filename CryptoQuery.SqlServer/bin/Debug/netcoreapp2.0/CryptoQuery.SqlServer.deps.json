@@ -1,7 +1,7 @@
 {
   "runtimeTarget": {
     "name": ".NETCoreApp,Version=v2.0",
-    "signature": "0af5b314f6f5d4afaf02cdb23e9dbf91bb963504"
+    "signature": "6751b4829ad932ed57115319d09255e2119fb3f2"
   },
   "compilationOptions": {},
   "targets": {
@@ -11,7 +11,9 @@
           "CSharpFunctionalExtensions": "1.9.1",
           "CryptoQuery.Domain": "1.0.0",
           "Microsoft.EntityFrameworkCore": "2.0.2",
-          "Microsoft.EntityFrameworkCore.SqlServer": "2.0.2"
+          "Microsoft.EntityFrameworkCore.SqlServer": "2.0.2",
+          "System.Configuration.ConfigurationManager": "4.4.1",
+          "Microsoft.Extensions.Configuration": "2.0.1.0"
         },
         "runtime": {
           "CryptoQuery.SqlServer.dll": {}
@@ -202,6 +204,14 @@
       },
       "System.Collections.Immutable/1.4.0": {},
       "System.ComponentModel.Annotations/4.4.0": {},
+      "System.Configuration.ConfigurationManager/4.4.1": {
+        "dependencies": {
+          "System.Security.Cryptography.ProtectedData": "4.4.0"
+        },
+        "runtime": {
+          "lib/netstandard2.0/System.Configuration.ConfigurationManager.dll": {}
+        }
+      },
       "System.Data.SqlClient/4.4.3": {
         "dependencies": {
           "Microsoft.Win32.Registry": "4.4.0",
@@ -390,6 +400,17 @@
           }
         }
       },
+      "System.Security.Cryptography.ProtectedData/4.4.0": {
+        "runtime": {
+          "lib/netstandard2.0/System.Security.Cryptography.ProtectedData.dll": {}
+        },
+        "runtimeTargets": {
+          "runtimes/win/lib/netstandard2.0/System.Security.Cryptography.ProtectedData.dll": {
+            "rid": "win",
+            "assetType": "runtime"
+          }
+        }
+      },
       "System.Security.Principal.Windows/4.4.0": {
         "runtimeTargets": {
           "runtime/unix/lib/_._": {
@@ -433,10 +454,16 @@
       },
       "CryptoQuery.Domain/1.0.0": {
         "dependencies": {
-          "CSharpFunctionalExtensions": "1.9.1"
+          "CSharpFunctionalExtensions": "1.9.1",
+          "System.Configuration.ConfigurationManager": "4.4.1"
         },
         "runtime": {
           "CryptoQuery.Domain.dll": {}
+        }
+      },
+      "Microsoft.Extensions.Configuration/2.0.1.0": {
+        "runtime": {
+          "Microsoft.Extensions.Configuration.dll": {}
         }
       }
     }
@@ -615,6 +642,13 @@
       "path": "system.componentmodel.annotations/4.4.0",
       "hashPath": "system.componentmodel.annotations.4.4.0.nupkg.sha512"
     },
+    "System.Configuration.ConfigurationManager/4.4.1": {
+      "type": "package",
+      "serviceable": true,
+      "sha512": "sha512-jz3TWKMAeuDEyrPCK5Jyt4bzQcmzUIMcY9Ud6PkElFxTfnsihV+9N/UCqvxe1z5gc7jMYAnj7V1COMS9QKIuHQ==",
+      "path": "system.configuration.configurationmanager/4.4.1",
+      "hashPath": "system.configuration.configurationmanager.4.4.1.nupkg.sha512"
+    },
     "System.Data.SqlClient/4.4.3": {
       "type": "package",
       "serviceable": true,
@@ -769,6 +803,13 @@
       "path": "system.security.accesscontrol/4.4.0",
       "hashPath": "system.security.accesscontrol.4.4.0.nupkg.sha512"
     },
+    "System.Security.Cryptography.ProtectedData/4.4.0": {
+      "type": "package",
+      "serviceable": true,
+      "sha512": "sha512-cJV7ScGW7EhatRsjehfvvYVBvtiSMKgN8bOVI0bQhnF5bU7vnHVIsH49Kva7i7GWaWYvmEzkYVk1TC+gZYBEog==",
+      "path": "system.security.cryptography.protecteddata/4.4.0",
+      "hashPath": "system.security.cryptography.protecteddata.4.4.0.nupkg.sha512"
+    },
     "System.Security.Principal.Windows/4.4.0": {
       "type": "package",
       "serviceable": true,
@@ -806,6 +847,11 @@
     },
     "CryptoQuery.Domain/1.0.0": {
       "type": "project",
+      "serviceable": false,
+      "sha512": ""
+    },
+    "Microsoft.Extensions.Configuration/2.0.1.0": {
+      "type": "reference",
       "serviceable": false,
       "sha512": ""
     }
