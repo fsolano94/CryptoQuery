@@ -59,22 +59,13 @@ namespace CryptoQuery.SqlServer
             var foo = _cryptoDbContext.Users.Include(x => x.ArticleQueryProfile).ToList();
 
             var u = foo.Find(user => user.Id == userId);
-
-            //newUserSettings.Id = u.ArticleQueryProfile.Id;
-
+            
             u.ArticleQueryProfile.Complexity = newUserSettings.Complexity;
             u.ArticleQueryProfile.PushEnabled = newUserSettings.PushEnabled;
-            u.ArticleQueryProfile.Topics = newUserSettings.Topics;
+            u.ArticleQueryProfile.Topics = FormNewUniqueSetOfTopics(u.Id, newUserSettings.Topics.Split(",").ToList());
             u.ArticleQueryProfile.Quality = newUserSettings.Quality;
 
             _cryptoDbContext.Users.Update(u);
-
-           // var userToUpdate = _cryptoDbContext.Users.FirstOrDefault(user => user.Id == userId);
-           
-            //if (userToUpdate == null)
-            //{
-            //    return Result.Fail($"Could not find user with id {userId}.");
-            //}
 
             _cryptoDbContext.SaveChanges();
 
@@ -123,7 +114,7 @@ namespace CryptoQuery.SqlServer
             userToUpdate.ArticleQueryProfile.PushEnabled = item.ArticleQueryProfile.PushEnabled;
             userToUpdate.ArticleQueryProfile.Complexity = item.ArticleQueryProfile.Complexity;
             userToUpdate.ArticleQueryProfile.Quality = item.ArticleQueryProfile.Quality;
-            userToUpdate.ArticleQueryProfile.Topics = item.ArticleQueryProfile.Topics;
+            userToUpdate.ArticleQueryProfile.Topics = FormNewUniqueSetOfTopics(userToUpdate.Id, item.ArticleQueryProfile.Topics.Split(",").ToList());
 
             _cryptoDbContext.Users.Update(userToUpdate);
 
@@ -148,7 +139,26 @@ namespace CryptoQuery.SqlServer
             return Result.Ok();
         }
 
-        public Result UpdateTopics(Guid userId, List<string> topics)
+        private string FormNewUniqueSetOfTopics(Guid userId,List<string> newTopics)
+        {
+            var user = _cryptoDbContext.Users.First(existingUser => existingUser.Id == userId);
+            var currentTopics = user.ArticleQueryProfile.Topics.Split(",");
+            HashSet<string> allOfUsersTopics = new HashSet<string>(currentTopics, StringComparer.InvariantCultureIgnoreCase);
+
+            for (int i = 0; i < newTopics.Count; ++i)
+            {
+                if (!allOfUsersTopics.Contains(newTopics[i], StringComparer.InvariantCultureIgnoreCase))
+                {
+                    allOfUsersTopics.Add(newTopics[i]);
+                }
+            }
+
+            var allOfUsersTopicsAsList = allOfUsersTopics.ToList();
+            var allOfUsersTopicsAsString = string.Join(",", allOfUsersTopicsAsList);
+            return allOfUsersTopicsAsString;
+        }
+
+        public Result UpdateTopics(Guid userId, List<string> newTopics)
         {
             var user = _cryptoDbContext.Users.FirstOrDefault(existingUser => existingUser.Id == userId);
 
@@ -157,8 +167,13 @@ namespace CryptoQuery.SqlServer
                 return Result.Fail($"Could not find user with id {userId}.");
             }
 
+            user.ArticleQueryProfile.Topics = FormNewUniqueSetOfTopics(userId, newTopics);
 
-            
+            _cryptoDbContext.Users.Update(user);
+
+            _cryptoDbContext.SaveChanges();
+
+            return Result.Ok();
         }
 
         public Result<IEnumerable<User>> Get()
@@ -181,9 +196,6 @@ namespace CryptoQuery.SqlServer
 
         public Result<User> Update(User userWithInformationToUpdate)
         {
-
-            var usersWithArticleQueryProfile = _cryptoDbContext.Users.Include(existingUser => existingUser.ArticleQueryProfile).ToList();
-
             var userToUpdate =
                 _cryptoDbContext.Users.FirstOrDefault(existingUser =>
                     existingUser.Id == userWithInformationToUpdate.Id);

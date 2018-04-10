@@ -39,5 +39,10 @@ namespace CryptoQuery.Domain.Articles
         {
             _articleRepository.Delete(id);
         }
+
+        public Result<IEnumerable<Article>> GetArticlesByTopics(List<string> topics)
+        {
+            return _articleRepository.GetArticlesByTopics(topics);
+        }
     }
 }

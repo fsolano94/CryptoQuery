@@ -35,6 +35,13 @@ namespace CryptoQuery.Api.Controllers
             _mapper = mapper;
         }
 
+        [HttpPost("GetArticlesByTopics", Name = nameof(GetArticlesByTopics))]
+        public IActionResult GetArticlesByTopics([FromBody] TopicsDto topicsDto)
+        {
+           var result = _articleService.GetArticlesByTopics(topicsDto.Topics);
+            return Ok();
+        }
+
         // GET: api/values
         /// <summary>
         /// 
@@ -91,26 +98,19 @@ namespace CryptoQuery.Api.Controllers
                 return BadRequest(result);
             }
 
+
             return Ok(_mapper.Map<ArticleGetDto>(result.Value));
         }
 
         [HttpPost]
         [Authorize(Roles = "Administrator")]
-        public IActionResult PostRange([FromBody]IEnumerable<ArticlePostDto> articlePostDtoCollection)
+        public IActionResult PostRange([FromBody]ArticlePostDtoCollection articlePostDtoCollection)
         {
-            var articles = _mapper.Map<IEnumerable<Article>>(articlePostDtoCollection);
+            var articles = _mapper.Map<IEnumerable<Article>>(articlePostDtoCollection.Articles);
 
             return Ok(_articleService.Create(articles));
         }
 
-        //// PUT api/values/5
-        //[HttpPut("{id}")]
-        //public IActionResult Put(string id, [FromBody]ArticlePostDto article)
-        //{
-        //    return Ok();
-        //}
-
-        //// DELETE api/values/5
         [HttpDelete("{id}")]
         [Authorize(Roles = "Administrator")]
         public IActionResult Delete(Guid id)

@@ -29,19 +29,25 @@ namespace CryptoQuery.SqlServer.Migrations
 
                     b.Property<int>("Complexity");
 
+                    b.Property<string>("Content");
+
                     b.Property<DateTime>("CreatedAt");
 
-                    b.Property<DateTime>("DateOfPublification");
+                    b.Property<string>("Description");
+
+                    b.Property<string>("ImageUrl");
+
+                    b.Property<string>("Link");
+
+                    b.Property<DateTime>("PublishedAt");
 
                     b.Property<int>("Quality");
 
                     b.Property<string>("Title");
 
-                    b.Property<string>("Topic");
+                    b.Property<string>("Topics");
 
                     b.Property<DateTime>("UpdatedAt");
-
-                    b.Property<string>("Url");
 
                     b.HasKey("Id");
 

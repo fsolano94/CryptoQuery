@@ -30,13 +30,16 @@ namespace CryptoQuery.SqlServer.Migrations
                     Id = table.Column<Guid>(nullable: false),
                     Author = table.Column<string>(nullable: true),
                     Complexity = table.Column<int>(nullable: false),
+                    Content = table.Column<string>(nullable: true),
                     CreatedAt = table.Column<DateTime>(nullable: false),
-                    DateOfPublification = table.Column<DateTime>(nullable: false),
+                    Description = table.Column<string>(nullable: true),
+                    ImageUrl = table.Column<string>(nullable: true),
+                    Link = table.Column<string>(nullable: true),
+                    PublishedAt = table.Column<DateTime>(nullable: false),
                     Quality = table.Column<int>(nullable: false),
                     Title = table.Column<string>(nullable: true),
-                    Topic = table.Column<string>(nullable: true),
-                    UpdatedAt = table.Column<DateTime>(nullable: false),
-                    Url = table.Column<string>(nullable: true)
+                    Topics = table.Column<string>(nullable: true),
+                    UpdatedAt = table.Column<DateTime>(nullable: false)
                 },
                 constraints: table =>
                 {

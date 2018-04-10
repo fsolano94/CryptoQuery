@@ -7,12 +7,15 @@ namespace CryptoQuery.Domain.Articles
         public Guid Id { get; set; }
         public DateTime UpdatedAt { get; set; }
         public DateTime CreatedAt { get; set; }
-        public DateTime DateOfPublification { get; set; }
+        public DateTime PublishedAt { get; set; }
         public string Author { get; set; }
-        public string Url { get; set; }
+        public string Link { get; set; }
         public string Title { get; set; }
-        public string Topic { get; set; }
+        public string Topics { get; set; }
         public int Complexity { get; set; }
         public int Quality { get; set; }
+        public string Description { get; set; }
+        public string Content { get; set; }
+        public string ImageUrl { get; set; }
     }
 }

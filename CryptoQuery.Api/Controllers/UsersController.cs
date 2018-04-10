@@ -37,7 +37,7 @@ namespace CryptoQuery.Api.Controllers
         }
 
         //// GET api/values/5
-        [HttpGet("{userId}", Name = nameof(GetUserById))]
+        [HttpGet(nameof(GetUserById) + "/{userId}", Name = nameof(GetUserById))]
         public IActionResult GetUserById([FromRoute(Name = "userId")]Guid id)
         {
             var userOrError = _userService.Get(id);
@@ -65,35 +65,34 @@ namespace CryptoQuery.Api.Controllers
             return Ok(_userService.Create(user));
         }
 
-        //[HttpPatch("{userId}/UpdateUserName", Name = nameof(UpdateUserName))]
-        //public IActionResult UpdateUserName([FromRoute(Name = "{userId}")]Guid userId, [FromBody]UserNameDto userNameDto)
-        //{
-        //    var userOrError = _userService.Get(userId);
+        [HttpPatch(nameof(UpdateUserName)+ "/{userId}", Name = nameof(UpdateUserName))]
+        public IActionResult UpdateUserName([FromRoute(Name = "{userId}")]Guid userId, [FromBody]UserNameDto userNameDto)
+        {
+            var userOrError = _userService.Get(userId);
 
-        //    if (userOrError.IsFailure)
-        //    {
-        //        return NotFound($"User with id {userId} not found.");
-        //    }
+            if (userOrError.IsFailure)
+            {
+                return NotFound($"User with id {userId} not found.");
+            }
 
-        //    return Ok(_userService.UpdateUserName(userId, userNameDto.UserName));
+            return Ok(_userService.UpdateUserName(userId, userNameDto.UserName));
 
-        //}
+        }
 
-        //[HttpPatch("{userId}/UpdateEmail", Name = nameof(UpdateEmail))]
-        //public IActionResult UpdateEmail([FromRoute]Guid userId, [FromBody] EmailPostDto emailPostDto)
-        //{
-        //    var userOrError = _userService.Get(userId);
+        [HttpPatch(nameof(UpdateEmail)+ "/{userId}", Name = nameof(UpdateEmail))]
+        public IActionResult UpdateEmail([FromRoute]Guid userId, [FromBody] EmailPostDto emailPostDto)
+        {
+            var userOrError = _userService.Get(userId);
 
-        //    if (userOrError.IsFailure)
-        //    {
-        //        return NotFound($"User with id {userId} not found.");
-        //    }
+            if (userOrError.IsFailure)
+            {
+                return NotFound($"User with id {userId} not found.");
+            }
 
-        //    return Ok(_userService.UpdateEmail(userId, emailPostDto.Email));
-        //}
+            return Ok(_userService.UpdateEmail(userId, emailPostDto.Email));
+        }
 
-        // POST: api/User
-        [HttpPut("{userId}/UpdateUser", Name = nameof(UpdateUser))]
+        [HttpPut(nameof(UpdateUser)+ "/{userId}", Name = nameof(UpdateUser))]
         public IActionResult UpdateUser([FromRoute(Name = "userId")]Guid userId, [FromBody]UpdateUserDto userWithInformationToBeUpdated)
         {
             var userOrError = _userService.Get(userId);
@@ -119,7 +118,7 @@ namespace CryptoQuery.Api.Controllers
             return Ok(_userService.Update(userId, user));
         }
 
-        [HttpPatch("{userId}/" + nameof(AddNewTopics))]
+        [HttpPatch(nameof(AddNewTopics)+ "/{userId}", Name = nameof(AddNewTopics))]
         public IActionResult AddNewTopics([FromRoute(Name = "userId")]Guid userId,[FromBody] TopicsDto topicsDto)
         {
             var userOrError = _userService.Get(userId);
@@ -132,12 +131,9 @@ namespace CryptoQuery.Api.Controllers
             return Ok(_userService.UpdateTopics(userId, topicsDto.Topics));
         }
 
-        //// POST: api/User
-        [HttpPatch("{userId}/"+ nameof(UpdateUserSettings))]
+        [HttpPatch(nameof(UpdateUserSettings)+"/{userId}" )]
         public IActionResult UpdateUserSettings([FromRoute(Name = "userId")]Guid userId, [FromBody]ArticleQueryProfileUpdateDto articleQueryProfileUpdateDto)
         {
-            //var newUserSettings = _mapper.Map<ArticleQueryProfile>(articleQueryProfileUpdateDto);
-
             var userOrError = _userService.Get(userId);
 
             if (userOrError.IsFailure)
@@ -156,26 +152,20 @@ namespace CryptoQuery.Api.Controllers
             return Ok(_userService.UpdateUserSettings( userId, newUserSettings));
         }
 
-        //[HttpPatch("{id}/updatePassword")]
-        //public IActionResult UpdatePassword([FromRoute]Guid userId, [FromBody] PasswordDto passwordDto)
-        //{
-        //    var userOrError = _userService.Get(userId);
+        [HttpPatch(nameof(UpdatePassword)+"/{id}")]
+        public IActionResult UpdatePassword([FromRoute]Guid userId, [FromBody] PasswordDto passwordDto)
+        {
+            var userOrError = _userService.Get(userId);
 
-        //    if (userOrError.IsFailure)
-        //    {
-        //        return BadRequest(userOrError);
-        //    }
+            if (userOrError.IsFailure)
+            {
+                return BadRequest(userOrError);
+            }
 
-        //    return Ok(_userService.Update(userId, passwordDto.Password));
-        //}
+            return Ok(_userService.Update(userId, passwordDto.Password));
+        }
 
-        //// PUT: api/User/5
-        //[HttpPut("{id}")]
-        //public void Put(int id, [FromBody]string value)
-        //{
-        //}
 
-        // DELETE: api/ApiWithActions/5
         [HttpDelete("{id}")]
         public IActionResult Delete(Guid id)
         {

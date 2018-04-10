@@ -18,6 +18,7 @@ namespace CryptoQuery.SqlServer
 
         public CryptoDbContext()
         {
+
         }
 
         public CryptoDbContext(DbContextOptions<CryptoDbContext> context) : base(context)

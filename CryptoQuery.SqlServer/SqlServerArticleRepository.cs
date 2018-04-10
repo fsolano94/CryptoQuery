@@ -1,5 +1,6 @@
 ﻿using CryptoQuery.Domain.Articles;
 using System;
+using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using CryptoQuery.Domain.Users;
@@ -29,7 +30,17 @@ namespace CryptoQuery.SqlServer
 
         public Result<IEnumerable<Article>> Create(IEnumerable<Article> items)
         {
-            _cryptoDbContext.Articles.AddRange(items);
+
+            List < Article > newArticles = items.ToList();
+
+
+            newArticles.ForEach(article =>
+            {
+                article.CreatedAt = DateTime.Now;
+                article.UpdatedAt = DateTime.Now;
+            });
+
+            _cryptoDbContext.Articles.AddRange(newArticles);
 
             _cryptoDbContext.SaveChanges();
 
@@ -52,6 +63,27 @@ namespace CryptoQuery.SqlServer
             _cryptoDbContext.Articles.Remove(articleToRemove);
 
             _cryptoDbContext.SaveChanges();
+
+        }
+
+        public Result<IEnumerable<Article>> GetArticlesByTopics(List<string> topics)
+        {
+            
+            List<Article> retrievedArticles;
+            IEnumerable<Article> articles = new Article[]{};
+
+            //for (int i = 0; i < topics.Count; ++i)
+            //{
+            //    _cryptoDbContext.Articles.FirstOrDefault(article =>
+            //        article.Topics.Contains(topics[0], StringComparer.InvariantCultureIgnoreCase));
+
+            //    if ()
+            //    {
+
+            //    }
+            //}
+
+            return Result.Ok(articles);
 
         }
 
