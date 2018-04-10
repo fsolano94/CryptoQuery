@@ -163,7 +163,7 @@ namespace CryptoQuery
             app.UseSwaggerUI(c =>
             {
                 // make sure it's /swagger/v1/swagger.json in release and /swagger/swagger/v1/swagger.json
-                c.SwaggerEndpoint("/swagger/v1/swagger.json", "My API v1"); // will be relative to route prefix, which is itself relative to the application basepath
+                c.SwaggerEndpoint("/swagger/swagger/v1/swagger.json", "My API v1"); // will be relative to route prefix, which is itself relative to the application basepath
             });
 
             app.UseAuthentication();
