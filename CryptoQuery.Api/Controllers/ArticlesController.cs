@@ -35,11 +35,18 @@ namespace CryptoQuery.Api.Controllers
             _mapper = mapper;
         }
 
-        [HttpPost("GetArticlesByTopics", Name = nameof(GetArticlesByTopics))]
+        [HttpPost(nameof(GetArticlesByTopics))]
+        [Authorize(Roles = "Administrator")]
         public IActionResult GetArticlesByTopics([FromBody] TopicsDto topicsDto)
         {
-           var result = _articleService.GetArticlesByTopics(topicsDto.Topics);
-            return Ok();
+           var articlesOrError = _articleService.GetArticlesByTopics(topicsDto.Topics);
+
+            if (articlesOrError.IsFailure)
+            {
+                return BadRequest(articlesOrError.Error);
+            }
+
+            return Ok(articlesOrError.Value);
         }
 
         // GET: api/values
@@ -55,7 +62,7 @@ namespace CryptoQuery.Api.Controllers
 
             if (articlesOrError.IsFailure)
             {
-                return BadRequest(articlesOrError);
+                return BadRequest(articlesOrError.Error);
             }
 
             // automapper

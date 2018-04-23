@@ -69,6 +69,12 @@ namespace CryptoQuery.SqlServer
         public Result<List<Article>> GetArticlesByTopics(List<string> desiredTopics)
         {
 
+
+            if ( !_cryptoDbContext.Articles.Any() )
+            {
+                return Result.Fail<List<Article>>("No articles present");
+            }
+
             var allArticlesInDatabase = _cryptoDbContext.Articles.Select(element => element).ToList();
 
             List<Article> articlesWithDesiredTopics = new List<Article>();

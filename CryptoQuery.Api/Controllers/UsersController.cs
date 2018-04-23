@@ -108,9 +108,9 @@ namespace CryptoQuery.Api.Controllers
                 UserName = userWithInformationToBeUpdated.UserName,
                 ArticleQueryProfile = new ArticleQueryProfile()
                 {
-                    Complexity = userWithInformationToBeUpdated.Complexity,
-                    PushEnabled = userWithInformationToBeUpdated.PushEnabled,
-                    Quality = userWithInformationToBeUpdated.Quality,
+                    //Complexity = userWithInformationToBeUpdated.Complexity,
+                    //PushEnabled = userWithInformationToBeUpdated.PushEnabled,
+                    //Quality = userWithInformationToBeUpdated.Quality,
                     Topics = string.Join(',', userWithInformationToBeUpdated.Topics)
                 }
             };

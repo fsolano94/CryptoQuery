@@ -11,7 +11,7 @@ using System;
 namespace CryptoQuery.SqlServer.Migrations
 {
     [DbContext(typeof(CryptoDbContext))]
-    [Migration("20180411024443_Initial")]
+    [Migration("20180423010405_Initial")]
     partial class Initial
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)

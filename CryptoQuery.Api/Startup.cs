@@ -175,7 +175,7 @@ namespace CryptoQuery
             });
 
 
-            app.UseHsts(opt =>
+            app.UseHsts(opt =>  
             {
                 opt.MaxAge(days: 180);
                 opt.IncludeSubdomains();
