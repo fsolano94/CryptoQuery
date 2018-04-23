@@ -46,7 +46,7 @@ namespace CryptoQuery.Api
             //CreateMap<ArticlePostDto, Article>().ReverseMap();
 
             CreateMap<ArticlePostDto, Article>().ForMember(destinationMember => destinationMember.Topics,
-                options => options.MapFrom(source => string.Join(",", source.Topics)));
+                options => options.MapFrom(source => string.Join(",", source.Topics))).ReverseMap();
 
             CreateMap<UserGetDto, User>().ReverseMap().ForMember(destination => destination.UserId, options => options.MapFrom(source => source.Id));
 
@@ -59,6 +59,9 @@ namespace CryptoQuery.Api
             CreateMap<ArticleQueryProfilePostDto, ArticleQueryProfile>().ReverseMap();
 
             CreateMap<ArticleQueryProfileUpdateDto, ArticleQueryProfile>().ReverseMap();
+
+
+
         }
     }
 }

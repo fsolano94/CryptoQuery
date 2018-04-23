@@ -66,24 +66,27 @@ namespace CryptoQuery.SqlServer
 
         }
 
-        public Result<IEnumerable<Article>> GetArticlesByTopics(List<string> topics)
+        public Result<List<Article>> GetArticlesByTopics(List<string> desiredTopics)
         {
-            
-            List<Article> retrievedArticles;
-            IEnumerable<Article> articles = new Article[]{};
 
-            //for (int i = 0; i < topics.Count; ++i)
-            //{
-            //    _cryptoDbContext.Articles.FirstOrDefault(article =>
-            //        article.Topics.Contains(topics[0], StringComparer.InvariantCultureIgnoreCase));
+            var allArticlesInDatabase = _cryptoDbContext.Articles.Select(element => element).ToList();
 
-            //    if ()
-            //    {
+            List<Article> articlesWithDesiredTopics = new List<Article>();
 
-            //    }
-            //}
+            for (int currentArticleIndex = 0; currentArticleIndex < desiredTopics.Count; ++currentArticleIndex)
+            {
+                var topicsForCurrentArticle = allArticlesInDatabase[currentArticleIndex].Topics.Split(",");
 
-            return Result.Ok(articles);
+                var currentDesiredTopicFoundInCurrentArticle = topicsForCurrentArticle.Any(topic =>
+                    string.Compare(topic, desiredTopics[currentArticleIndex], StringComparison.InvariantCultureIgnoreCase) == 0);
+                
+                if ( currentDesiredTopicFoundInCurrentArticle )
+                {
+                    articlesWithDesiredTopics.Add(allArticlesInDatabase[currentArticleIndex]);
+                }
+            }
+
+            return Result.Ok( allArticlesInDatabase );
 
         }
 

@@ -102,7 +102,7 @@ namespace CryptoQuery.Api.Controllers
             return Ok(_mapper.Map<ArticleGetDto>(result.Value));
         }
 
-        [HttpPost]
+        [HttpPost(Name =nameof(PostRange))]
         [Authorize(Roles = "Administrator")]
         public IActionResult PostRange([FromBody]ArticlePostDtoCollection articlePostDtoCollection)
         {

@@ -38,7 +38,7 @@
           "lib/netstandard2.0/AutoMapper.Extensions.Microsoft.DependencyInjection.dll": {}
         }
       },
-      "CSharpFunctionalExtensions/1.9.1": {
+      "CSharpFunctionalExtensions/1.10.0": {
         "type": "package",
         "compile": {
           "lib/netstandard2.0/CSharpFunctionalExtensions.dll": {}
@@ -1117,7 +1117,7 @@
           "lib/netstandard2.0/Microsoft.AspNetCore.Mvc.TagHelpers.dll": {}
         }
       },
-      "Microsoft.AspNetCore.Mvc.Versioning/2.1.0": {
+      "Microsoft.AspNetCore.Mvc.Versioning/2.2.0": {
         "type": "package",
         "dependencies": {
           "Microsoft.AspNetCore.Mvc.Core": "2.0.0"
@@ -2927,7 +2927,7 @@
           "lib/netstandard1.3/Newtonsoft.Json.Bson.dll": {}
         }
       },
-      "NLog/4.5.0-rc06": {
+      "NLog/4.5.0": {
         "type": "package",
         "compile": {
           "lib/netstandard2.0/NLog.dll": {}
@@ -2936,11 +2936,11 @@
           "lib/netstandard2.0/NLog.dll": {}
         }
       },
-      "NLog.Extensions.Logging/1.0.0-rtm-rc7": {
+      "NLog.Extensions.Logging/1.0.0": {
         "type": "package",
         "dependencies": {
           "Microsoft.Extensions.Logging": "2.0.0",
-          "NLog": "[4.5.0-rc06, 5.0.0)"
+          "NLog": "[4.5.0, 5.0.0)"
         },
         "compile": {
           "lib/netstandard2.0/NLog.Extensions.Logging.dll": {}
@@ -2949,14 +2949,14 @@
           "lib/netstandard2.0/NLog.Extensions.Logging.dll": {}
         }
       },
-      "NLog.Web.AspNetCore/4.5.0-rc3": {
+      "NLog.Web.AspNetCore/4.5.1": {
         "type": "package",
         "dependencies": {
           "Microsoft.AspNetCore.Hosting.Abstractions": "2.0.0",
           "Microsoft.AspNetCore.Http": "2.0.0",
           "Microsoft.AspNetCore.Http.Extensions": "2.0.0",
           "Microsoft.AspNetCore.Routing.Abstractions": "2.0.0",
-          "NLog.Extensions.Logging": "1.0.0-rtm-rc7"
+          "NLog.Extensions.Logging": "1.0.0"
         },
         "compile": {
           "lib/netstandard2.0/NLog.Web.AspNetCore.dll": {}
@@ -2977,32 +2977,29 @@
           "lib/netstandard1.3/NuGet.Frameworks.dll": {}
         }
       },
-      "NWebsec.AspNetCore.Core/1.1.0": {
+      "NWebsec.AspNetCore.Core/2.0.0": {
         "type": "package",
         "dependencies": {
-          "Microsoft.AspNetCore.Http.Abstractions": "1.0.2",
-          "NETStandard.Library": "1.6.1",
-          "System.Text.RegularExpressions": "4.3.0"
+          "Microsoft.AspNetCore.Http.Abstractions": "2.0.2"
         },
         "compile": {
-          "lib/netstandard1.3/NWebsec.AspNetCore.Core.dll": {}
+          "lib/netstandard2.0/NWebsec.AspNetCore.Core.dll": {}
         },
         "runtime": {
-          "lib/netstandard1.3/NWebsec.AspNetCore.Core.dll": {}
+          "lib/netstandard2.0/NWebsec.AspNetCore.Core.dll": {}
         }
       },
-      "NWebsec.AspNetCore.Middleware/1.1.0": {
+      "NWebsec.AspNetCore.Middleware/2.0.0": {
         "type": "package",
         "dependencies": {
-          "Microsoft.AspNetCore.Http.Abstractions": "1.0.2",
-          "NETStandard.Library": "1.6.1",
-          "NWebsec.AspNetCore.Core": "1.1.0"
+          "Microsoft.AspNetCore.Http.Abstractions": "2.0.2",
+          "NWebsec.AspNetCore.Core": "2.0.0"
         },
         "compile": {
-          "lib/netstandard1.3/NWebsec.AspNetCore.Middleware.dll": {}
+          "lib/netstandard2.0/NWebsec.AspNetCore.Middleware.dll": {}
         },
         "runtime": {
-          "lib/netstandard1.3/NWebsec.AspNetCore.Middleware.dll": {}
+          "lib/netstandard2.0/NWebsec.AspNetCore.Middleware.dll": {}
         }
       },
       "Remotion.Linq/2.1.1": {
@@ -3376,13 +3373,13 @@
           "lib/netstandard1.5/StackExchange.Redis.StrongName.dll": {}
         }
       },
-      "Swashbuckle.AspNetCore/2.3.0": {
+      "Swashbuckle.AspNetCore/1.2.0": {
         "type": "package",
         "dependencies": {
           "NETStandard.Library": "1.6.1",
-          "Swashbuckle.AspNetCore.Swagger": "2.3.0",
-          "Swashbuckle.AspNetCore.SwaggerGen": "2.3.0",
-          "Swashbuckle.AspNetCore.SwaggerUI": "2.3.0"
+          "Swashbuckle.AspNetCore.Swagger": "1.2.0",
+          "Swashbuckle.AspNetCore.SwaggerGen": "1.2.0",
+          "Swashbuckle.AspNetCore.SwaggerUI": "1.2.0"
         },
         "compile": {
           "lib/netstandard1.6/Swashbuckle.AspNetCore.dll": {}
@@ -3391,7 +3388,7 @@
           "lib/netstandard1.6/Swashbuckle.AspNetCore.dll": {}
         }
       },
-      "Swashbuckle.AspNetCore.Swagger/2.3.0": {
+      "Swashbuckle.AspNetCore.Swagger/1.2.0": {
         "type": "package",
         "dependencies": {
           "Microsoft.AspNetCore.Mvc.Core": "1.0.4",
@@ -3405,14 +3402,14 @@
           "lib/netstandard1.6/Swashbuckle.AspNetCore.Swagger.dll": {}
         }
       },
-      "Swashbuckle.AspNetCore.SwaggerGen/2.3.0": {
+      "Swashbuckle.AspNetCore.SwaggerGen/1.2.0": {
         "type": "package",
         "dependencies": {
           "Microsoft.AspNetCore.Mvc.ApiExplorer": "1.0.4",
           "Microsoft.AspNetCore.Mvc.Core": "1.0.4",
           "Microsoft.AspNetCore.Mvc.DataAnnotations": "1.0.4",
           "NETStandard.Library": "1.6.1",
-          "Swashbuckle.AspNetCore.Swagger": "2.3.0",
+          "Swashbuckle.AspNetCore.Swagger": "1.2.0",
           "System.Xml.XPath": "4.0.1"
         },
         "compile": {
@@ -3422,14 +3419,15 @@
           "lib/netstandard1.6/Swashbuckle.AspNetCore.SwaggerGen.dll": {}
         }
       },
-      "Swashbuckle.AspNetCore.SwaggerUI/2.3.0": {
+      "Swashbuckle.AspNetCore.SwaggerUI/1.2.0": {
         "type": "package",
         "dependencies": {
           "Microsoft.AspNetCore.Routing": "1.0.4",
           "Microsoft.AspNetCore.StaticFiles": "1.0.4",
           "Microsoft.Extensions.FileProviders.Embedded": "1.0.1",
           "NETStandard.Library": "1.6.1",
-          "Newtonsoft.Json": "9.0.1"
+          "Newtonsoft.Json": "9.0.1",
+          "System.Xml.XPath": "4.0.0"
         },
         "compile": {
           "lib/netstandard1.6/Swashbuckle.AspNetCore.SwaggerUI.dll": {}
@@ -5302,12 +5300,12 @@
         "lib/netstandard2.0/AutoMapper.Extensions.Microsoft.DependencyInjection.dll"
       ]
     },
-    "CSharpFunctionalExtensions/1.9.1": {
-      "sha512": "r8gAp/k5vfZkwwe7ija2HPq+SNpSmOZjdC+tM2iS1Yj4W2IcowyoeRiNVmN0LdiIcJd6K8Z9kJPVQh/U+DbfhQ==",
+    "CSharpFunctionalExtensions/1.10.0": {
+      "sha512": "IPP8PiNPP2DyKLYNfX8YRTq+uhUVixiH1HlX81Xl70xHeGp2cpU2g5NGdZeKqopyanYEysRzFkQEcOJ0MerjLg==",
       "type": "package",
-      "path": "csharpfunctionalextensions/1.9.1",
+      "path": "csharpfunctionalextensions/1.10.0",
       "files": [
-        "csharpfunctionalextensions.1.9.1.nupkg.sha512",
+        "csharpfunctionalextensions.1.10.0.nupkg.sha512",
         "csharpfunctionalextensions.nuspec",
         "lib/net40/CSharpFunctionalExtensions.dll",
         "lib/net45/CSharpFunctionalExtensions.dll",
@@ -6052,14 +6050,14 @@
         "microsoft.aspnetcore.mvc.taghelpers.nuspec"
       ]
     },
-    "Microsoft.AspNetCore.Mvc.Versioning/2.1.0": {
-      "sha512": "D6RopYcqp72PY/Wv1K6kl33bIu3ue0kowdrUfC7gWPcGsm8eVAkgr6swW/7cKP72aF7aBONcb3dCAaKhk3sBhw==",
+    "Microsoft.AspNetCore.Mvc.Versioning/2.2.0": {
+      "sha512": "mBdGlJaOFmwTc5/bo8m3FeSjM+54be+VGqVoqke2WUapy5kKrybHLLnnB5OX2VKVHJw06k1JyXMgHpb6BBWGZQ==",
       "type": "package",
-      "path": "microsoft.aspnetcore.mvc.versioning/2.1.0",
+      "path": "microsoft.aspnetcore.mvc.versioning/2.2.0",
       "files": [
         "lib/netstandard2.0/Microsoft.AspNetCore.Mvc.Versioning.dll",
         "lib/netstandard2.0/Microsoft.AspNetCore.Mvc.Versioning.xml",
-        "microsoft.aspnetcore.mvc.versioning.2.1.0.nupkg.sha512",
+        "microsoft.aspnetcore.mvc.versioning.2.2.0.nupkg.sha512",
         "microsoft.aspnetcore.mvc.versioning.nuspec"
       ]
     },
@@ -8296,10 +8294,10 @@
         "newtonsoft.json.bson.nuspec"
       ]
     },
-    "NLog/4.5.0-rc06": {
-      "sha512": "RcEE+hNHTRNmk3XHWMEE1bd/CtyI/RNYBiXDxgl8oo8uIH48TMGCuY7KvBmrZUajgeRN+ep28O2oBpdv4EzRuQ==",
+    "NLog/4.5.0": {
+      "sha512": "lzqhWWkcC2HplWKsT3Rv81O7WbMt0xr0ICnCGqTgiSkqbnRxL8tTDGL0WRK7+sFZnZ/GQThkQcjSymhcbz05/w==",
       "type": "package",
-      "path": "nlog/4.5.0-rc06",
+      "path": "nlog/4.5.0",
       "files": [
         "lib/monoandroid44/NLog.dll",
         "lib/monoandroid44/NLog.xml",
@@ -8309,6 +8307,8 @@
         "lib/net40-client/NLog.xml",
         "lib/net45/NLog.dll",
         "lib/net45/NLog.xml",
+        "lib/netstandard1.3/NLog.dll",
+        "lib/netstandard1.3/NLog.xml",
         "lib/netstandard1.5/NLog.dll",
         "lib/netstandard1.5/NLog.xml",
         "lib/netstandard2.0/NLog.dll",
@@ -8317,39 +8317,37 @@
         "lib/sl4/NLog.xml",
         "lib/sl5/NLog.dll",
         "lib/sl5/NLog.xml",
-        "lib/uap10.0/NLog.dll",
-        "lib/uap10.0/NLog.xml",
         "lib/wp8/NLog.dll",
         "lib/wp8/NLog.xml",
         "lib/xamarinios10/NLog.dll",
         "lib/xamarinios10/NLog.xml",
-        "nlog.4.5.0-rc06.nupkg.sha512",
+        "nlog.4.5.0.nupkg.sha512",
         "nlog.nuspec"
       ]
     },
-    "NLog.Extensions.Logging/1.0.0-rtm-rc7": {
-      "sha512": "faT5NH1kg6v4Vbspb8mm/DpSu1bk/YUrJWf/hq5Z/IsUZMW3mgGNzLUjurSzDZYT5UsClR983pcXvppmwsdwKA==",
+    "NLog.Extensions.Logging/1.0.0": {
+      "sha512": "a/Bxm5QcSxhpB25CqrC7uj+v23sqpXfL1xWbzBJF/m67Fb2hlsqwB6nfVXGTudOtlGBhExpdVLRDKvBGBO/guw==",
       "type": "package",
-      "path": "nlog.extensions.logging/1.0.0-rtm-rc7",
+      "path": "nlog.extensions.logging/1.0.0",
       "files": [
         "lib/net451/NLog.Extensions.Logging.dll",
         "lib/net451/NLog.Extensions.Logging.xml",
         "lib/net461/NLog.Extensions.Logging.dll",
         "lib/net461/NLog.Extensions.Logging.xml",
+        "lib/netstandard1.3/NLog.Extensions.Logging.dll",
+        "lib/netstandard1.3/NLog.Extensions.Logging.xml",
         "lib/netstandard1.5/NLog.Extensions.Logging.dll",
         "lib/netstandard1.5/NLog.Extensions.Logging.xml",
         "lib/netstandard2.0/NLog.Extensions.Logging.dll",
         "lib/netstandard2.0/NLog.Extensions.Logging.xml",
-        "lib/uap10.0/NLog.Extensions.Logging.dll",
-        "lib/uap10.0/NLog.Extensions.Logging.xml",
-        "nlog.extensions.logging.1.0.0-rtm-rc7.nupkg.sha512",
+        "nlog.extensions.logging.1.0.0.nupkg.sha512",
         "nlog.extensions.logging.nuspec"
       ]
     },
-    "NLog.Web.AspNetCore/4.5.0-rc3": {
-      "sha512": "GRo0ShtJKfKpcADLqbdT12nLvoli/AzDrAZLLE+YXzu2iBXbY8N/Z0vAfeXLDCPMETveBmDENk+JhSNu24hwxQ==",
+    "NLog.Web.AspNetCore/4.5.1": {
+      "sha512": "rraX5nRj9xZFFPZjM5Cgr2EbsXPNoCz0jtZUiPte5LQZyabl/c0AUYOQorJEKyj9TKhUmMlu9FUAcx4dBAFEaQ==",
       "type": "package",
-      "path": "nlog.web.aspnetcore/4.5.0-rc3",
+      "path": "nlog.web.aspnetcore/4.5.1",
       "files": [
         "lib/net451/NLog.Web.AspNetCore.dll",
         "lib/net451/NLog.Web.AspNetCore.xml",
@@ -8359,7 +8357,7 @@
         "lib/netstandard1.5/NLog.Web.AspNetCore.xml",
         "lib/netstandard2.0/NLog.Web.AspNetCore.dll",
         "lib/netstandard2.0/NLog.Web.AspNetCore.xml",
-        "nlog.web.aspnetcore.4.5.0-rc3.nupkg.sha512",
+        "nlog.web.aspnetcore.4.5.1.nupkg.sha512",
         "nlog.web.aspnetcore.nuspec"
       ]
     },
@@ -8378,29 +8376,25 @@
         "nuget.frameworks.nuspec"
       ]
     },
-    "NWebsec.AspNetCore.Core/1.1.0": {
-      "sha512": "LKyL2tmHjc0w/OUWt5TlACNCjtbKL0HP/Wn9rKDkLPXgsCxfn273jisoxEbYa+PsnPjifSwrKE0zMcGmFPE7uQ==",
+    "NWebsec.AspNetCore.Core/2.0.0": {
+      "sha512": "rBzLHzTQx7X3vcLbhcHPVgNUALl1mb2zoiIqNw/M7z4lda7WkvMbsHrb4+hh1lZVgeYp4qZwDbO8gAoPdnXmrQ==",
       "type": "package",
-      "path": "nwebsec.aspnetcore.core/1.1.0",
+      "path": "nwebsec.aspnetcore.core/2.0.0",
       "files": [
-        "lib/net451/NWebsec.AspNetCore.Core.dll",
-        "lib/net451/NWebsec.AspNetCore.Core.xml",
-        "lib/netstandard1.3/NWebsec.AspNetCore.Core.dll",
-        "lib/netstandard1.3/NWebsec.AspNetCore.Core.xml",
-        "nwebsec.aspnetcore.core.1.1.0.nupkg.sha512",
+        "lib/netstandard2.0/NWebsec.AspNetCore.Core.dll",
+        "lib/netstandard2.0/NWebsec.AspNetCore.Core.xml",
+        "nwebsec.aspnetcore.core.2.0.0.nupkg.sha512",
         "nwebsec.aspnetcore.core.nuspec"
       ]
     },
-    "NWebsec.AspNetCore.Middleware/1.1.0": {
-      "sha512": "PlZ12p+ouSJXj5/6aFL26AI18VryK3+FH+sOgt7Cj+S5uUu1HdqD2FZXWts0P4Cf5gY8a2gzahV5KKY4VP0gug==",
+    "NWebsec.AspNetCore.Middleware/2.0.0": {
+      "sha512": "5PN4h7BLS9b4Hz6own0L1DqVrhpDnUKQaHDJGgkZz2efvZ9YwfAPE1yW7hVCpzNjLBYG3EV3xXWwIg0M5mXZUA==",
       "type": "package",
-      "path": "nwebsec.aspnetcore.middleware/1.1.0",
+      "path": "nwebsec.aspnetcore.middleware/2.0.0",
       "files": [
-        "lib/net451/NWebsec.AspNetCore.Middleware.dll",
-        "lib/net451/NWebsec.AspNetCore.Middleware.xml",
-        "lib/netstandard1.3/NWebsec.AspNetCore.Middleware.dll",
-        "lib/netstandard1.3/NWebsec.AspNetCore.Middleware.xml",
-        "nwebsec.aspnetcore.middleware.1.1.0.nupkg.sha512",
+        "lib/netstandard2.0/NWebsec.AspNetCore.Middleware.dll",
+        "lib/netstandard2.0/NWebsec.AspNetCore.Middleware.xml",
+        "nwebsec.aspnetcore.middleware.2.0.0.nupkg.sha512",
         "nwebsec.aspnetcore.middleware.nuspec"
       ]
     },
@@ -8820,53 +8814,53 @@
         "stackexchange.redis.strongname.nuspec"
       ]
     },
-    "Swashbuckle.AspNetCore/2.3.0": {
-      "sha512": "aYScYpC8kBZXA1dp9GajZ0iehqcUXhhWLK0paDUCpBDvDF7U5vR7+11MR/W6TaxAZGMJrqUirQU2EtOkvjY7lg==",
+    "Swashbuckle.AspNetCore/1.2.0": {
+      "sha512": "r/jU+jpeBivp5XtXW72TMpe/yp79i48rBZDA7efyaekvE7L/BBZc/Sdk661z+GAMSqchELSnMdk3yjWpj+lJUA==",
       "type": "package",
-      "path": "swashbuckle.aspnetcore/2.3.0",
+      "path": "swashbuckle.aspnetcore/1.2.0",
       "files": [
         "lib/net451/Swashbuckle.AspNetCore.dll",
         "lib/netstandard1.6/Swashbuckle.AspNetCore.dll",
-        "swashbuckle.aspnetcore.2.3.0.nupkg.sha512",
+        "swashbuckle.aspnetcore.1.2.0.nupkg.sha512",
         "swashbuckle.aspnetcore.nuspec"
       ]
     },
-    "Swashbuckle.AspNetCore.Swagger/2.3.0": {
-      "sha512": "GVUpq/IGk7vpcber8AQEjHtZH9YF/RcyPLL9rhkR36HQREXwfoSo68YimLhfIPdKpT0UhMg1bNpFSybPy9w1xA==",
+    "Swashbuckle.AspNetCore.Swagger/1.2.0": {
+      "sha512": "48yeywwlL+qwcclrDBSabMw+ZfrAwIVqrtJPpR/Ma9UeMRubb1DbiBu0ozrvpuQi/ZNM8mhweuveEo5z2IrOKw==",
       "type": "package",
-      "path": "swashbuckle.aspnetcore.swagger/2.3.0",
+      "path": "swashbuckle.aspnetcore.swagger/1.2.0",
       "files": [
         "lib/net451/Swashbuckle.AspNetCore.Swagger.dll",
         "lib/net451/Swashbuckle.AspNetCore.Swagger.xml",
         "lib/netstandard1.6/Swashbuckle.AspNetCore.Swagger.dll",
         "lib/netstandard1.6/Swashbuckle.AspNetCore.Swagger.xml",
-        "swashbuckle.aspnetcore.swagger.2.3.0.nupkg.sha512",
+        "swashbuckle.aspnetcore.swagger.1.2.0.nupkg.sha512",
         "swashbuckle.aspnetcore.swagger.nuspec"
       ]
     },
-    "Swashbuckle.AspNetCore.SwaggerGen/2.3.0": {
-      "sha512": "wRVXSTaYY5K0LJoUMkXpExm/0igVy5W40a9PZbbjm9LdqqBsmYmZHElNwGE5TIGV6Sy0HJtytVVjZwZuKc9pAQ==",
+    "Swashbuckle.AspNetCore.SwaggerGen/1.2.0": {
+      "sha512": "TJDiSkjljGyyntO+fcDhshbs51XDJmTs4vlvxTx/rMGzWY3EYskRQRJ28FJzuMtJQTWbe/zWW/7XvazxfHFVWA==",
       "type": "package",
-      "path": "swashbuckle.aspnetcore.swaggergen/2.3.0",
+      "path": "swashbuckle.aspnetcore.swaggergen/1.2.0",
       "files": [
         "lib/net451/Swashbuckle.AspNetCore.SwaggerGen.dll",
         "lib/net451/Swashbuckle.AspNetCore.SwaggerGen.xml",
         "lib/netstandard1.6/Swashbuckle.AspNetCore.SwaggerGen.dll",
         "lib/netstandard1.6/Swashbuckle.AspNetCore.SwaggerGen.xml",
-        "swashbuckle.aspnetcore.swaggergen.2.3.0.nupkg.sha512",
+        "swashbuckle.aspnetcore.swaggergen.1.2.0.nupkg.sha512",
         "swashbuckle.aspnetcore.swaggergen.nuspec"
       ]
     },
-    "Swashbuckle.AspNetCore.SwaggerUI/2.3.0": {
-      "sha512": "URNUb0lLP4FDshwY3+UsJGcyEiYeBguFswvcS08rCRbUjvW8FsGJwHkdSpM3UZUC5b1F6sVF21kA0qju6/fgQQ==",
+    "Swashbuckle.AspNetCore.SwaggerUI/1.2.0": {
+      "sha512": "BN2k1jwqQyH0Q7+jojnOtFZ+F3+0BpZsfwy9IPQuTDj0+EA15Rdk5rZFd88udiI6zbZ+sq4CqvJTsH3j1qm0sA==",
       "type": "package",
-      "path": "swashbuckle.aspnetcore.swaggerui/2.3.0",
+      "path": "swashbuckle.aspnetcore.swaggerui/1.2.0",
       "files": [
         "lib/net451/Swashbuckle.AspNetCore.SwaggerUI.dll",
         "lib/net451/Swashbuckle.AspNetCore.SwaggerUI.xml",
         "lib/netstandard1.6/Swashbuckle.AspNetCore.SwaggerUI.dll",
         "lib/netstandard1.6/Swashbuckle.AspNetCore.SwaggerUI.xml",
-        "swashbuckle.aspnetcore.swaggerui.2.3.0.nupkg.sha512",
+        "swashbuckle.aspnetcore.swaggerui.1.2.0.nupkg.sha512",
         "swashbuckle.aspnetcore.swaggerui.nuspec"
       ]
     },
@@ -13626,16 +13620,16 @@
     ".NETCoreApp,Version=v2.0": [
       "AutoMapper >= 6.2.2",
       "AutoMapper.Extensions.Microsoft.DependencyInjection >= 3.2.0",
-      "CSharpFunctionalExtensions >= 1.9.1",
+      "CSharpFunctionalExtensions >= 1.10.0",
       "CryptoQuery.Domain >= 1.0.0",
       "CryptoQuery.SqlServer >= 1.0.0",
       "Microsoft.AspNetCore.All >= 2.0.6",
-      "Microsoft.AspNetCore.Mvc.Versioning >= 2.1.0",
+      "Microsoft.AspNetCore.Mvc.Versioning >= 2.2.0",
       "Microsoft.NETCore.App >= 2.0.0",
       "Microsoft.VisualStudio.Web.CodeGeneration.Design >= 2.0.3",
-      "NLog.Web.AspNetCore >= 4.5.0-rc3",
-      "NWebsec.AspNetCore.Middleware >= 1.1.0",
-      "Swashbuckle.AspNetCore >= 2.3.0",
+      "NLog.Web.AspNetCore >= 4.5.1",
+      "NWebsec.AspNetCore.Middleware >= 2.0.0",
+      "Swashbuckle.AspNetCore >= 1.2.0",
       "System.Configuration.ConfigurationManager >= 4.4.1"
     ]
   },
@@ -13703,7 +13697,7 @@
           },
           "CSharpFunctionalExtensions": {
             "target": "Package",
-            "version": "[1.9.1, )"
+            "version": "[1.10.0, )"
           },
           "Microsoft.AspNetCore.All": {
             "target": "Package",
@@ -13711,7 +13705,7 @@
           },
           "Microsoft.AspNetCore.Mvc.Versioning": {
             "target": "Package",
-            "version": "[2.1.0, )"
+            "version": "[2.2.0, )"
           },
           "Microsoft.NETCore.App": {
             "target": "Package",
@@ -13724,15 +13718,15 @@
           },
           "NLog.Web.AspNetCore": {
             "target": "Package",
-            "version": "[4.5.0-rc3, )"
+            "version": "[4.5.1, )"
           },
           "NWebsec.AspNetCore.Middleware": {
             "target": "Package",
-            "version": "[1.1.0, )"
+            "version": "[2.0.0, )"
           },
           "Swashbuckle.AspNetCore": {
             "target": "Package",
-            "version": "[2.3.0, )"
+            "version": "[1.2.0, )"
           },
           "System.Configuration.ConfigurationManager": {
             "target": "Package",

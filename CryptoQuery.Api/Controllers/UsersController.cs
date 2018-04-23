@@ -152,7 +152,7 @@ namespace CryptoQuery.Api.Controllers
             return Ok(_userService.UpdateUserSettings( userId, newUserSettings));
         }
 
-        [HttpPatch(nameof(UpdatePassword)+"/{id}")]
+        [HttpPatch(nameof(UpdatePassword)+"/{userId}")]
         public IActionResult UpdatePassword([FromRoute]Guid userId, [FromBody] PasswordDto passwordDto)
         {
             var userOrError = _userService.Get(userId);
@@ -166,7 +166,7 @@ namespace CryptoQuery.Api.Controllers
         }
 
 
-        [HttpDelete("{id}")]
+        [HttpDelete("{userId}")]
         public IActionResult Delete(Guid id)
         {
             _userService.Delete(id);

@@ -6,6 +6,7 @@ using System.Security.Claims;
 using System.Text;
 using System.Threading.Tasks;
 using AutoMapper;
+using CryptoQuery.Api.Dto;
 using CryptoQuery.Domain;
 using CryptoQuery.Domain.Users;
 using CSharpFunctionalExtensions;
@@ -36,12 +37,14 @@ namespace CryptoQuery.Api.Controllers
         {
             var authResult = Authenticate(login);
 
+            var user = _userService.GetUserByUserName(login.Username);
+
             if (authResult.IsFailure)
             {
                 return Unauthorized();
             }
 
-            return Ok(new AuthenticatePostDto { Token = BuildToken(authResult.Value) });
+            return Ok(new AuthenticateGetDto { Id = user.Id,UserName = user.UserName, Email = user.Email, Token = BuildToken(authResult.Value)});
         }
         private string BuildToken(string role)
         {

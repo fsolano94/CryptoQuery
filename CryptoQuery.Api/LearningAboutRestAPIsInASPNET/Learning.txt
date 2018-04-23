@@ -136,6 +136,21 @@ Create a Resource class that only has one propery called Href.
 Every resource returned from the API will include an Href that contains the absolute URI of the resource itself and takes place of an Id property.
 
 
+Create classes that extend the Resource class.
+
+Use Configuration pattern to populate articles with data at run time.
+
+We can add custom data to appsettings.json file and pull them out as needed at run time.
+
+
+
+
+
+
+
+
+
+
 
 
 

@@ -25,6 +25,7 @@ using Microsoft.IdentityModel.Tokens;
 using Swashbuckle.AspNetCore.SwaggerGen;
 using System.Configuration;
 using System.Xml.Linq;
+using Microsoft.CodeAnalysis.CSharp.Syntax;
 
 namespace CryptoQuery
 {
@@ -55,6 +56,12 @@ namespace CryptoQuery
         {
 
             var connectionString = GetConnectionStringFromAppConfigFile("LocalHost");
+
+            if (connectionString == string.Empty)
+            {
+                throw new Exception(
+                    "Could not connect to the database because the connection string was unrecognized.");
+            }
 
             services.AddDbContext<CryptoDbContext>(options =>
                 options.UseSqlServer(connectionString));
@@ -91,16 +98,15 @@ namespace CryptoQuery
                 opt.SslPort = _httpsPort;
             });
 
+
             services.AddSwaggerGen(c =>
             {
                 c.SwaggerDoc("v1", new Info
                 {
                     Version = "v1",
                     Title = "CryptoQuery API",
-                    Description = "API for Senior Project",
-                    TermsOfService = "None",
+                    Description = "Web API for Senior Project",
                     Contact = new Contact { Name = "Francisco Solano", Email = "fsolano@nevada.unr.edu", Url = "https://github.com/fsolano94" },
-                    License = new License { Name = "None", Url = "" }
                 });
 
                 var basePath = AppContext.BaseDirectory;
@@ -111,7 +117,7 @@ namespace CryptoQuery
                     Description = "JWT Authorization header using the Bearer scheme. Example: \"Authorization: Bearer {token}\"",
                     Name = "Authorization",
                     In = "header",
-                    Type = "apiKey"
+                    Type = "apiKey",
                 });
 
             });
@@ -160,13 +166,14 @@ namespace CryptoQuery
 
             app.UseSwagger();
 
+            app.UseAuthentication();
+
             app.UseSwaggerUI(c =>
             {
                 // make sure it's /swagger/v1/swagger.json in release and /swagger/swagger/v1/swagger.json
                 c.SwaggerEndpoint("/swagger/swagger/v1/swagger.json", "My API v1"); // will be relative to route prefix, which is itself relative to the application basepath
             });
 
-            app.UseAuthentication();
 
             app.UseHsts(opt =>
             {

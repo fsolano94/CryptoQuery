@@ -51,7 +51,7 @@ namespace CryptoQuery.SqlServer
 
         public User GetUserByUserName(string userName)
         {
-            return _cryptoDbContext.Users.FirstOrDefault(user => user.UserName == userName);
+            return _cryptoDbContext.Users.FirstOrDefault(user => string.Compare(user.UserName, userName, StringComparison.InvariantCultureIgnoreCase)==0);
         }
 
         public Result UpdateUserSettings(Guid userId, ArticleQueryProfile newUserSettings)
