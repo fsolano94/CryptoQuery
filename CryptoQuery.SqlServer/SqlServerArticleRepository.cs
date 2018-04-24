@@ -5,6 +5,7 @@ using System.Collections.Generic;
 using System.Linq;
 using CryptoQuery.Domain.Users;
 using CSharpFunctionalExtensions;
+using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.Options;
 
@@ -69,7 +70,6 @@ namespace CryptoQuery.SqlServer
         public Result<List<Article>> GetArticlesByTopics(List<string> desiredTopics)
         {
 
-
             if ( !_cryptoDbContext.Articles.Any() )
             {
                 return Result.Fail<List<Article>>("No articles present");
@@ -77,22 +77,27 @@ namespace CryptoQuery.SqlServer
 
             var allArticlesInDatabase = _cryptoDbContext.Articles.Select(element => element).ToList();
 
+
             List<Article> articlesWithDesiredTopics = new List<Article>();
 
-            for (int currentArticleIndex = 0; currentArticleIndex < desiredTopics.Count; ++currentArticleIndex)
+            for (int currentDesiredTopicIndex = 0; currentDesiredTopicIndex < desiredTopics.Count; ++currentDesiredTopicIndex)
             {
-                var topicsForCurrentArticle = allArticlesInDatabase[currentArticleIndex].Topics.Split(",");
 
-                var currentDesiredTopicFoundInCurrentArticle = topicsForCurrentArticle.Any(topic =>
-                    string.Compare(topic, desiredTopics[currentArticleIndex], StringComparison.InvariantCultureIgnoreCase) == 0);
-                
-                if ( currentDesiredTopicFoundInCurrentArticle )
+                for (int currentArticleInDataBaseIndex = 0; currentArticleInDataBaseIndex < _cryptoDbContext.Articles.Count(); currentArticleInDataBaseIndex++)
                 {
-                    articlesWithDesiredTopics.Add(allArticlesInDatabase[currentArticleIndex]);
+                    var topicsForCurrentArticleInDatabase = allArticlesInDatabase[currentArticleInDataBaseIndex].Topics.Split(",");
+
+                    var currentDesiredTopicFoundInCurrentArticle = topicsForCurrentArticleInDatabase.Any(topic =>
+                        string.Compare(topic, desiredTopics[currentDesiredTopicIndex], StringComparison.InvariantCultureIgnoreCase) == 0);
+
+                    if (currentDesiredTopicFoundInCurrentArticle)
+                    {
+                        articlesWithDesiredTopics.Add(allArticlesInDatabase[currentArticleInDataBaseIndex]);
+                    } 
                 }
             }
 
-            return Result.Ok( allArticlesInDatabase );
+            return Result.Ok(articlesWithDesiredTopics);
 
         }
 

@@ -46,7 +46,7 @@ namespace CryptoQuery.Api.Controllers
                 return BadRequest(articlesOrError.Error);
             }
 
-            return Ok(articlesOrError.Value);
+            return articlesOrError.Value.Count() == 0 ? Ok($"No articles found for specified topics: {string.Join(",", topicsDto.Topics) }.") : Ok(articlesOrError.Value);
         }
 
         // GET: api/values
