@@ -39,14 +39,14 @@ namespace CryptoQuery.Api.Controllers
         [Authorize(Roles = "Administrator")]
         public IActionResult GetArticlesByTopics([FromBody] TopicsDto topicsDto)
         {
-           var articlesOrError = _articleService.GetArticlesByTopics(topicsDto.Topics);
+           var articlesOrError = _articleService.GetArticlesByTopics(topicsDto.Topics, topicsDto.offset, topicsDto.limit);
 
             if (articlesOrError.IsFailure)
             {
                 return BadRequest(articlesOrError.Error);
             }
 
-            return articlesOrError.Value.Count() == 0 ? Ok($"No articles found for specified topics: {string.Join(",", topicsDto.Topics) }.") : Ok(articlesOrError.Value);
+            return Ok(articlesOrError.Value);
         }
 
         // GET: api/values
@@ -88,7 +88,7 @@ namespace CryptoQuery.Api.Controllers
             }
             
             // automapper
-            var articleDtos =_mapper.Map<IEnumerable<ArticleGetDto>>(articlesOrError.Value);
+            var articleDtos =_mapper.Map<IEnumerable<GetArticlePartiallyDto>>(articlesOrError.Value);
 
             return Ok(Result.Ok(articleDtos));
         }

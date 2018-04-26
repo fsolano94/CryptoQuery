@@ -6,6 +6,6 @@ namespace CryptoQuery.Domain.Articles
 {
     public interface IArticleRepository : IRepository<Article>
     {
-        Result<List<Article>> GetArticlesByTopics(List<string> topics);
+        Result<List<Article>> GetArticlesByTopics(List<string> topics, int numberOfArticlesToSkip, int maximumNumberOfArticlesToRetreive);
     }
 }

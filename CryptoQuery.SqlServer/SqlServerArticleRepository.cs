@@ -67,7 +67,7 @@ namespace CryptoQuery.SqlServer
 
         }
 
-        public Result<List<Article>> GetArticlesByTopics(List<string> desiredTopics)
+        public Result<List<Article>> GetArticlesByTopics(List<string> desiredTopics, int numberOfArticlesToSkip, int maximumNumberOfArticlesToRetreive)
         {
 
             if ( !_cryptoDbContext.Articles.Any() )
@@ -75,29 +75,35 @@ namespace CryptoQuery.SqlServer
                 return Result.Fail<List<Article>>("No articles present");
             }
 
-            var allArticlesInDatabase = _cryptoDbContext.Articles.Select(element => element).ToList();
-
+            // get rid of for loops
 
             List<Article> articlesWithDesiredTopics = new List<Article>();
 
+            var articlesInDatabase = _cryptoDbContext.Articles.Select(article => article).ToList();
+
             for (int currentDesiredTopicIndex = 0; currentDesiredTopicIndex < desiredTopics.Count; ++currentDesiredTopicIndex)
             {
-
-                for (int currentArticleInDataBaseIndex = 0; currentArticleInDataBaseIndex < _cryptoDbContext.Articles.Count(); currentArticleInDataBaseIndex++)
+                for (int currentArticleInDataBaseIndex = 0; currentArticleInDataBaseIndex < articlesInDatabase.Count(); currentArticleInDataBaseIndex++)
                 {
-                    var topicsForCurrentArticleInDatabase = allArticlesInDatabase[currentArticleInDataBaseIndex].Topics.Split(",");
+                    var topicsForCurrentArticleInDatabase = articlesInDatabase[currentArticleInDataBaseIndex].Topics.Split(",");
 
                     var currentDesiredTopicFoundInCurrentArticle = topicsForCurrentArticleInDatabase.Any(topic =>
                         string.Compare(topic, desiredTopics[currentDesiredTopicIndex], StringComparison.InvariantCultureIgnoreCase) == 0);
 
                     if (currentDesiredTopicFoundInCurrentArticle)
                     {
-                        articlesWithDesiredTopics.Add(allArticlesInDatabase[currentArticleInDataBaseIndex]);
+                        articlesWithDesiredTopics.Add(articlesInDatabase[currentArticleInDataBaseIndex]);
                     } 
                 }
             }
 
-            return Result.Ok(articlesWithDesiredTopics);
+            var retrievedArticlesWithDesiredTopics = articlesWithDesiredTopics.OrderBy(existingArticle => existingArticle.Quality)
+                .ThenBy(article => article.PublishedAt)
+                .Skip(numberOfArticlesToSkip)
+                .Take(maximumNumberOfArticlesToRetreive)
+                .ToList();
+
+            return Result.Ok(retrievedArticlesWithDesiredTopics);
 
         }
 

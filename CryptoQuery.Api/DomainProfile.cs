@@ -60,6 +60,9 @@ namespace CryptoQuery.Api
 
             CreateMap<ArticleQueryProfileUpdateDto, ArticleQueryProfile>().ReverseMap();
 
+            CreateMap<GetArticlePartiallyDto, Article>().ReverseMap().ForMember(dst => dst.Topics,
+                memberOptions => memberOptions.MapFrom( src => src.Topics.Split(',').ToList()));
+
 
 
         }

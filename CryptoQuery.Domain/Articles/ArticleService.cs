@@ -40,9 +40,9 @@ namespace CryptoQuery.Domain.Articles
             _articleRepository.Delete(id);
         }
 
-        public Result<List<Article>> GetArticlesByTopics(List<string> topics)
+        public Result<List<Article>> GetArticlesByTopics(List<string> topics, int numberOfArticlesToSkip, int maximumNumberOfArticlesToRetreive)
         {
-            return _articleRepository.GetArticlesByTopics(topics);
+            return _articleRepository.GetArticlesByTopics(topics, numberOfArticlesToSkip, maximumNumberOfArticlesToRetreive);
         }
     }
 }
