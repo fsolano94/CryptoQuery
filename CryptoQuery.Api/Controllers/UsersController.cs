@@ -144,18 +144,27 @@ namespace CryptoQuery.Api.Controllers
         }
 
         [HttpDelete(nameof(DeleteUserTopics) + "/{userId}")]
-        public IActionResult DeleteUserTopics([FromRoute]Guid userId ,[FromBody] ListOfTopicsDto topicsToDelete)
+        public IActionResult DeleteUserTopics([FromRoute()]Guid userId ,[FromBody] ListOfTopicsDto topicsToDelete)
         {
             var updatedTopics = _userService.DeleteUserTopics(userId, topicsToDelete.Topics).Value.ArticleQueryProfile.Topics.Split(',').Select(topic => topic.Trim()).ToList();
             return Ok();
         }
 
 
-        [HttpDelete()]
-        public IActionResult Delete([FromBody] DeleteUserDto userToDelete)
+        [HttpDelete("{userId}")]
+        public IActionResult DeleteUser([FromRoute(Name = "userId")] Guid idOfUserToDelete)
         {
-            _userService.Delete(userToDelete.userId);
-            return Ok();
+            var userOrError = _userService.Get(idOfUserToDelete);
+
+            if (userOrError.IsFailure)
+            {
+                return BadRequest(userOrError.Error);
+            }
+
+            _userService.Delete(idOfUserToDelete);
+
+
+            return Ok($"Deleted user with id {idOfUserToDelete}.");
         }
     }
 }

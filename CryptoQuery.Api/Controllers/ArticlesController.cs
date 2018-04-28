@@ -36,7 +36,6 @@ namespace CryptoQuery.Api.Controllers
         }
 
         [HttpPost(nameof(GetArticlesByTopics))]
-        [Authorize(Roles = "Administrator")]
         public IActionResult GetArticlesByTopics([FromBody] TopicsDto topicsDto)
         {
            var articlesOrError = _articleService.GetArticlesByTopics(topicsDto.Topics, topicsDto.offset, topicsDto.limit);
@@ -66,7 +65,6 @@ namespace CryptoQuery.Api.Controllers
 
         //// GET api/values/5
         [HttpGet("{id}")]
-        [Authorize(Roles = "Administrator, StandardUser")]
         public IActionResult Get(Guid id)
         {
             var result = _articleService.Get(id);

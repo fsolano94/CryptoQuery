@@ -9,10 +9,6 @@ namespace CryptoQuery.SqlServer
 {
     public static class CryptoDbContextInitializer
     {
-        private static Guid philGuid;
-        private static Guid franciscoGuid;
-        private static Guid maxGuid;
-        private static Guid standardUserGuid;
 
         public static void Initialize(CryptoDbContext context)
         {
@@ -31,6 +27,7 @@ namespace CryptoQuery.SqlServer
                         Topics = "BitCoin, Etherium, Litecoin"
                     },
                     CreatedAt = DateTime.Now.ToString(),
+                    UpdatedAt = "no update",
                     Email = "phil@gmail.com",
                     PlainTextPassword = "abc123",
                 };
@@ -46,6 +43,7 @@ namespace CryptoQuery.SqlServer
                         Topics = "Bytecoin, blockchain, bitcoin"
                     },
                     CreatedAt = DateTime.Now.ToString(),
+                    UpdatedAt = "no update",
                     Email = "francisco@gmail.com",
                     PlainTextPassword = "abc123",
                 };
@@ -61,6 +59,7 @@ namespace CryptoQuery.SqlServer
                         Topics = "Etherium, BitCoin"
                     },
                     CreatedAt = DateTime.Now.ToString(),
+                    UpdatedAt = "no update",
                     Email = "max@gmail.com",
                     PlainTextPassword = "abc123",
                 };

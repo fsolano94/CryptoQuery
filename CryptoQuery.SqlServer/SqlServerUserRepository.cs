@@ -34,16 +34,20 @@ namespace CryptoQuery.SqlServer
         {
             User userToRemove = null;
 
-            var result = Get(userId);
+            var userToDelete = _cryptoDbContext.Users.Include(user => user.ArticleQueryProfile)
+                .FirstOrDefault(existingUser => existingUser.Id == userId);
 
-            if (result.Value == null)
+
+            if (userToDelete == null)
             {
-                return;
+                throw new Exception(
+                    "Error occurred while obtaining the user to delete and their article query profile.");
             }
 
-            userToRemove = result.Value;
 
-            _cryptoDbContext.Users.Remove(userToRemove);
+            _cryptoDbContext.Users.Remove(userToDelete);
+
+            _cryptoDbContext.Remove(userToDelete.ArticleQueryProfile);
 
             _cryptoDbContext.SaveChanges();
 
@@ -161,7 +165,11 @@ namespace CryptoQuery.SqlServer
                 return Result.Fail<User>($"Could not find user with id {userId}.");
             }
 
-            user.ArticleQueryProfile.Topics = FormNewUniqueSetOfTopics(userId, newTopics);
+            //user.ArticleQueryProfile.Topics = FormNewUniqueSetOfTopics(userId, newTopics);
+
+            newTopics = newTopics.Select(topic => topic.Trim()).ToList();
+
+            user.ArticleQueryProfile.Topics = string.Join(",", newTopics);
 
             _cryptoDbContext.Users.Update(user);
 
