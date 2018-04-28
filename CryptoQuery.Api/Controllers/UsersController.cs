@@ -61,7 +61,22 @@ namespace CryptoQuery.Api.Controllers
         [HttpPost(nameof(CreateUser))]
         public IActionResult CreateUser([FromBody]UserPostDto userPostDto)
         {
-            var user = _mapper.Map<User>(userPostDto);
+            var user = new User()
+            {
+                ArticleQueryProfile = new ArticleQueryProfile()
+                {
+                    Id = Guid.NewGuid(),
+                    Complexity = userPostDto.Complexity,
+                    Quality = userPostDto.Quality,
+                    Topics = String.Join(",", userPostDto.Topics.Select(topic => topic.Trim()).ToList())
+                },
+                Id = Guid.NewGuid(),
+                Email = userPostDto.Email,
+                Role = "StandardUser",
+                CreatedAt = DateTime.Now.ToLongDateString(),
+                UpdatedAt = "no update",
+                PlainTextPassword = userPostDto.Password
+            };
 
             var userOrError = _userService.GetUserByEmail(userPostDto.Email);
 
@@ -70,10 +85,16 @@ namespace CryptoQuery.Api.Controllers
                 return BadRequest($"User with {userPostDto.Email} already exists.");
             }
 
+            var createdUser = _userService.Create(user);
 
-            user.Role = "StandardUser";
+            var createdUserDto = new UserGetDto()
+            {
+                Topics = createdUser.Value.ArticleQueryProfile.Topics.Split(',').Select(topic => topic.Trim()).ToList(),
+                Email = createdUser.Value.Email,
+                UserId = createdUser.Value.Id
+            };
 
-            return Ok(_mapper.Map<UserGetDto>(_userService.Create(user)));
+            return Ok(createdUserDto);
         }
 
         [HttpPatch(nameof(UpdateEmail)+ "/{userId}", Name = nameof(UpdateEmail))]

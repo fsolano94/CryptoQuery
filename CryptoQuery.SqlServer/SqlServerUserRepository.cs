@@ -208,6 +208,8 @@ namespace CryptoQuery.SqlServer
 
             _cryptoDbContext.Update(userInDataBase);
 
+            _cryptoDbContext.SaveChanges();
+
             return Result.Ok(userInDataBase);
         }
 
