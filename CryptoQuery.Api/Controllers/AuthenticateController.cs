@@ -18,7 +18,7 @@ using Microsoft.IdentityModel.Tokens;
 namespace CryptoQuery.Api.Controllers
 {
     [Produces("application/json")]
-    [Route("/[controller]")]
+    [Route("/api/[controller]")]
     [ApiVersion("1.0")]
     public class AuthenticateController : Controller
     {
@@ -37,14 +37,14 @@ namespace CryptoQuery.Api.Controllers
         {
             var authResult = Authenticate(login);
 
-            var user = _userService.GetUserByUserName(login.Username);
+            var user = _userService.GetUserByEmail(login.email);
 
             if (authResult.IsFailure)
             {
                 return Unauthorized();
             }
 
-            return Ok(new AuthenticateGetDto { Id = user.Id,UserName = user.UserName, Email = user.Email, Token = BuildToken(authResult.Value)});
+            return Ok(new AuthenticateGetDto { Id = user.Value.Id, Email = user.Value.Email, Token = BuildToken(authResult.Value), Topics = user.Value.ArticleQueryProfile.Topics.Split(',').Select(topic => topic.Trim()).ToList() });
         }
         private string BuildToken(string role)
         {
@@ -65,24 +65,24 @@ namespace CryptoQuery.Api.Controllers
 
         private Result<string> Authenticate(LoginModel login)
         {
-            var userOrNull = _userService.GetUserByUserName(login.Username);
+            var userOrError = _userService.GetUserByEmail(login.email);
 
-            if ( userOrNull == null)
+            if (userOrError.IsFailure)
             {
-                return Result.Fail<string>($"username '{login.Username}' not found.");
+                return Result.Fail<string>(userOrError.Error);
             }
 
-            if ( userOrNull.HashedPassword == login.Password )
+            if ( string.Compare(userOrError.Value.PlainTextPassword, login.Password, StringComparison.InvariantCultureIgnoreCase) == 0 )
             {
-                return (userOrNull.Role == "Administrator") ? Result.Ok("Administrator") : Result.Ok("StandardUser");
+                return (userOrError.Value.Role == "Administrator") ? Result.Ok("Administrator") : Result.Ok("StandardUser");
             }
         
-            return Result.Fail<string>("Login failed");
+            return Result.Fail<string>("Incorrect password.");
         }
 
         public class LoginModel
         {
-            public string Username { get; set; }
+            public string email { get; set; }
             public string Password { get; set; }
         }
 

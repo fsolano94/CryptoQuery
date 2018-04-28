@@ -23,52 +23,46 @@ namespace CryptoQuery.SqlServer
                 var phil = new User()
                 {
                     Role = "Administrator",
-                    UserName = "phil",
                     ArticleQueryProfile = new ArticleQueryProfile()
                     {
-                        PushEnabled = true,
                         Id = Guid.NewGuid(),
                         Complexity = 10,
                         Quality = 10,
                         Topics = "BitCoin, Etherium, Litecoin"
                     },
                     CreatedAt = DateTime.Now.ToString(),
-                    Email = "",
-                    HashedPassword = "abc123",
+                    Email = "phil@gmail.com",
+                    PlainTextPassword = "abc123",
                 };
 
                 var francisco = new User()
                 {
                     Role = "Administrator",
-                    UserName = "max",
                     ArticleQueryProfile = new ArticleQueryProfile()
                     {
-                        PushEnabled = true,
                         Id = Guid.NewGuid(),
                         Complexity = 10,
                         Quality = 10,
                         Topics = "Bytecoin, blockchain, bitcoin"
                     },
                     CreatedAt = DateTime.Now.ToString(),
-                    Email = "",
-                    HashedPassword = "abc123",
+                    Email = "francisco@gmail.com",
+                    PlainTextPassword = "abc123",
                 };
 
                 var max = new User()
                 {
                     Role = "Administrator",
-                    UserName = "francisco",
                     ArticleQueryProfile = new ArticleQueryProfile()
                     {
-                        PushEnabled = true,
                         Id = Guid.NewGuid(),
                         Complexity = 10,
                         Quality = 10,
                         Topics = "Etherium, BitCoin"
                     },
                     CreatedAt = DateTime.Now.ToString(),
-                    Email = "initial email. Ensure to change.",
-                    HashedPassword = "abc123",
+                    Email = "max@gmail.com",
+                    PlainTextPassword = "abc123",
                 };
 
                 context.Users.Add(phil);

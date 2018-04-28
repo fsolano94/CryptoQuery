@@ -6,15 +6,10 @@ using System.Threading.Tasks;
 
 namespace CryptoQuery.Api.Dto
 {
-    public class UserGetDto : Resource
+    public class UserGetDto
     {
         public Guid UserId { get; set; }
-        public ArticleQueryProfilePostDto ArticleQueryProfile { get; set; }
-        public string CreatedAt { get; set; }
-        public string UpdatedAt { get; set; }
+        public List<string> Topics { get; set; }
         public string Email { get; set; }
-        public string UserName { get; set; }
-        public string HashedPassword { get; set; }
-        public string Salt { get; set; }
     }
 }

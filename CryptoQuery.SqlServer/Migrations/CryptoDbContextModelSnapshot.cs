@@ -61,8 +61,6 @@ namespace CryptoQuery.SqlServer.Migrations
 
                     b.Property<int>("Complexity");
 
-                    b.Property<bool>("PushEnabled");
-
                     b.Property<int>("Quality");
 
                     b.Property<string>("Topics");
@@ -83,15 +81,11 @@ namespace CryptoQuery.SqlServer.Migrations
 
                     b.Property<string>("Email");
 
-                    b.Property<string>("HashedPassword");
+                    b.Property<string>("PlainTextPassword");
 
                     b.Property<string>("Role");
 
-                    b.Property<string>("Salt");
-
                     b.Property<string>("UpdatedAt");
-
-                    b.Property<string>("UserName");
 
                     b.HasKey("Id");
 

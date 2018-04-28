@@ -17,7 +17,7 @@ namespace CryptoQuery.Api.Controllers
     /// <summary>
     /// 
     /// </summary>
-    [Route("/[controller]")]
+    [Route("/api/[controller]")]
    // [ApiVersion("1.0")]
     public class ArticlesController : Controller
     {
@@ -43,54 +43,25 @@ namespace CryptoQuery.Api.Controllers
 
             if (articlesOrError.IsFailure)
             {
-                return BadRequest(articlesOrError.Error);
+                return Ok(new List<string>());
             }
 
-            return Ok(articlesOrError.Value);
-        }
-
-        // GET: api/values
-        /// <summary>
-        /// 
-        /// </summary>
-        /// <returns></returns>
-        [HttpGet(nameof(GetArticlesBySettings))]
-        [Authorize(Roles = "Administrator, StandardUser")]
-        public IActionResult GetArticlesBySettings([FromBody] ArticleQueryProfilePostDto settings)
-        {
-            var articlesOrError = _articleService.Get();
-
-            if (articlesOrError.IsFailure)
+            var articles = articlesOrError.Value.Select(article => new GetArticlePartiallyDto()
             {
-                return BadRequest(articlesOrError.Error);
-            }
+                Author = article.Author,
+                Id = article.Id,
+                Link = article.Link,
+                Topics = article.Topics.Split(',').Select(topic => topic.Trim()).ToList(),
+                Complexity = article.Complexity,
+                Quality = article.Quality,
+                PublishedAt = article.PublishedAt.ToString(),
+                Description = article.Description,
+                ImageUrl = article.ImageUrl,
+                Title = article.Title
+            });
 
-            // automapper
-            var articleDtos = _mapper.Map<IEnumerable<ArticleGetDto>>(articlesOrError.Value);
 
-            return Ok(Result.Ok(articleDtos));
-        }
-
-        // GET: api/values
-        /// <summary>
-        /// 
-        /// </summary>
-        /// <returns></returns>
-        [HttpGet(Name = nameof(GetAllArticles))]
-        [Authorize(Roles = "Administrator, StandardUser")]
-        public IActionResult GetAllArticles()
-        {
-            var articlesOrError = _articleService.Get(); 
-
-            if (articlesOrError.IsFailure)
-            {
-                return BadRequest(articlesOrError);
-            }
-            
-            // automapper
-            var articleDtos =_mapper.Map<IEnumerable<GetArticlePartiallyDto>>(articlesOrError.Value);
-
-            return Ok(Result.Ok(articleDtos));
+            return Ok(articles);
         }
 
         //// GET api/values/5

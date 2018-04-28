@@ -11,6 +11,5 @@ namespace CryptoQuery.Domain.Users
         public string Topics { get; set; }
         public int Complexity { get; set; }
         public int Quality { get; set; }
-        public bool PushEnabled { get; set; }
     }
 }

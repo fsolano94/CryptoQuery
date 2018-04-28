@@ -49,31 +49,25 @@ namespace CryptoQuery.SqlServer
 
         }
 
-        public User GetUserByUserName(string userName)
-        {
-            return _cryptoDbContext.Users.FirstOrDefault(user => string.Compare(user.UserName, userName, StringComparison.InvariantCultureIgnoreCase)==0);
-        }
-
-        public Result UpdateUserSettings(Guid userId, ArticleQueryProfile newUserSettings)
+        public Result<User> UpdateUserSettings(Guid userId, ArticleQueryProfile newUserSettings)
         {
             var foo = _cryptoDbContext.Users.Include(x => x.ArticleQueryProfile).ToList();
 
             var u = foo.Find(user => user.Id == userId);
             
             u.ArticleQueryProfile.Complexity = newUserSettings.Complexity;
-            u.ArticleQueryProfile.PushEnabled = newUserSettings.PushEnabled;
-            u.ArticleQueryProfile.Topics = FormNewUniqueSetOfTopics(u.Id, newUserSettings.Topics.Split(",").ToList());
+            u.ArticleQueryProfile.Topics = FormNewUniqueSetOfTopics(u.Id, newUserSettings.Topics.Split(',').Select(topic => topic.Trim()).ToList());
             u.ArticleQueryProfile.Quality = newUserSettings.Quality;
 
             _cryptoDbContext.Users.Update(u);
 
             _cryptoDbContext.SaveChanges();
 
-            return Result.Ok();
+            return Result.Ok(u);
 
         }
 
-        public Result UpdateEmail(Guid userId, string newEmail)
+        public Result<User> UpdateEmail(Guid userId, string newEmail)
         {
             var user = _cryptoDbContext.Users.FirstOrDefault(existingUser => existingUser.Id == userId);
 
@@ -83,15 +77,13 @@ namespace CryptoQuery.SqlServer
 
             _cryptoDbContext.SaveChanges();
 
-            return Result.Ok();
+            return Result.Ok(user);
 
         }
 
         public Result UpdateUserName(Guid userId, string userName)
         {
             var user = _cryptoDbContext.Users.FirstOrDefault(existingUser => existingUser.Id == userId);
-
-            user.UserName = userName;
 
             _cryptoDbContext.Update(user);
 
@@ -109,12 +101,10 @@ namespace CryptoQuery.SqlServer
 
             // do updates
             userToUpdate.Email = item.Email;
-            userToUpdate.HashedPassword = item.HashedPassword;
-            userToUpdate.UserName = item.UserName;
-            userToUpdate.ArticleQueryProfile.PushEnabled = item.ArticleQueryProfile.PushEnabled;
+            userToUpdate.PlainTextPassword = item.PlainTextPassword;
             userToUpdate.ArticleQueryProfile.Complexity = item.ArticleQueryProfile.Complexity;
             userToUpdate.ArticleQueryProfile.Quality = item.ArticleQueryProfile.Quality;
-            userToUpdate.ArticleQueryProfile.Topics = FormNewUniqueSetOfTopics(userToUpdate.Id, item.ArticleQueryProfile.Topics.Split(",").ToList());
+            userToUpdate.ArticleQueryProfile.Topics = FormNewUniqueSetOfTopics(userToUpdate.Id, item.ArticleQueryProfile.Topics.Split(',').Select(topic => topic.Trim()).ToList());
 
             _cryptoDbContext.Users.Update(userToUpdate);
 
@@ -130,7 +120,7 @@ namespace CryptoQuery.SqlServer
         {
             var user = _cryptoDbContext.Users.FirstOrDefault(existingUser => existingUser.Id == userId);
 
-            user.HashedPassword = password;
+            user.PlainTextPassword = password;
 
             _cryptoDbContext.Users.Update(user);
 
@@ -142,29 +132,33 @@ namespace CryptoQuery.SqlServer
         private string FormNewUniqueSetOfTopics(Guid userId,List<string> newTopics)
         {
             var user = _cryptoDbContext.Users.First(existingUser => existingUser.Id == userId);
-            var currentTopics = user.ArticleQueryProfile.Topics.Split(",");
-            HashSet<string> allOfUsersTopics = new HashSet<string>(currentTopics, StringComparer.InvariantCultureIgnoreCase);
+            var currentTopics = user.ArticleQueryProfile.Topics.Split(',').Select(topic => topic.Trim()).ToList();
+            List<string> updatedListOfTopics = new List<string>();
 
-            for (int i = 0; i < newTopics.Count; ++i)
+            for (int newTopicIndex = 0; newTopicIndex < newTopics.Count(); newTopicIndex++)
             {
-                if (!allOfUsersTopics.Contains(newTopics[i], StringComparer.InvariantCultureIgnoreCase))
+                var newCurrentTopicExists = currentTopics.Any(existingCurrentTopic =>
+                    string.Compare(existingCurrentTopic, newTopics[newTopicIndex],
+                        StringComparison.InvariantCultureIgnoreCase) == 0);
+                if (!newCurrentTopicExists)
                 {
-                    allOfUsersTopics.Add(newTopics[i]);
+                    updatedListOfTopics.Add(newTopics[newTopicIndex]);
                 }
             }
 
-            var allOfUsersTopicsAsList = allOfUsersTopics.ToList();
-            var allOfUsersTopicsAsString = string.Join(",", allOfUsersTopicsAsList);
-            return allOfUsersTopicsAsString;
+            updatedListOfTopics.AddRange(currentTopics);
+
+            return string.Join(",", updatedListOfTopics);
         }
 
-        public Result UpdateTopics(Guid userId, List<string> newTopics)
+        public Result<User> UpdateTopics(Guid userId, List<string> newTopics)
         {
-            var user = _cryptoDbContext.Users.FirstOrDefault(existingUser => existingUser.Id == userId);
+            var user = _cryptoDbContext.Users.Include(existingUser => existingUser.ArticleQueryProfile)
+                .FirstOrDefault(targetUser => targetUser.Id == userId);
 
             if (user == null)
             {
-                return Result.Fail($"Could not find user with id {userId}.");
+                return Result.Fail<User>($"Could not find user with id {userId}.");
             }
 
             user.ArticleQueryProfile.Topics = FormNewUniqueSetOfTopics(userId, newTopics);
@@ -173,7 +167,48 @@ namespace CryptoQuery.SqlServer
 
             _cryptoDbContext.SaveChanges();
 
-            return Result.Ok();
+            return Result.Ok(user);
+        }
+
+        public Result<User> GetUserByEmail(string loginEmail)
+        {
+            var user = _cryptoDbContext.Users.Include(userInDatabase => userInDatabase.ArticleQueryProfile).FirstOrDefault(existingUser =>
+                string.Compare(existingUser.Email, loginEmail, StringComparison.InvariantCultureIgnoreCase) == 0);
+
+            return user != null ? Result.Ok(user) : Result.Fail<User>($"User with email \"{loginEmail}\" does not exist.");
+        }
+
+        public Result<User> DeleteUserTopics(Guid userId, List<string> topicsToDelete)
+        {
+            var userInDataBase = _cryptoDbContext.Users.Include(user => user.ArticleQueryProfile)
+                .FirstOrDefault(existingUser => existingUser.Id == userId);
+
+
+            topicsToDelete = topicsToDelete.Select(topic => topic.Trim()).ToList();
+
+            var currentTopics = _cryptoDbContext.Users.Include(userWithTopics => userWithTopics.ArticleQueryProfile)
+                .FirstOrDefault(existingUser => existingUser.Id == userId).ArticleQueryProfile.Topics.Split(',').Select(topic => topic.Trim()).ToList();
+
+            var updatedTopics = new List<string>();
+
+            for (int currentTopicToDeleteCounter = 0; currentTopicToDeleteCounter < topicsToDelete.Count; currentTopicToDeleteCounter++)
+            {
+                var currentTopicToDeleteIndex = currentTopics.FindIndex(existingTopic =>
+                    string.Compare(existingTopic, topicsToDelete[currentTopicToDeleteCounter],
+                        StringComparison.InvariantCultureIgnoreCase) == 0);
+
+                if (currentTopicToDeleteIndex != -1)
+                {
+                    currentTopics.RemoveAt(currentTopicToDeleteIndex);
+                }
+
+            }
+
+            userInDataBase.ArticleQueryProfile.Topics = string.Join(",", currentTopics);
+
+            _cryptoDbContext.Update(userInDataBase);
+
+            return Result.Ok(userInDataBase);
         }
 
         public Result<IEnumerable<User>> Get()

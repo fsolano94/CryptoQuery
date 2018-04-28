@@ -14,7 +14,6 @@ namespace CryptoQuery.SqlServer.Migrations
                 {
                     Id = table.Column<Guid>(nullable: false),
                     Complexity = table.Column<int>(nullable: false),
-                    PushEnabled = table.Column<bool>(nullable: false),
                     Quality = table.Column<int>(nullable: false),
                     Topics = table.Column<string>(nullable: true)
                 },
@@ -54,11 +53,9 @@ namespace CryptoQuery.SqlServer.Migrations
                     ArticleQueryProfileId = table.Column<Guid>(nullable: true),
                     CreatedAt = table.Column<string>(nullable: true),
                     Email = table.Column<string>(nullable: true),
-                    HashedPassword = table.Column<string>(nullable: true),
+                    PlainTextPassword = table.Column<string>(nullable: true),
                     Role = table.Column<string>(nullable: true),
-                    Salt = table.Column<string>(nullable: true),
-                    UpdatedAt = table.Column<string>(nullable: true),
-                    UserName = table.Column<string>(nullable: true)
+                    UpdatedAt = table.Column<string>(nullable: true)
                 },
                 constraints: table =>
                 {

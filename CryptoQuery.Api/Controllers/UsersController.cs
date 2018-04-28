@@ -18,7 +18,7 @@ namespace CryptoQuery.Api.Controllers
     /// 
     /// </summary>
     [Produces("application/json")]
-    [Route("/[controller]")]
+    [Route("/api/[controller]")]
     [ApiVersion("1.0")]
     public class UsersController : Controller
     {
@@ -44,13 +44,16 @@ namespace CryptoQuery.Api.Controllers
 
             if (userOrError.IsFailure)
             {
-                return BadRequest(userOrError);
+                return BadRequest(userOrError.Error);
             }
 
-            var user = _mapper.Map<UserGetDto>(userOrError.Value);
-
-            user.Href = Url.Link(nameof(GetUserById), id);
-
+            UserGetDto user = new UserGetDto()
+            {
+                Topics = userOrError.Value.ArticleQueryProfile.Topics.Split(',').Select(topic => topic.Trim()).ToList(),
+                Email = userOrError.Value.Email,
+                UserId = userOrError.Value.Id
+            };
+             
             return Ok(user);
         }
 
@@ -60,23 +63,17 @@ namespace CryptoQuery.Api.Controllers
         {
             var user = _mapper.Map<User>(userPostDto);
 
-            user.Role = "StandardUser";
+            var userOrError = _userService.GetUserByEmail(userPostDto.Email);
 
-            return Ok(_userService.Create(user));
-        }
-
-        [HttpPatch(nameof(UpdateUserName)+ "/{userId}", Name = nameof(UpdateUserName))]
-        public IActionResult UpdateUserName([FromRoute(Name = "{userId}")]Guid userId, [FromBody]UserNameDto userNameDto)
-        {
-            var userOrError = _userService.Get(userId);
-
-            if (userOrError.IsFailure)
+            if (userOrError.IsSuccess)
             {
-                return NotFound($"User with id {userId} not found.");
+                return BadRequest($"User with {userPostDto.Email} already exists.");
             }
 
-            return Ok(_userService.UpdateUserName(userId, userNameDto.UserName));
 
+            user.Role = "StandardUser";
+
+            return Ok(_mapper.Map<UserGetDto>(_userService.Create(user)));
         }
 
         [HttpPatch(nameof(UpdateEmail)+ "/{userId}", Name = nameof(UpdateEmail))]
@@ -89,37 +86,16 @@ namespace CryptoQuery.Api.Controllers
                 return NotFound($"User with id {userId} not found.");
             }
 
-            return Ok(_userService.UpdateEmail(userId, emailPostDto.Email));
-        }
-
-        [HttpPut(nameof(UpdateUser)+ "/{userId}", Name = nameof(UpdateUser))]
-        public IActionResult UpdateUser([FromRoute(Name = "userId")]Guid userId, [FromBody]UpdateUserDto userWithInformationToBeUpdated)
-        {
-            var userOrError = _userService.Get(userId);
-
-            if (userOrError.IsFailure)
+            var newEmail = new EmailPostDto()
             {
-                return NotFound($"User with id {userId} not found.");
-            }
-
-            var user = new User()
-            {
-                Email = userWithInformationToBeUpdated.Email,
-                UserName = userWithInformationToBeUpdated.UserName,
-                ArticleQueryProfile = new ArticleQueryProfile()
-                {
-                    //Complexity = userWithInformationToBeUpdated.Complexity,
-                    //PushEnabled = userWithInformationToBeUpdated.PushEnabled,
-                    //Quality = userWithInformationToBeUpdated.Quality,
-                    Topics = string.Join(',', userWithInformationToBeUpdated.Topics)
-                }
+                Email = _userService.UpdateEmail(userId, emailPostDto.Email).Value.Email
             };
 
-            return Ok(_userService.Update(userId, user));
+            return Ok(newEmail);
         }
 
-        [HttpPatch(nameof(AddNewTopics)+ "/{userId}", Name = nameof(AddNewTopics))]
-        public IActionResult AddNewTopics([FromRoute(Name = "userId")]Guid userId,[FromBody] TopicsDto topicsDto)
+        [HttpPatch(nameof(UpdateUserTopics) +"/{userId}" )]
+        public IActionResult UpdateUserTopics([FromRoute(Name = "userId")]Guid userId, [FromBody]ListOfTopicsDto listOfTopicsDto)
         {
             var userOrError = _userService.Get(userId);
 
@@ -128,28 +104,9 @@ namespace CryptoQuery.Api.Controllers
                 return NotFound($"User with id {userId} not found.");
             }
 
-            return Ok(_userService.UpdateTopics(userId, topicsDto.Topics));
-        }
-
-        [HttpPatch(nameof(UpdateUserSettings)+"/{userId}" )]
-        public IActionResult UpdateUserSettings([FromRoute(Name = "userId")]Guid userId, [FromBody]ArticleQueryProfileUpdateDto articleQueryProfileUpdateDto)
-        {
-            var userOrError = _userService.Get(userId);
-
-            if (userOrError.IsFailure)
-            {
-                return NotFound($"User with id {userId} not found.");
-            }
-
-            var newUserSettings = new ArticleQueryProfile()
-            {
-                PushEnabled = articleQueryProfileUpdateDto.PushEnabled,
-                Complexity = articleQueryProfileUpdateDto.Complexity,
-                Quality = articleQueryProfileUpdateDto.Quality,
-                Topics = articleQueryProfileUpdateDto.Topics.Join(",")
-            };
-
-            return Ok(_userService.UpdateUserSettings( userId, newUserSettings));
+            var updatedTopics = _userService.UpdateTopics(userId, listOfTopicsDto.Topics).Value.ArticleQueryProfile.Topics.Split(',').Select(topic => topic.Trim()).ToList();
+            
+            return Ok(new ListOfTopicsDto(){Topics =  updatedTopics});
         }
 
         [HttpPatch(nameof(UpdatePassword)+"/{userId}")]
@@ -165,11 +122,18 @@ namespace CryptoQuery.Api.Controllers
             return Ok(_userService.Update(userId, passwordDto.Password));
         }
 
-
-        [HttpDelete("{userId}")]
-        public IActionResult Delete(Guid id)
+        [HttpDelete(nameof(DeleteUserTopics) + "/{userId}")]
+        public IActionResult DeleteUserTopics([FromRoute]Guid userId ,[FromBody] ListOfTopicsDto topicsToDelete)
         {
-            _userService.Delete(id);
+            var updatedTopics = _userService.DeleteUserTopics(userId, topicsToDelete.Topics).Value.ArticleQueryProfile.Topics.Split(',').Select(topic => topic.Trim()).ToList();
+            return Ok();
+        }
+
+
+        [HttpDelete()]
+        public IActionResult Delete([FromBody] DeleteUserDto userToDelete)
+        {
+            _userService.Delete(userToDelete.userId);
             return Ok();
         }
     }

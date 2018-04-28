@@ -2,15 +2,11 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
-using CryptoQuery.Api.Models;
 
 namespace CryptoQuery.Api.Dto
 {
-    public class AuthenticateGetDto
+    public class ListOfTopicsDto
     {
-        public Guid Id { get; set; }
-        public string Token { get; set; }
-        public string Email { get; set; }
         public List<string> Topics { get; set; }
     }
 }

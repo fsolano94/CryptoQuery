@@ -39,24 +39,14 @@ namespace CryptoQuery.Domain.Users
             return _userRepository.Update(userId, item);
         }
 
-        public Result UpdateUserSettings(Guid userId, ArticleQueryProfile newUserSettings)
+        public Result<User> UpdateUserSettings(Guid userId, ArticleQueryProfile newUserSettings)
         {
             return _userRepository.UpdateUserSettings(userId, newUserSettings);
         }
 
-        public User GetUserByUserName(string userName)
-        {
-            return _userRepository.GetUserByUserName(userName);
-        }
-
-        public Result UpdateEmail(Guid userId, string newEmail)
+        public Result<User> UpdateEmail(Guid userId, string newEmail)
         {
             return _userRepository.UpdateEmail(userId,newEmail);
-        }
-
-        public Result UpdateUserName(Guid userId, string userName)
-        {
-            return _userRepository.UpdateUserName(userId, userName);
         }
 
         public Result Update(User value)
@@ -69,9 +59,19 @@ namespace CryptoQuery.Domain.Users
             return _userRepository.UpdatePassword(userId, password);
         }
 
-        public Result UpdateTopics(Guid userId, List<string> topics)
+        public Result<User> UpdateTopics(Guid userId, List<string> topics)
         {
             return _userRepository.UpdateTopics(userId, topics);
+        }
+
+        public Result<User> GetUserByEmail(string loginEmail)
+        {
+            return _userRepository.GetUserByEmail(loginEmail);
+        }
+
+        public Result<User> DeleteUserTopics(Guid userId, List<string> topicsToDelete)
+        {
+            return _userRepository.DeleteUserTopics(userId, topicsToDelete);
         }
     }
 }

@@ -11,7 +11,7 @@ using System;
 namespace CryptoQuery.SqlServer.Migrations
 {
     [DbContext(typeof(CryptoDbContext))]
-    [Migration("20180423010405_Initial")]
+    [Migration("20180428015932_Initial")]
     partial class Initial
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -62,8 +62,6 @@ namespace CryptoQuery.SqlServer.Migrations
 
                     b.Property<int>("Complexity");
 
-                    b.Property<bool>("PushEnabled");
-
                     b.Property<int>("Quality");
 
                     b.Property<string>("Topics");
@@ -84,15 +82,11 @@ namespace CryptoQuery.SqlServer.Migrations
 
                     b.Property<string>("Email");
 
-                    b.Property<string>("HashedPassword");
+                    b.Property<string>("PlainTextPassword");
 
                     b.Property<string>("Role");
 
-                    b.Property<string>("Salt");
-
                     b.Property<string>("UpdatedAt");
-
-                    b.Property<string>("UserName");
 
                     b.HasKey("Id");
 

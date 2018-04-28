@@ -13,8 +13,6 @@ namespace CryptoQuery.Domain.Users
         public string CreatedAt { get; set; }
         public string UpdatedAt { get; set; }
         public string Email { get; set; }
-        public string UserName { get; set; }
-        public string HashedPassword { get; set; }
-        public string Salt { get; set; } 
+        public string PlainTextPassword { get; set; }
     }
 }

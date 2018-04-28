@@ -8,12 +8,7 @@ namespace CryptoQuery.Api.Dto
 {
     public class UserPostDto
     {
-        public ArticleQueryProfilePostDto ArticleQueryProfile { get; set; }
-        public string CreatedAt { get; set; }
-        public string UpdatedAt { get; set; }
         public string Email { get; set; }
-        public string UserName { get; set; }
-        public string HashedPassword { get; set; }
-        public string Salt { get; set; }
+        public string Password { get; set; }
     }
 }
